@@ -6,7 +6,7 @@
   "description": "Beautifully animated Heroicons for SolidJS",
   "author": "Aniket-508",
   "license": "MIT",
-  "homepage": "https://heroicons-animated.com",
+  "homepage": "https://solid.heroicons-animated.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heroicons-animated/heroicons-animated-solid.git"

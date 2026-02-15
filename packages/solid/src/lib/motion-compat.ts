@@ -25,7 +25,7 @@ function applySpecialTransitionKey(
   key: TransitionKey,
   value: unknown,
   source: TransitionObj,
-  target: TransitionObj
+  target: TransitionObj,
 ): boolean {
   switch (key) {
     case "ease":
@@ -69,6 +69,7 @@ function isTransitionObject(value: unknown): value is TransitionObj {
 function convertTransitionObj(t: TransitionObj): TransitionObj {
   const r: TransitionObj = {};
   const skip = new Set([
+    "d",
     "stiffness",
     "damping",
     "mass",
@@ -118,7 +119,7 @@ export function resolveValues(
   variants: Variants,
   variantName: string,
   // biome-ignore lint/suspicious/noExplicitAny: Custom payload shape varies per icon.
-  custom: any = 0
+  custom: any = 0,
   // biome-ignore lint/suspicious/noExplicitAny: Returned object is forwarded to Motion animate prop.
 ): any {
   const def = variants[variantName];
@@ -126,7 +127,7 @@ export function resolveValues(
     return {};
   }
   const state = typeof def === "function" ? def(custom) : def;
-  const { transition: _t, originX, originY, ...values } = state;
+  const { transition: _t, originX, originY, d: _d, ...values } = state;
 
   if (originX !== undefined || originY !== undefined) {
     const x = toTransformOriginPart(originX, "50%");
@@ -146,7 +147,7 @@ export function resolveTransition(
   variantName: string,
   // biome-ignore lint/suspicious/noExplicitAny: Custom payload shape varies per icon.
   custom: any = 0,
-  extraTransition?: TransitionObj
+  extraTransition?: TransitionObj,
   // biome-ignore lint/suspicious/noExplicitAny: Returned object is forwarded to Motion transition prop.
 ): any {
   const def = variants[variantName];
