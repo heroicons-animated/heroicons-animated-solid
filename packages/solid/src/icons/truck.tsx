@@ -9,7 +9,8 @@ export interface TruckIconHandle {
   stopAnimation: () => void;
 }
 
-interface TruckIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface TruckIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: TruckIconHandle) => void;
 }
@@ -113,11 +114,9 @@ const TruckIcon = (rawProps: TruckIconProps) => {
           { y: 8, width: 5, x: 0 },
           { y: 11, width: 7, x: -1 },
           { y: 14, width: 4, x: 0 },
-        ].map((line, i) => (
+        ].map((line) => (
           <Motion.line
             animate={resolveValues(SPEED_LINE_VARIANTS, variant())}
-            custom={i}
-            key={`speed-${i}`}
             stroke-linecap="round"
             stroke-width="1.5"
             transition={resolveTransition(SPEED_LINE_VARIANTS, variant())}

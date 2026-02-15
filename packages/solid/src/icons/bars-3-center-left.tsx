@@ -9,7 +9,8 @@ export interface Bars3CenterLeftIconHandle {
   stopAnimation: () => void;
 }
 
-interface Bars3CenterLeftIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Bars3CenterLeftIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Bars3CenterLeftIconHandle) => void;
 }

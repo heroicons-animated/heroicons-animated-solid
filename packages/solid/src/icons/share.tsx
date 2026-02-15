@@ -9,7 +9,8 @@ export interface ShareIconHandle {
   stopAnimation: () => void;
 }
 
-interface ShareIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ShareIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ShareIconHandle) => void;
 }
@@ -118,7 +119,6 @@ const ShareIcon = (rawProps: ShareIconProps) => {
         />
         <Motion.circle
           animate={resolveValues(NODE_VARIANTS, variant())}
-          custom={0.15}
           cx="18.75"
           cy="4.5"
           r="2.25"
@@ -126,7 +126,6 @@ const ShareIcon = (rawProps: ShareIconProps) => {
         />
         <Motion.circle
           animate={resolveValues(NODE_VARIANTS, variant())}
-          custom={0.3}
           cx="18.75"
           cy="19.5"
           r="2.25"

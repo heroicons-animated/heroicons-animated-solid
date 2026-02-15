@@ -9,7 +9,8 @@ export interface GlobeAmericasIconHandle {
   stopAnimation: () => void;
 }
 
-interface GlobeAmericasIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface GlobeAmericasIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: GlobeAmericasIconHandle) => void;
 }

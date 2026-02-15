@@ -9,7 +9,8 @@ export interface CalendarDaysIconHandle {
   stopAnimation: () => void;
 }
 
-interface CalendarDaysIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CalendarDaysIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CalendarDaysIconHandle) => void;
 }
@@ -111,9 +112,7 @@ const CalendarDaysIcon = (rawProps: CalendarDaysIconProps) => {
         {DOTS.map((dot) => (
           <Motion.path
             animate={resolveValues(DOT_VARIANTS, variant())}
-            custom={dot.index}
             d={dot.d}
-            key={dot.index}
             transition={resolveTransition(DOT_VARIANTS, variant())}
           />
         ))}

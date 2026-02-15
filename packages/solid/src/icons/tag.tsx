@@ -9,7 +9,7 @@ export interface TagIconHandle {
   stopAnimation: () => void;
 }
 
-interface TagIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface TagIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: TagIconHandle) => void;
 }

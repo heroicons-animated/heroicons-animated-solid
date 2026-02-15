@@ -9,7 +9,8 @@ export interface ScissorsIconHandle {
   stopAnimation: () => void;
 }
 
-interface ScissorsIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ScissorsIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ScissorsIconHandle) => void;
 }

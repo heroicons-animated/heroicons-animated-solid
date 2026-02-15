@@ -9,7 +9,8 @@ export interface EyeSlashIconHandle {
   stopAnimation: () => void;
 }
 
-interface EyeSlashIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface EyeSlashIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: EyeSlashIconHandle) => void;
 }

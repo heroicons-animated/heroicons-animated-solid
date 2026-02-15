@@ -10,7 +10,7 @@ export interface ChatBubbleOvalLeftEllipsisIconHandle {
 }
 
 interface ChatBubbleOvalLeftEllipsisIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChatBubbleOvalLeftEllipsisIconHandle) => void;
 }
@@ -118,9 +118,7 @@ const ChatBubbleOvalLeftEllipsisIcon = (
         ].map((dot) => (
           <Motion.path
             animate={resolveValues(DOT_VARIANTS, variant())}
-            custom={dot.index}
             d={dot.d}
-            key={dot.index}
             transition={resolveTransition(DOT_VARIANTS, variant())}
           />
         ))}

@@ -9,7 +9,8 @@ export interface CheckBadgeIconHandle {
   stopAnimation: () => void;
 }
 
-interface CheckBadgeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CheckBadgeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CheckBadgeIconHandle) => void;
 }

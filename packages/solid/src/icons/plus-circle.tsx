@@ -9,7 +9,8 @@ export interface PlusCircleIconHandle {
   stopAnimation: () => void;
 }
 
-interface PlusCircleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PlusCircleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PlusCircleIconHandle) => void;
 }

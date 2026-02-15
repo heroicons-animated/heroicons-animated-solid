@@ -9,7 +9,8 @@ export interface PuzzlePieceIconHandle {
   stopAnimation: () => void;
 }
 
-interface PuzzlePieceIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PuzzlePieceIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PuzzlePieceIconHandle) => void;
 }

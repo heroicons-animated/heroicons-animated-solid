@@ -9,7 +9,8 @@ export interface VideoCameraSlashIconHandle {
   stopAnimation: () => void;
 }
 
-interface VideoCameraSlashIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface VideoCameraSlashIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: VideoCameraSlashIconHandle) => void;
 }

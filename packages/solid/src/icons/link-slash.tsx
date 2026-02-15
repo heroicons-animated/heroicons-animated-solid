@@ -9,7 +9,8 @@ export interface LinkSlashIconHandle {
   stopAnimation: () => void;
 }
 
-interface LinkSlashIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface LinkSlashIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: LinkSlashIconHandle) => void;
 }

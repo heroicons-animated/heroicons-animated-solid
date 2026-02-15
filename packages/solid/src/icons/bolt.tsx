@@ -9,7 +9,8 @@ export interface BoltIconHandle {
   stopAnimation: () => void;
 }
 
-interface BoltIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BoltIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BoltIconHandle) => void;
 }

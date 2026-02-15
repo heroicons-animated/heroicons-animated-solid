@@ -9,7 +9,8 @@ export interface RocketLaunchIconHandle {
   stopAnimation: () => void;
 }
 
-interface RocketLaunchIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface RocketLaunchIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: RocketLaunchIconHandle) => void;
 }

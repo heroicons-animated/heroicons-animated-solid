@@ -9,7 +9,8 @@ export interface StarIconHandle {
   stopAnimation: () => void;
 }
 
-interface StarIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface StarIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: StarIconHandle) => void;
 }

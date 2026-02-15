@@ -10,7 +10,7 @@ export interface ArrowPathRoundedSquareIconHandle {
 }
 
 interface ArrowPathRoundedSquareIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowPathRoundedSquareIconHandle) => void;
 }

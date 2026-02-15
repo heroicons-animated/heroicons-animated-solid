@@ -9,7 +9,8 @@ export interface LockClosedIconHandle {
   stopAnimation: () => void;
 }
 
-interface LockClosedIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface LockClosedIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: LockClosedIconHandle) => void;
 }

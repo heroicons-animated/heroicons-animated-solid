@@ -10,7 +10,7 @@ export interface DocumentCurrencyYenIconHandle {
 }
 
 interface DocumentCurrencyYenIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DocumentCurrencyYenIconHandle) => void;
 }

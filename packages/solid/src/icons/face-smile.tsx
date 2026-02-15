@@ -9,7 +9,8 @@ export interface FaceSmileIconHandle {
   stopAnimation: () => void;
 }
 
-interface FaceSmileIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FaceSmileIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FaceSmileIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface ChevronDoubleUpIconHandle {
   stopAnimation: () => void;
 }
 
-interface ChevronDoubleUpIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ChevronDoubleUpIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChevronDoubleUpIconHandle) => void;
 }

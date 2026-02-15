@@ -9,7 +9,7 @@ export interface GifIconHandle {
   stopAnimation: () => void;
 }
 
-interface GifIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface GifIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: GifIconHandle) => void;
 }

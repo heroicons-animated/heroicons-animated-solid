@@ -9,7 +9,8 @@ export interface PaintBrushIconHandle {
   stopAnimation: () => void;
 }
 
-interface PaintBrushIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PaintBrushIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PaintBrushIconHandle) => void;
 }

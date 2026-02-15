@@ -9,7 +9,8 @@ export interface Square2StackIconHandle {
   stopAnimation: () => void;
 }
 
-interface Square2StackIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Square2StackIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Square2StackIconHandle) => void;
 }

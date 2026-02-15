@@ -9,7 +9,8 @@ export interface SpeakerXMarkIconHandle {
   stopAnimation: () => void;
 }
 
-interface SpeakerXMarkIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SpeakerXMarkIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SpeakerXMarkIconHandle) => void;
 }

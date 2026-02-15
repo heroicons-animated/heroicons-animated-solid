@@ -9,7 +9,8 @@ export interface StopIconHandle {
   stopAnimation: () => void;
 }
 
-interface StopIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface StopIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: StopIconHandle) => void;
 }

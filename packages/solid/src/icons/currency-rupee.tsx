@@ -9,7 +9,8 @@ export interface CurrencyRupeeIconHandle {
   stopAnimation: () => void;
 }
 
-interface CurrencyRupeeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CurrencyRupeeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CurrencyRupeeIconHandle) => void;
 }

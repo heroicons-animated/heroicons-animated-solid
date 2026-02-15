@@ -9,7 +9,7 @@ export interface KeyIconHandle {
   stopAnimation: () => void;
 }
 
-interface KeyIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface KeyIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: KeyIconHandle) => void;
 }

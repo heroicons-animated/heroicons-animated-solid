@@ -9,7 +9,8 @@ export interface HomeModernIconHandle {
   stopAnimation: () => void;
 }
 
-interface HomeModernIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface HomeModernIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: HomeModernIconHandle) => void;
 }

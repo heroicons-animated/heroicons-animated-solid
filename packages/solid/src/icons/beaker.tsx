@@ -9,7 +9,8 @@ export interface BeakerIconHandle {
   stopAnimation: () => void;
 }
 
-interface BeakerIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BeakerIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BeakerIconHandle) => void;
 }

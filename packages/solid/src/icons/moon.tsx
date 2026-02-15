@@ -9,7 +9,8 @@ export interface MoonIconHandle {
   stopAnimation: () => void;
 }
 
-interface MoonIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface MoonIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MoonIconHandle) => void;
 }

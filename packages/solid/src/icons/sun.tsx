@@ -9,7 +9,7 @@ export interface SunIconHandle {
   stopAnimation: () => void;
 }
 
-interface SunIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SunIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SunIconHandle) => void;
 }

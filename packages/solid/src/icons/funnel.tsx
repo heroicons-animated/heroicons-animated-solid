@@ -9,7 +9,8 @@ export interface FunnelIconHandle {
   stopAnimation: () => void;
 }
 
-interface FunnelIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FunnelIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FunnelIconHandle) => void;
 }

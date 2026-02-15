@@ -10,7 +10,7 @@ export interface ExclamationCircleIconHandle {
 }
 
 interface ExclamationCircleIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ExclamationCircleIconHandle) => void;
 }

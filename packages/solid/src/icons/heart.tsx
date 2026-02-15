@@ -9,7 +9,8 @@ export interface HeartIconHandle {
   stopAnimation: () => void;
 }
 
-interface HeartIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface HeartIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: HeartIconHandle) => void;
 }

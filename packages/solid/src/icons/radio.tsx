@@ -9,7 +9,8 @@ export interface RadioIconHandle {
   stopAnimation: () => void;
 }
 
-interface RadioIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface RadioIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: RadioIconHandle) => void;
 }

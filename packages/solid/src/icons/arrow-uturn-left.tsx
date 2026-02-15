@@ -9,7 +9,8 @@ export interface ArrowUturnLeftIconHandle {
   stopAnimation: () => void;
 }
 
-interface ArrowUturnLeftIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ArrowUturnLeftIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowUturnLeftIconHandle) => void;
 }

@@ -9,7 +9,7 @@ export interface H1IconHandle {
   stopAnimation: () => void;
 }
 
-interface H1IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface H1IconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: H1IconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface LanguageIconHandle {
   stopAnimation: () => void;
 }
 
-interface LanguageIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface LanguageIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: LanguageIconHandle) => void;
 }

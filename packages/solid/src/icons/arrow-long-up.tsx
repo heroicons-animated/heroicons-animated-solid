@@ -9,7 +9,8 @@ export interface ArrowLongUpIconHandle {
   stopAnimation: () => void;
 }
 
-interface ArrowLongUpIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ArrowLongUpIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowLongUpIconHandle) => void;
 }

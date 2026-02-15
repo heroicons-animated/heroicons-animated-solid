@@ -9,7 +9,8 @@ export interface PowerIconHandle {
   stopAnimation: () => void;
 }
 
-interface PowerIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PowerIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PowerIconHandle) => void;
 }

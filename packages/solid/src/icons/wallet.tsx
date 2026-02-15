@@ -9,7 +9,8 @@ export interface WalletIconHandle {
   stopAnimation: () => void;
 }
 
-interface WalletIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface WalletIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: WalletIconHandle) => void;
 }

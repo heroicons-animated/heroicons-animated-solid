@@ -9,7 +9,8 @@ export interface FaceFrownIconHandle {
   stopAnimation: () => void;
 }
 
-interface FaceFrownIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FaceFrownIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FaceFrownIconHandle) => void;
 }

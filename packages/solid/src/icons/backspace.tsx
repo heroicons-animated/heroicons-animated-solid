@@ -9,7 +9,8 @@ export interface BackspaceIconHandle {
   stopAnimation: () => void;
 }
 
-interface BackspaceIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BackspaceIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BackspaceIconHandle) => void;
 }

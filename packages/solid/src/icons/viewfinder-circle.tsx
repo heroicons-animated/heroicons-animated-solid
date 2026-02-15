@@ -9,7 +9,8 @@ export interface ViewfinderCircleIconHandle {
   stopAnimation: () => void;
 }
 
-interface ViewfinderCircleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ViewfinderCircleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ViewfinderCircleIconHandle) => void;
 }

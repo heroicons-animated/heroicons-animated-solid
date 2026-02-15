@@ -9,7 +9,8 @@ export interface AcademicCapIconHandle {
   stopAnimation: () => void;
 }
 
-interface AcademicCapIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface AcademicCapIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: AcademicCapIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface ForwardIconHandle {
   stopAnimation: () => void;
 }
 
-interface ForwardIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ForwardIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ForwardIconHandle) => void;
 }

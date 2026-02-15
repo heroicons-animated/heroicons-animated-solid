@@ -9,7 +9,8 @@ export interface ArrowUpCircleIconHandle {
   stopAnimation: () => void;
 }
 
-interface ArrowUpCircleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ArrowUpCircleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowUpCircleIconHandle) => void;
 }

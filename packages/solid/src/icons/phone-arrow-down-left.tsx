@@ -10,7 +10,7 @@ export interface PhoneArrowDownLeftIconHandle {
 }
 
 interface PhoneArrowDownLeftIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PhoneArrowDownLeftIconHandle) => void;
 }

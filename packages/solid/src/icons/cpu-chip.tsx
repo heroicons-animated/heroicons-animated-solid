@@ -9,7 +9,8 @@ export interface CpuChipIconHandle {
   stopAnimation: () => void;
 }
 
-interface CpuChipIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CpuChipIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CpuChipIconHandle) => void;
 }

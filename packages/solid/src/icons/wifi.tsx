@@ -9,7 +9,8 @@ export interface WifiIconHandle {
   stopAnimation: () => void;
 }
 
-interface WifiIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface WifiIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: WifiIconHandle) => void;
 }

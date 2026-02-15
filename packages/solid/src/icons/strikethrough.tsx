@@ -9,7 +9,8 @@ export interface StrikethroughIconHandle {
   stopAnimation: () => void;
 }
 
-interface StrikethroughIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface StrikethroughIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: StrikethroughIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface FolderArrowDownIconHandle {
   stopAnimation: () => void;
 }
 
-interface FolderArrowDownIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FolderArrowDownIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FolderArrowDownIconHandle) => void;
 }

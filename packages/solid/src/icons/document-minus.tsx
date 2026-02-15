@@ -9,7 +9,8 @@ export interface DocumentMinusIconHandle {
   stopAnimation: () => void;
 }
 
-interface DocumentMinusIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface DocumentMinusIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DocumentMinusIconHandle) => void;
 }

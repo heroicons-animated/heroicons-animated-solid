@@ -9,7 +9,8 @@ export interface TicketIconHandle {
   stopAnimation: () => void;
 }
 
-interface TicketIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface TicketIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: TicketIconHandle) => void;
 }

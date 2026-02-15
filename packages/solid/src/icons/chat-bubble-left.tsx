@@ -9,7 +9,8 @@ export interface ChatBubbleLeftIconHandle {
   stopAnimation: () => void;
 }
 
-interface ChatBubbleLeftIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ChatBubbleLeftIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChatBubbleLeftIconHandle) => void;
 }

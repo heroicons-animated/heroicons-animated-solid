@@ -9,7 +9,8 @@ export interface PlayPauseIconHandle {
   stopAnimation: () => void;
 }
 
-interface PlayPauseIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PlayPauseIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PlayPauseIconHandle) => void;
 }

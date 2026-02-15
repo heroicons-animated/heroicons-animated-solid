@@ -9,7 +9,7 @@ export interface RssIconHandle {
   stopAnimation: () => void;
 }
 
-interface RssIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface RssIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: RssIconHandle) => void;
 }

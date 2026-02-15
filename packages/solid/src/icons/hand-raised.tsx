@@ -9,7 +9,8 @@ export interface HandRaisedIconHandle {
   stopAnimation: () => void;
 }
 
-interface HandRaisedIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface HandRaisedIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: HandRaisedIconHandle) => void;
 }

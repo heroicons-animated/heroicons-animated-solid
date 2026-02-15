@@ -9,7 +9,8 @@ export interface FilmIconHandle {
   stopAnimation: () => void;
 }
 
-interface FilmIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FilmIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FilmIconHandle) => void;
 }

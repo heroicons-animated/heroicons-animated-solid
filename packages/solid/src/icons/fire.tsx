@@ -9,7 +9,8 @@ export interface FireIconHandle {
   stopAnimation: () => void;
 }
 
-interface FireIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FireIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FireIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface CommandLineIconHandle {
   stopAnimation: () => void;
 }
 
-interface CommandLineIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CommandLineIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CommandLineIconHandle) => void;
 }

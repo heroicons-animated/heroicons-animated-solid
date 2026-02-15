@@ -10,7 +10,7 @@ export interface InformationCircleIconHandle {
 }
 
 interface InformationCircleIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: InformationCircleIconHandle) => void;
 }

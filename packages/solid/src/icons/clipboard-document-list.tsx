@@ -10,7 +10,7 @@ export interface ClipboardDocumentListIconHandle {
 }
 
 interface ClipboardDocumentListIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ClipboardDocumentListIconHandle) => void;
 }
@@ -122,7 +122,7 @@ const ClipboardDocumentListIcon = (
           const lineDelay = dotDelay + DOT_DURATION;
 
           return (
-            <g key={item.y}>
+            <g>
               <Motion.path
                 animate={resolveValues(
                   CREATE_DOT_VARIANTS(dotDelay),

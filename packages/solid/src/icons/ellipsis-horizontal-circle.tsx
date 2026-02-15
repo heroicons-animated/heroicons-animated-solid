@@ -10,7 +10,7 @@ export interface EllipsisHorizontalCircleIconHandle {
 }
 
 interface EllipsisHorizontalCircleIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: EllipsisHorizontalCircleIconHandle) => void;
 }
@@ -108,9 +108,7 @@ const EllipsisHorizontalCircleIcon = (
         ].map((dot) => (
           <Motion.path
             animate={resolveValues(DOT_VARIANTS, variant())}
-            custom={dot.index}
             d={dot.d}
-            key={dot.index}
             transition={resolveTransition(DOT_VARIANTS, variant())}
           />
         ))}

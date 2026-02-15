@@ -9,7 +9,8 @@ export interface BackwardIconHandle {
   stopAnimation: () => void;
 }
 
-interface BackwardIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BackwardIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BackwardIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface DocumentTextIconHandle {
   stopAnimation: () => void;
 }
 
-interface DocumentTextIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface DocumentTextIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DocumentTextIconHandle) => void;
 }
@@ -87,10 +88,8 @@ const DocumentTextIcon = (rawProps: DocumentTextIconProps) => {
         ].map((line) => (
           <Motion.path
             animate={resolveValues(LINE_VARIANTS, variant())}
-            custom={line.index}
             d={line.d}
             initial="visible"
-            key={line.index}
             transition={resolveTransition(LINE_VARIANTS, variant())}
           />
         ))}

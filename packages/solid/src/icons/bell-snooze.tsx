@@ -9,7 +9,8 @@ export interface BellSnoozeIconHandle {
   stopAnimation: () => void;
 }
 
-interface BellSnoozeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BellSnoozeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BellSnoozeIconHandle) => void;
 }

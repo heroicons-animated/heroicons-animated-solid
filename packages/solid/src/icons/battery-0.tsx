@@ -9,7 +9,8 @@ export interface Battery0IconHandle {
   stopAnimation: () => void;
 }
 
-interface Battery0IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Battery0IconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Battery0IconHandle) => void;
 }

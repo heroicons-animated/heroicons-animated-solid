@@ -9,7 +9,8 @@ export interface PlayCircleIconHandle {
   stopAnimation: () => void;
 }
 
-interface PlayCircleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PlayCircleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PlayCircleIconHandle) => void;
 }

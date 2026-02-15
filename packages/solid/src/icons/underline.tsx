@@ -9,7 +9,8 @@ export interface UnderlineIconHandle {
   stopAnimation: () => void;
 }
 
-interface UnderlineIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface UnderlineIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: UnderlineIconHandle) => void;
 }

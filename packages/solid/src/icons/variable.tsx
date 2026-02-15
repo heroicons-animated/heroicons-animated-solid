@@ -9,7 +9,8 @@ export interface VariableIconHandle {
   stopAnimation: () => void;
 }
 
-interface VariableIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface VariableIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: VariableIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface FolderMinusIconHandle {
   stopAnimation: () => void;
 }
 
-interface FolderMinusIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FolderMinusIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FolderMinusIconHandle) => void;
 }

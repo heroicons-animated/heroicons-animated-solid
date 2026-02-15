@@ -9,7 +9,8 @@ export interface Bars3IconHandle {
   stopAnimation: () => void;
 }
 
-interface Bars3IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Bars3IconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Bars3IconHandle) => void;
 }
@@ -104,7 +105,6 @@ const Bars3Icon = (rawProps: Bars3IconProps) => {
           <Motion.path
             animate={resolveValues(CREATE_BAR_VARIANTS(bar.delay), variant())}
             d={bar.d}
-            key={bar.d}
             style={{ "transform-origin": "center" }}
             transition={resolveTransition(
               CREATE_BAR_VARIANTS(bar.delay),

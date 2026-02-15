@@ -9,7 +9,8 @@ export interface LifebuoyIconHandle {
   stopAnimation: () => void;
 }
 
-interface LifebuoyIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface LifebuoyIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: LifebuoyIconHandle) => void;
 }

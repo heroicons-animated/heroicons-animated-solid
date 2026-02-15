@@ -9,7 +9,8 @@ export interface ArchiveBoxIconHandle {
   stopAnimation: () => void;
 }
 
-interface ArchiveBoxIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ArchiveBoxIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArchiveBoxIconHandle) => void;
 }

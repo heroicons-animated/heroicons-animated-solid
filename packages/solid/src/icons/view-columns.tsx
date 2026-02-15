@@ -9,7 +9,8 @@ export interface ViewColumnsIconHandle {
   stopAnimation: () => void;
 }
 
-interface ViewColumnsIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ViewColumnsIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ViewColumnsIconHandle) => void;
 }
@@ -100,9 +101,7 @@ const ViewColumnsIcon = (rawProps: ViewColumnsIconProps) => {
         {LINES.map((line) => (
           <Motion.path
             animate={resolveValues(LINE_VARIANTS, variant())}
-            custom={line.index}
             d={line.d}
-            key={line.index}
             transition={resolveTransition(LINE_VARIANTS, variant())}
           />
         ))}

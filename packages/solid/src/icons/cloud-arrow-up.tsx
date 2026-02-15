@@ -9,7 +9,8 @@ export interface CloudArrowUpIconHandle {
   stopAnimation: () => void;
 }
 
-interface CloudArrowUpIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CloudArrowUpIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CloudArrowUpIconHandle) => void;
 }

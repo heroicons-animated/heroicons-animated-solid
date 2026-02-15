@@ -9,7 +9,7 @@ export interface TvIconHandle {
   stopAnimation: () => void;
 }
 
-interface TvIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface TvIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: TvIconHandle) => void;
 }

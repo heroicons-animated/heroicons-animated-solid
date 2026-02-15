@@ -9,7 +9,8 @@ export interface InboxStackIconHandle {
   stopAnimation: () => void;
 }
 
-interface InboxStackIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface InboxStackIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: InboxStackIconHandle) => void;
 }

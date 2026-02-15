@@ -9,7 +9,8 @@ export interface CodeBracketIconHandle {
   stopAnimation: () => void;
 }
 
-interface CodeBracketIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CodeBracketIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CodeBracketIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface MegaphoneIconHandle {
   stopAnimation: () => void;
 }
 
-interface MegaphoneIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface MegaphoneIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MegaphoneIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface RectangleStackIconHandle {
   stopAnimation: () => void;
 }
 
-interface RectangleStackIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface RectangleStackIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: RectangleStackIconHandle) => void;
 }

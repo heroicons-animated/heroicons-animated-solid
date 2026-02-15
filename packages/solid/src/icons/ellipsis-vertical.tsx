@@ -9,7 +9,8 @@ export interface EllipsisVerticalIconHandle {
   stopAnimation: () => void;
 }
 
-interface EllipsisVerticalIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface EllipsisVerticalIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: EllipsisVerticalIconHandle) => void;
 }
@@ -105,9 +106,7 @@ const EllipsisVerticalIcon = (rawProps: EllipsisVerticalIconProps) => {
         ].map((dot) => (
           <Motion.path
             animate={resolveValues(DOT_VARIANTS, variant())}
-            custom={dot.index}
             d={dot.d}
-            key={dot.index}
             transition={resolveTransition(DOT_VARIANTS, variant())}
           />
         ))}

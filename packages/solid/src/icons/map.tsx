@@ -9,7 +9,7 @@ export interface MapIconHandle {
   stopAnimation: () => void;
 }
 
-interface MapIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface MapIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MapIconHandle) => void;
 }

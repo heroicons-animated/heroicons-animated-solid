@@ -9,7 +9,8 @@ export interface CurrencyEuroIconHandle {
   stopAnimation: () => void;
 }
 
-interface CurrencyEuroIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CurrencyEuroIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CurrencyEuroIconHandle) => void;
 }

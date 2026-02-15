@@ -9,7 +9,8 @@ export interface BuildingLibraryIconHandle {
   stopAnimation: () => void;
 }
 
-interface BuildingLibraryIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BuildingLibraryIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BuildingLibraryIconHandle) => void;
 }
@@ -119,9 +120,7 @@ const BuildingLibraryIcon = (rawProps: BuildingLibraryIconProps) => {
         {PILLARS.map((pillar) => (
           <Motion.path
             animate={resolveValues(PILLAR_VARIANTS, variant())}
-            custom={pillar.index}
             d={pillar.d}
-            key={pillar.index}
             transition={resolveTransition(PILLAR_VARIANTS, variant())}
           />
         ))}

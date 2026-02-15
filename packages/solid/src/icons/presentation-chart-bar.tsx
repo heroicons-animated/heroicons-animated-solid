@@ -10,7 +10,7 @@ export interface PresentationChartBarIconHandle {
 }
 
 interface PresentationChartBarIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PresentationChartBarIconHandle) => void;
 }

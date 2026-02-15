@@ -9,7 +9,8 @@ export interface ArrowsRightLeftIconHandle {
   stopAnimation: () => void;
 }
 
-interface ArrowsRightLeftIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ArrowsRightLeftIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowsRightLeftIconHandle) => void;
 }

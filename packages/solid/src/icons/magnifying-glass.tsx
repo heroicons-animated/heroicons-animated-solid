@@ -9,7 +9,8 @@ export interface MagnifyingGlassIconHandle {
   stopAnimation: () => void;
 }
 
-interface MagnifyingGlassIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface MagnifyingGlassIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MagnifyingGlassIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface HomeIconHandle {
   stopAnimation: () => void;
 }
 
-interface HomeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface HomeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: HomeIconHandle) => void;
 }

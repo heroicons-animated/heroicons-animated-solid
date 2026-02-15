@@ -9,7 +9,8 @@ export interface Cog8ToothIconHandle {
   stopAnimation: () => void;
 }
 
-interface Cog8ToothIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Cog8ToothIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Cog8ToothIconHandle) => void;
 }

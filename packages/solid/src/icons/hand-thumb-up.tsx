@@ -9,7 +9,8 @@ export interface HandThumbUpIconHandle {
   stopAnimation: () => void;
 }
 
-interface HandThumbUpIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface HandThumbUpIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: HandThumbUpIconHandle) => void;
 }

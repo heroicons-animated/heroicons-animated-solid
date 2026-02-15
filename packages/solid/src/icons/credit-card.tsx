@@ -9,7 +9,8 @@ export interface CreditCardIconHandle {
   stopAnimation: () => void;
 }
 
-interface CreditCardIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CreditCardIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CreditCardIconHandle) => void;
 }
@@ -87,10 +88,8 @@ const CreditCardIcon = (rawProps: CreditCardIconProps) => {
         ].map((line) => (
           <Motion.path
             animate={resolveValues(LINE_VARIANTS, variant())}
-            custom={line.index}
             d={line.d}
             initial="visible"
-            key={line.index}
             transition={resolveTransition(LINE_VARIANTS, variant())}
           />
         ))}

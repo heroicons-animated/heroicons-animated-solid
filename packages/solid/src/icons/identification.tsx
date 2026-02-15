@@ -9,7 +9,8 @@ export interface IdentificationIconHandle {
   stopAnimation: () => void;
 }
 
-interface IdentificationIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface IdentificationIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: IdentificationIconHandle) => void;
 }

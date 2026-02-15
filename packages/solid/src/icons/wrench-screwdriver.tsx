@@ -10,7 +10,7 @@ export interface WrenchScrewdriverIconHandle {
 }
 
 interface WrenchScrewdriverIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: WrenchScrewdriverIconHandle) => void;
 }

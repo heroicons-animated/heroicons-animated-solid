@@ -9,7 +9,8 @@ export interface ShieldCheckIconHandle {
   stopAnimation: () => void;
 }
 
-interface ShieldCheckIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ShieldCheckIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ShieldCheckIconHandle) => void;
 }

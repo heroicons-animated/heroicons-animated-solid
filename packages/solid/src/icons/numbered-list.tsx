@@ -9,7 +9,8 @@ export interface NumberedListIconHandle {
   stopAnimation: () => void;
 }
 
-interface NumberedListIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface NumberedListIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: NumberedListIconHandle) => void;
 }
@@ -134,7 +135,7 @@ const NumberedListIcon = (rawProps: NumberedListIconProps) => {
           const lineDelay = numberDelay + NUMBER_DURATION;
 
           return (
-            <g key={item.y}>
+            <g>
               <Motion.path
                 animate={resolveValues(
                   CREATE_NUMBER_VARIANTS(numberDelay),

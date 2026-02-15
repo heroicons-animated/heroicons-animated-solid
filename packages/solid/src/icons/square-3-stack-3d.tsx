@@ -9,7 +9,8 @@ export interface Square3Stack3DIconHandle {
   stopAnimation: () => void;
 }
 
-interface Square3Stack3DIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Square3Stack3DIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Square3Stack3DIconHandle) => void;
 }

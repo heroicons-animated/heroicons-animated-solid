@@ -9,7 +9,8 @@ export interface MusicalNoteIconHandle {
   stopAnimation: () => void;
 }
 
-interface MusicalNoteIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface MusicalNoteIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MusicalNoteIconHandle) => void;
 }

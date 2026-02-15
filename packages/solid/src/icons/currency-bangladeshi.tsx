@@ -10,7 +10,7 @@ export interface CurrencyBangladeshiIconHandle {
 }
 
 interface CurrencyBangladeshiIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CurrencyBangladeshiIconHandle) => void;
 }

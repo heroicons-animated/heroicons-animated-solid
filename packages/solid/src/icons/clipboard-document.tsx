@@ -10,7 +10,7 @@ export interface ClipboardDocumentIconHandle {
 }
 
 interface ClipboardDocumentIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ClipboardDocumentIconHandle) => void;
 }

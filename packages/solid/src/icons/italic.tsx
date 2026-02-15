@@ -9,7 +9,8 @@ export interface ItalicIconHandle {
   stopAnimation: () => void;
 }
 
-interface ItalicIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ItalicIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ItalicIconHandle) => void;
 }

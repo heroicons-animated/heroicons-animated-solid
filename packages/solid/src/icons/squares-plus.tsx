@@ -9,7 +9,8 @@ export interface SquaresPlusIconHandle {
   stopAnimation: () => void;
 }
 
-interface SquaresPlusIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SquaresPlusIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SquaresPlusIconHandle) => void;
 }

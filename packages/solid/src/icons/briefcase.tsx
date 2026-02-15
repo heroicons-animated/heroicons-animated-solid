@@ -9,7 +9,8 @@ export interface BriefcaseIconHandle {
   stopAnimation: () => void;
 }
 
-interface BriefcaseIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BriefcaseIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BriefcaseIconHandle) => void;
 }

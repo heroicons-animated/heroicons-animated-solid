@@ -10,7 +10,7 @@ export interface ArrowUpOnSquareStackIconHandle {
 }
 
 interface ArrowUpOnSquareStackIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowUpOnSquareStackIconHandle) => void;
 }

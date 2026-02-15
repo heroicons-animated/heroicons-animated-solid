@@ -10,7 +10,7 @@ export interface DocumentCurrencyEuroIconHandle {
 }
 
 interface DocumentCurrencyEuroIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DocumentCurrencyEuroIconHandle) => void;
 }

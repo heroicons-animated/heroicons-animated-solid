@@ -9,7 +9,8 @@ export interface XMarkIconHandle {
   stopAnimation: () => void;
 }
 
-interface XMarkIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface XMarkIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: XMarkIconHandle) => void;
 }

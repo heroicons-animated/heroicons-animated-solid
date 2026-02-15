@@ -10,7 +10,7 @@ export interface PresentationChartLineIconHandle {
 }
 
 interface PresentationChartLineIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PresentationChartLineIconHandle) => void;
 }

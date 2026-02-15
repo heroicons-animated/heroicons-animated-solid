@@ -17,7 +17,8 @@ function convertEase(ease: string | number[]): string {
   return EASE_MAP[ease] ?? ease;
 }
 
-type TransitionObj = Record<string, unknown>;
+// biome-ignore lint/suspicious/noExplicitAny: Motion One options vary by property at runtime.
+type TransitionObj = Record<string, any>;
 type TransitionKey = string;
 
 function applySpecialTransitionKey(
@@ -93,7 +94,8 @@ function convertTransitionObj(t: TransitionObj): TransitionObj {
   return r;
 }
 
-type VariantValue = Record<string, unknown>;
+// biome-ignore lint/suspicious/noExplicitAny: Variant payload is dynamic and icon-specific.
+type VariantValue = Record<string, any>;
 type VariantDef = VariantValue | ((custom: number) => VariantValue);
 type Variants = Record<string, VariantDef>;
 
@@ -105,7 +107,8 @@ export function resolveValues(
   variants: Variants,
   variantName: string,
   custom = 0
-): VariantValue {
+  // biome-ignore lint/suspicious/noExplicitAny: Returned object is forwarded to Motion animate prop.
+): any {
   const def = variants[variantName];
   if (!def) {
     return {};
@@ -124,7 +127,8 @@ export function resolveTransition(
   variantName: string,
   custom = 0,
   extraTransition?: TransitionObj
-): TransitionObj {
+  // biome-ignore lint/suspicious/noExplicitAny: Returned object is forwarded to Motion transition prop.
+): any {
   const def = variants[variantName];
   if (!(def || extraTransition)) {
     return {};

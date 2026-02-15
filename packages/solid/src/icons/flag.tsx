@@ -9,7 +9,8 @@ export interface FlagIconHandle {
   stopAnimation: () => void;
 }
 
-interface FlagIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface FlagIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: FlagIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface AtSymbolIconHandle {
   stopAnimation: () => void;
 }
 
-interface AtSymbolIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface AtSymbolIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: AtSymbolIconHandle) => void;
 }

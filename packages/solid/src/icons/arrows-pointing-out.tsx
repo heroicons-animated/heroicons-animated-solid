@@ -10,7 +10,7 @@ export interface ArrowsPointingOutIconHandle {
 }
 
 interface ArrowsPointingOutIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowsPointingOutIconHandle) => void;
 }

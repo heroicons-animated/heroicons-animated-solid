@@ -9,7 +9,8 @@ export interface ShoppingCartIconHandle {
   stopAnimation: () => void;
 }
 
-interface ShoppingCartIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ShoppingCartIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ShoppingCartIconHandle) => void;
 }

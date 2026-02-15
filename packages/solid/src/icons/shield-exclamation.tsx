@@ -10,7 +10,7 @@ export interface ShieldExclamationIconHandle {
 }
 
 interface ShieldExclamationIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ShieldExclamationIconHandle) => void;
 }

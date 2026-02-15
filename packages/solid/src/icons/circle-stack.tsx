@@ -9,7 +9,8 @@ export interface CircleStackIconHandle {
   stopAnimation: () => void;
 }
 
-interface CircleStackIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CircleStackIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CircleStackIconHandle) => void;
 }

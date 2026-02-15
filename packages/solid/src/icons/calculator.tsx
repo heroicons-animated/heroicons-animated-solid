@@ -9,7 +9,8 @@ export interface CalculatorIconHandle {
   stopAnimation: () => void;
 }
 
-interface CalculatorIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CalculatorIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CalculatorIconHandle) => void;
 }

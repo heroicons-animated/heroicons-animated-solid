@@ -9,7 +9,8 @@ export interface PhoneIconHandle {
   stopAnimation: () => void;
 }
 
-interface PhoneIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PhoneIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PhoneIconHandle) => void;
 }

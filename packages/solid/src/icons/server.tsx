@@ -9,7 +9,8 @@ export interface ServerIconHandle {
   stopAnimation: () => void;
 }
 
-interface ServerIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ServerIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ServerIconHandle) => void;
 }

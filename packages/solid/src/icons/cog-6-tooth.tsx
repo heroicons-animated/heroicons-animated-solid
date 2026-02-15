@@ -9,7 +9,8 @@ export interface Cog6ToothIconHandle {
   stopAnimation: () => void;
 }
 
-interface Cog6ToothIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Cog6ToothIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Cog6ToothIconHandle) => void;
 }

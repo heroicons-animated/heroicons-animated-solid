@@ -9,7 +9,8 @@ export interface SparklesIconHandle {
   stopAnimation: () => void;
 }
 
-interface SparklesIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SparklesIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SparklesIconHandle) => void;
 }

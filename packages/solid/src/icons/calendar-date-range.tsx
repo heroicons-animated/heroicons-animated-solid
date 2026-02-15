@@ -10,7 +10,7 @@ export interface CalendarDateRangeIconHandle {
 }
 
 interface CalendarDateRangeIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CalendarDateRangeIconHandle) => void;
 }
@@ -155,18 +155,14 @@ const CalendarDateRangeIcon = (rawProps: CalendarDateRangeIconProps) => {
         {RANGE_LINES.map((line) => (
           <Motion.path
             animate={resolveValues(LINE_VARIANTS, variant())}
-            custom={line.index}
             d={line.d}
-            key={`line-${line.index}`}
             transition={resolveTransition(LINE_VARIANTS, variant())}
           />
         ))}
         {DOTS.map((dot) => (
           <Motion.path
             animate={resolveValues(DOT_VARIANTS, variant())}
-            custom={dot.index}
             d={dot.d}
-            key={`dot-${dot.index}`}
             transition={resolveTransition(DOT_VARIANTS, variant())}
           />
         ))}

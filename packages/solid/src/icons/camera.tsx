@@ -9,7 +9,8 @@ export interface CameraIconHandle {
   stopAnimation: () => void;
 }
 
-interface CameraIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CameraIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CameraIconHandle) => void;
 }

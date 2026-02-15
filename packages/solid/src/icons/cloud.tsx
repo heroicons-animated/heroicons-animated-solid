@@ -9,7 +9,8 @@ export interface CloudIconHandle {
   stopAnimation: () => void;
 }
 
-interface CloudIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CloudIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CloudIconHandle) => void;
 }

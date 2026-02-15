@@ -9,7 +9,8 @@ export interface EnvelopeIconHandle {
   stopAnimation: () => void;
 }
 
-interface EnvelopeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface EnvelopeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: EnvelopeIconHandle) => void;
 }

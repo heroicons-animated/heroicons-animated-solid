@@ -10,7 +10,7 @@ export interface ChevronDoubleRightIconHandle {
 }
 
 interface ChevronDoubleRightIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChevronDoubleRightIconHandle) => void;
 }

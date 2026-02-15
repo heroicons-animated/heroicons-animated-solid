@@ -9,7 +9,8 @@ export interface BookOpenIconHandle {
   stopAnimation: () => void;
 }
 
-interface BookOpenIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BookOpenIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BookOpenIconHandle) => void;
 }

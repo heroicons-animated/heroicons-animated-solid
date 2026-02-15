@@ -9,7 +9,8 @@ export interface WindowIconHandle {
   stopAnimation: () => void;
 }
 
-interface WindowIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface WindowIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: WindowIconHandle) => void;
 }
@@ -99,13 +100,11 @@ const WindowIcon = (rawProps: WindowIconProps) => {
         />
         <Motion.path
           animate={resolveValues(BUTTON_VARIANTS, variant())}
-          custom={0.1}
           d="M7.5 6H7.5075V6.0075H7.5V6Z"
           transition={resolveTransition(BUTTON_VARIANTS, variant())}
         />
         <Motion.path
           animate={resolveValues(BUTTON_VARIANTS, variant())}
-          custom={0.2}
           d="M9.75 6H9.7575V6.0075H9.75V6Z"
           transition={resolveTransition(BUTTON_VARIANTS, variant())}
         />

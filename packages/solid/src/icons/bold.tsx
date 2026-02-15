@@ -9,7 +9,8 @@ export interface BoldIconHandle {
   stopAnimation: () => void;
 }
 
-interface BoldIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BoldIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BoldIconHandle) => void;
 }

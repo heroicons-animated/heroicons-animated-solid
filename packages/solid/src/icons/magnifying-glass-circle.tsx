@@ -10,7 +10,7 @@ export interface MagnifyingGlassCircleIconHandle {
 }
 
 interface MagnifyingGlassCircleIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MagnifyingGlassCircleIconHandle) => void;
 }

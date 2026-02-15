@@ -9,7 +9,8 @@ export interface ChartBarIconHandle {
   stopAnimation: () => void;
 }
 
-interface ChartBarIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ChartBarIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChartBarIconHandle) => void;
 }

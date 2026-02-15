@@ -10,7 +10,7 @@ export interface ExclamationTriangleIconHandle {
 }
 
 interface ExclamationTriangleIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ExclamationTriangleIconHandle) => void;
 }

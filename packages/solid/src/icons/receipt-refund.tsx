@@ -9,7 +9,8 @@ export interface ReceiptRefundIconHandle {
   stopAnimation: () => void;
 }
 
-interface ReceiptRefundIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ReceiptRefundIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ReceiptRefundIconHandle) => void;
 }

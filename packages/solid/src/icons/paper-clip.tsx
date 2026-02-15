@@ -9,7 +9,8 @@ export interface PaperClipIconHandle {
   stopAnimation: () => void;
 }
 
-interface PaperClipIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PaperClipIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PaperClipIconHandle) => void;
 }

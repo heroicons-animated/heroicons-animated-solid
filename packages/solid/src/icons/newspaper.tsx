@@ -9,7 +9,8 @@ export interface NewspaperIconHandle {
   stopAnimation: () => void;
 }
 
-interface NewspaperIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface NewspaperIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: NewspaperIconHandle) => void;
 }

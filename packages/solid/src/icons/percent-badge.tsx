@@ -9,7 +9,8 @@ export interface PercentBadgeIconHandle {
   stopAnimation: () => void;
 }
 
-interface PercentBadgeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PercentBadgeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PercentBadgeIconHandle) => void;
 }

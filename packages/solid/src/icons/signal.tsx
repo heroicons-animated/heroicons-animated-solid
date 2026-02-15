@@ -9,7 +9,8 @@ export interface SignalIconHandle {
   stopAnimation: () => void;
 }
 
-interface SignalIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SignalIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SignalIconHandle) => void;
 }

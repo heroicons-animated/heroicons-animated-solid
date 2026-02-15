@@ -9,7 +9,8 @@ export interface GlobeAltIconHandle {
   stopAnimation: () => void;
 }
 
-interface GlobeAltIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface GlobeAltIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: GlobeAltIconHandle) => void;
 }

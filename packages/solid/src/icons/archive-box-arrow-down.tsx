@@ -10,7 +10,7 @@ export interface ArchiveBoxArrowDownIconHandle {
 }
 
 interface ArchiveBoxArrowDownIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArchiveBoxArrowDownIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface PauseCircleIconHandle {
   stopAnimation: () => void;
 }
 
-interface PauseCircleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PauseCircleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PauseCircleIconHandle) => void;
 }

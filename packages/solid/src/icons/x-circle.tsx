@@ -9,7 +9,8 @@ export interface XCircleIconHandle {
   stopAnimation: () => void;
 }
 
-interface XCircleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface XCircleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: XCircleIconHandle) => void;
 }

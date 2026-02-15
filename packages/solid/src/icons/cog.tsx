@@ -9,7 +9,7 @@ export interface CogIconHandle {
   stopAnimation: () => void;
 }
 
-interface CogIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CogIconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CogIconHandle) => void;
 }

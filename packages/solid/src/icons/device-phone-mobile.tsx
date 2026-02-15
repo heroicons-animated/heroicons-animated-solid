@@ -10,7 +10,7 @@ export interface DevicePhoneMobileIconHandle {
 }
 
 interface DevicePhoneMobileIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DevicePhoneMobileIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface ClockIconHandle {
   stopAnimation: () => void;
 }
 
-interface ClockIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ClockIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ClockIconHandle) => void;
 }

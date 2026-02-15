@@ -9,7 +9,8 @@ export interface InboxIconHandle {
   stopAnimation: () => void;
 }
 
-interface InboxIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface InboxIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: InboxIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface MicrophoneIconHandle {
   stopAnimation: () => void;
 }
 
-interface MicrophoneIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface MicrophoneIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: MicrophoneIconHandle) => void;
 }

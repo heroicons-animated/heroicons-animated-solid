@@ -9,7 +9,8 @@ export interface PhoneXMarkIconHandle {
   stopAnimation: () => void;
 }
 
-interface PhoneXMarkIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PhoneXMarkIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PhoneXMarkIconHandle) => void;
 }

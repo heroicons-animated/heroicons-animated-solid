@@ -9,7 +9,8 @@ export interface PhotoIconHandle {
   stopAnimation: () => void;
 }
 
-interface PhotoIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PhotoIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PhotoIconHandle) => void;
 }

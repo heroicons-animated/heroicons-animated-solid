@@ -9,7 +9,8 @@ export interface EyeDropperIconHandle {
   stopAnimation: () => void;
 }
 
-interface EyeDropperIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface EyeDropperIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: EyeDropperIconHandle) => void;
 }

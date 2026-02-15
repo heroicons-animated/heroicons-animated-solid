@@ -9,7 +9,8 @@ export interface NoSymbolIconHandle {
   stopAnimation: () => void;
 }
 
-interface NoSymbolIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface NoSymbolIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: NoSymbolIconHandle) => void;
 }

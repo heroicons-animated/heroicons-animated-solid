@@ -9,7 +9,8 @@ export interface HashtagIconHandle {
   stopAnimation: () => void;
 }
 
-interface HashtagIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface HashtagIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: HashtagIconHandle) => void;
 }

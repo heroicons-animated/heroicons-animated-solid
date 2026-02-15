@@ -9,7 +9,8 @@ export interface CubeTransparentIconHandle {
   stopAnimation: () => void;
 }
 
-interface CubeTransparentIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CubeTransparentIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CubeTransparentIconHandle) => void;
 }

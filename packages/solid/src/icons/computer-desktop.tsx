@@ -9,7 +9,8 @@ export interface ComputerDesktopIconHandle {
   stopAnimation: () => void;
 }
 
-interface ComputerDesktopIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ComputerDesktopIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ComputerDesktopIconHandle) => void;
 }

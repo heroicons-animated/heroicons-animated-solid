@@ -9,7 +9,8 @@ export interface RectangleGroupIconHandle {
   stopAnimation: () => void;
 }
 
-interface RectangleGroupIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface RectangleGroupIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: RectangleGroupIconHandle) => void;
 }

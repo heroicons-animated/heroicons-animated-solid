@@ -10,7 +10,7 @@ export interface ArrowTrendingDownIconHandle {
 }
 
 interface ArrowTrendingDownIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowTrendingDownIconHandle) => void;
 }

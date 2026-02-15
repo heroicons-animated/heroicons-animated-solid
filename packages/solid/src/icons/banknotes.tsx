@@ -9,7 +9,8 @@ export interface BanknotesIconHandle {
   stopAnimation: () => void;
 }
 
-interface BanknotesIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BanknotesIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BanknotesIconHandle) => void;
 }

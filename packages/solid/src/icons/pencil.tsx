@@ -9,7 +9,8 @@ export interface PencilIconHandle {
   stopAnimation: () => void;
 }
 
-interface PencilIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PencilIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PencilIconHandle) => void;
 }

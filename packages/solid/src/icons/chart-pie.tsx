@@ -9,7 +9,8 @@ export interface ChartPieIconHandle {
   stopAnimation: () => void;
 }
 
-interface ChartPieIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ChartPieIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChartPieIconHandle) => void;
 }

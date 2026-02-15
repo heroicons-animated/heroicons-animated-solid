@@ -9,7 +9,8 @@ export interface InboxArrowDownIconHandle {
   stopAnimation: () => void;
 }
 
-interface InboxArrowDownIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface InboxArrowDownIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: InboxArrowDownIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface PrinterIconHandle {
   stopAnimation: () => void;
 }
 
-interface PrinterIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface PrinterIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: PrinterIconHandle) => void;
 }

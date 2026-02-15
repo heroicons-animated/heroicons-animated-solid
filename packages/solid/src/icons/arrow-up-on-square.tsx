@@ -9,7 +9,8 @@ export interface ArrowUpOnSquareIconHandle {
   stopAnimation: () => void;
 }
 
-interface ArrowUpOnSquareIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ArrowUpOnSquareIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ArrowUpOnSquareIconHandle) => void;
 }

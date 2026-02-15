@@ -10,7 +10,7 @@ export interface DocumentMagnifyingGlassIconHandle {
 }
 
 interface DocumentMagnifyingGlassIconProps
-  extends JSX.HTMLAttributes<HTMLDivElement> {
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DocumentMagnifyingGlassIconHandle) => void;
 }

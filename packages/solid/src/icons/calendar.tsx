@@ -9,7 +9,8 @@ export interface CalendarIconHandle {
   stopAnimation: () => void;
 }
 
-interface CalendarIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CalendarIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CalendarIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface Battery50IconHandle {
   stopAnimation: () => void;
 }
 
-interface Battery50IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Battery50IconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Battery50IconHandle) => void;
 }
@@ -108,7 +109,7 @@ const Battery50Icon = (rawProps: Battery50IconProps) => {
         <path d="M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
         <path d="M4.5 10.5h6.75V15H4.5v-4.5Z" />
         <path
-          clipPath={`url(#${clipId})`}
+          clip-path={`url(#${clipId})`}
           d="M4.5 10.5h6.75V15H4.5v-4.5Z"
           fill="currentColor"
           stroke="none"

@@ -9,7 +9,8 @@ export interface GiftTopIconHandle {
   stopAnimation: () => void;
 }
 
-interface GiftTopIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface GiftTopIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: GiftTopIconHandle) => void;
 }

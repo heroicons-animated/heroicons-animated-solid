@@ -9,7 +9,8 @@ export interface CurrencyYenIconHandle {
   stopAnimation: () => void;
 }
 
-interface CurrencyYenIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CurrencyYenIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CurrencyYenIconHandle) => void;
 }

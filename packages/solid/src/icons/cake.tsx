@@ -9,7 +9,8 @@ export interface CakeIconHandle {
   stopAnimation: () => void;
 }
 
-interface CakeIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface CakeIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: CakeIconHandle) => void;
 }

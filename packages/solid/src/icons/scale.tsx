@@ -9,7 +9,8 @@ export interface ScaleIconHandle {
   stopAnimation: () => void;
 }
 
-interface ScaleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ScaleIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ScaleIconHandle) => void;
 }

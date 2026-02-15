@@ -9,7 +9,8 @@ export interface SlashIconHandle {
   stopAnimation: () => void;
 }
 
-interface SlashIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SlashIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SlashIconHandle) => void;
 }

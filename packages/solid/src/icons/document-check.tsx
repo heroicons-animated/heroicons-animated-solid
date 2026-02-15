@@ -9,7 +9,8 @@ export interface DocumentCheckIconHandle {
   stopAnimation: () => void;
 }
 
-interface DocumentCheckIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface DocumentCheckIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DocumentCheckIconHandle) => void;
 }

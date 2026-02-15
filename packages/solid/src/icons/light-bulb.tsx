@@ -9,7 +9,8 @@ export interface LightBulbIconHandle {
   stopAnimation: () => void;
 }
 
-interface LightBulbIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface LightBulbIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: LightBulbIconHandle) => void;
 }

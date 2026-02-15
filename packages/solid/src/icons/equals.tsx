@@ -9,7 +9,8 @@ export interface EqualsIconHandle {
   stopAnimation: () => void;
 }
 
-interface EqualsIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface EqualsIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: EqualsIconHandle) => void;
 }

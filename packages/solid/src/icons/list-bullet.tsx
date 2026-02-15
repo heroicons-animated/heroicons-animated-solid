@@ -9,7 +9,8 @@ export interface ListBulletIconHandle {
   stopAnimation: () => void;
 }
 
-interface ListBulletIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ListBulletIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ListBulletIconHandle) => void;
 }
@@ -133,7 +134,7 @@ const ListBulletIcon = (rawProps: ListBulletIconProps) => {
           const lineDelay = bulletDelay + DOT_DURATION;
 
           return (
-            <g key={item.y}>
+            <g>
               <Motion.path
                 animate={resolveValues(
                   CREATE_BULLET_VARIANTS(bulletDelay),

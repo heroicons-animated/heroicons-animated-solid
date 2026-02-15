@@ -9,7 +9,8 @@ export interface SwatchIconHandle {
   stopAnimation: () => void;
 }
 
-interface SwatchIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface SwatchIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: SwatchIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface ShoppingBagIconHandle {
   stopAnimation: () => void;
 }
 
-interface ShoppingBagIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ShoppingBagIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ShoppingBagIconHandle) => void;
 }

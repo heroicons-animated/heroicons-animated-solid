@@ -9,7 +9,8 @@ export interface UsersIconHandle {
   stopAnimation: () => void;
 }
 
-interface UsersIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface UsersIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: UsersIconHandle) => void;
 }

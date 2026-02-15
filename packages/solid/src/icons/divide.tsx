@@ -9,7 +9,8 @@ export interface DivideIconHandle {
   stopAnimation: () => void;
 }
 
-interface DivideIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface DivideIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DivideIconHandle) => void;
 }

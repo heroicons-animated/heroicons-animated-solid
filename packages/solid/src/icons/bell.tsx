@@ -9,7 +9,8 @@ export interface BellIconHandle {
   stopAnimation: () => void;
 }
 
-interface BellIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BellIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BellIconHandle) => void;
 }

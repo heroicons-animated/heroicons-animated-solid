@@ -9,7 +9,8 @@ export interface WrenchIconHandle {
   stopAnimation: () => void;
 }
 
-interface WrenchIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface WrenchIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: WrenchIconHandle) => void;
 }

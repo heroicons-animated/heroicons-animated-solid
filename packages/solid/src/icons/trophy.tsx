@@ -9,7 +9,8 @@ export interface TrophyIconHandle {
   stopAnimation: () => void;
 }
 
-interface TrophyIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface TrophyIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: TrophyIconHandle) => void;
 }

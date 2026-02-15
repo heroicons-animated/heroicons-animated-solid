@@ -9,7 +9,8 @@ export interface ChevronDownIconHandle {
   stopAnimation: () => void;
 }
 
-interface ChevronDownIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ChevronDownIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ChevronDownIconHandle) => void;
 }

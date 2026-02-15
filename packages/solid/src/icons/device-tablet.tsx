@@ -9,7 +9,8 @@ export interface DeviceTabletIconHandle {
   stopAnimation: () => void;
 }
 
-interface DeviceTabletIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface DeviceTabletIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: DeviceTabletIconHandle) => void;
 }

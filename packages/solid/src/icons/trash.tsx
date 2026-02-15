@@ -9,7 +9,8 @@ export interface TrashIconHandle {
   stopAnimation: () => void;
 }
 
-interface TrashIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface TrashIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: TrashIconHandle) => void;
 }

@@ -9,7 +9,8 @@ export interface Bars3BottomRightIconHandle {
   stopAnimation: () => void;
 }
 
-interface Bars3BottomRightIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface Bars3BottomRightIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: Bars3BottomRightIconHandle) => void;
 }

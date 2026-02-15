@@ -9,7 +9,8 @@ export interface BuildingOffice2IconHandle {
   stopAnimation: () => void;
 }
 
-interface BuildingOffice2IconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BuildingOffice2IconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BuildingOffice2IconHandle) => void;
 }
@@ -102,13 +103,11 @@ const BuildingOffice2Icon = (rawProps: BuildingOffice2IconProps) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21" />
-        {WINDOWS.map((window, index) => {
+        {WINDOWS.map((window) => {
           return (
             <Motion.path
               animate={resolveValues(WINDOW_VARIANTS, variant())}
-              custom={window.index}
               d={window.path}
-              key={`${window.path}-${index}`}
               transition={resolveTransition(WINDOW_VARIANTS, variant())}
             />
           );

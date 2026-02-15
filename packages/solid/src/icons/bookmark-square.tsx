@@ -9,7 +9,8 @@ export interface BookmarkSquareIconHandle {
   stopAnimation: () => void;
 }
 
-interface BookmarkSquareIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BookmarkSquareIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BookmarkSquareIconHandle) => void;
 }

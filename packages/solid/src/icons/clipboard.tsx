@@ -9,7 +9,8 @@ export interface ClipboardIconHandle {
   stopAnimation: () => void;
 }
 
-interface ClipboardIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ClipboardIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: ClipboardIconHandle) => void;
 }

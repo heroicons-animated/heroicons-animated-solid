@@ -9,7 +9,8 @@ export interface BoltSlashIconHandle {
   stopAnimation: () => void;
 }
 
-interface BoltSlashIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface BoltSlashIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: BoltSlashIconHandle) => void;
 }

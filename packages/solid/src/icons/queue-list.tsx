@@ -9,7 +9,8 @@ export interface QueueListIconHandle {
   stopAnimation: () => void;
 }
 
-interface QueueListIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface QueueListIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: QueueListIconHandle) => void;
 }
@@ -107,7 +108,6 @@ const QueueListIcon = (rawProps: QueueListIconProps) => {
             <Motion.path
               animate={resolveValues(CREATE_ITEM_VARIANTS(delay), variant())}
               d={item.path}
-              key={item.y}
               transition={resolveTransition(
                 CREATE_ITEM_VARIANTS(delay),
                 variant()
