@@ -17,7 +17,7 @@ const IconCard = (props: IconCardProps) => {
       {(IconComponent) => (
         <Card
           animationRef={animationRef}
-          class="w-full min-[880px]:w-auto"
+          class="w-full min-[880px]:w-[200px]"
           onMouseEnter={() => animationRef?.startAnimation()}
           onMouseLeave={() => animationRef?.stopAnimation()}
         >

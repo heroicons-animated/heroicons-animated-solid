@@ -1,6 +1,7 @@
 import type { JSX } from "solid-js";
-import { splitProps } from "solid-js";
+import { createSignal, splitProps } from "solid-js";
 import { cn } from "~/lib/utils";
+import { LINK } from "../constants";
 
 interface SponsorHeartFilledProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   size?: number;
@@ -37,4 +38,38 @@ const SponsorHeartFilled = (props: SponsorHeartFilledProps) => {
   );
 };
 
-export { SponsorHeartFilled };
+const SponsorButton = () => {
+  const [isSponsorIconAnimating, setIsSponsorIconAnimating] =
+    createSignal(false);
+
+  const handleSponsorEnter = () => {
+    setIsSponsorIconAnimating(true);
+  };
+
+  const handleSponsorLeave = () => {
+    setIsSponsorIconAnimating(false);
+  };
+
+  return (
+    <a
+      aria-label="Sponsor Project"
+      class="supports-[corner-shape:squircle]:corner-squircle flex size-9 items-center justify-center gap-1 rounded-[14px] bg-white font-sans text-[#3F3F47] text-sm underline-offset-4 focus-within:outline-offset-2 hover:underline focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] sm:size-auto sm:bg-transparent sm:pr-1 dark:bg-white/10 dark:text-[#FAFAFA] sm:dark:bg-transparent"
+      href={LINK.SPONSOR}
+      onBlur={handleSponsorLeave}
+      onFocus={handleSponsorEnter}
+      onMouseEnter={handleSponsorEnter}
+      onMouseLeave={handleSponsorLeave}
+      tabIndex={0}
+    >
+      <SponsorHeartFilled
+        animate={isSponsorIconAnimating()}
+        aria-hidden="true"
+        class="text-primary"
+        size={16}
+      />
+      <span class="hidden sm:inline">Sponsor Project</span>
+    </a>
+  );
+};
+
+export { SponsorButton };

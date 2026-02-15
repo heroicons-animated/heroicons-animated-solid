@@ -1,12 +1,22 @@
-import { ArrowLeftIcon } from "@heroicons-animated/solid";
 import { A, useParams } from "@solidjs/router";
+import { clientOnly } from "@solidjs/start";
 import { createMemo, For, Show } from "solid-js";
 import { CliBlock } from "~/components/cli-block";
-import GoHomeButton from "~/components/go-home-button";
-import { IconCard } from "~/components/icon-card";
-import { SimilarIcons } from "~/components/similar-icons";
+import { ArrowLeftIcon } from "~/components/ui/icons";
 import { kebabToPascalCase } from "~/lib/kebab-to-pascal";
 import { ICON_MANIFEST } from "~/lib/manifest";
+
+const GoHomeButton = clientOnly(() =>
+  import("~/components/go-home-button").then((m) => ({ default: m.default }))
+);
+const IconCard = clientOnly(() =>
+  import("~/components/icon-card").then((m) => ({ default: m.IconCard }))
+);
+const SimilarIcons = clientOnly(() =>
+  import("~/components/similar-icons").then((m) => ({
+    default: m.SimilarIcons,
+  }))
+);
 
 const getIconBySlug = (slug: string) => {
   return ICON_MANIFEST.find((icon) => icon.name === slug);
@@ -51,7 +61,7 @@ export default function IconDetailPage() {
               class="mb-8 flex items-center gap-2 font-sans text-secondary text-sm transition-[color] duration-100 hover:text-primary focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2"
               href="/"
             >
-              <ArrowLeftIcon class="[&>svg]:size-4" size={16} />
+              <ArrowLeftIcon />
               Back to all icons
             </A>
 

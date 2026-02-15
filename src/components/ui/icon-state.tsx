@@ -1,4 +1,5 @@
 import { createEffect, createSignal, type JSX } from "solid-js";
+import { CheckIcon, SpinnerIcon, XIcon } from "./icons";
 
 const DEFAULT_LOADING_DELAY = 150;
 
@@ -9,61 +10,6 @@ interface IconStateProps {
   status?: IconStatus;
   loadingDelay?: number;
 }
-
-/** Inline SVG icons for status states */
-const SpinnerIcon = () => (
-  <svg
-    aria-hidden="true"
-    class="animate-spin"
-    fill="none"
-    height="16"
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    viewBox="0 0 24 24"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-  </svg>
-);
-
-const CheckIcon = () => (
-  <svg
-    aria-hidden="true"
-    class="text-green-600"
-    fill="none"
-    height="16"
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    viewBox="0 0 24 24"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="m4.5 12.75 6 6 9-13.5" />
-  </svg>
-);
-
-const XIcon = () => (
-  <svg
-    aria-hidden="true"
-    class="text-red-500"
-    fill="none"
-    height="16"
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    viewBox="0 0 24 24"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M6 18 18 6M6 6l12 12" />
-  </svg>
-);
 
 const IconState = (props: IconStateProps) => {
   const [showLoading, setShowLoading] = createSignal(false);
