@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap");
 @import "tailwindcss";
+@plugin "@toolwind/corner-shape";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -37,6 +38,16 @@
   --foreground: #fff;
   --secondary-bg: #262626;
   --secondary: #d4d4d4;
+}
+
+@keyframes sponsor-heart-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
 }
 
 @layer base {

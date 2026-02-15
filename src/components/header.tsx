@@ -1,21 +1,22 @@
-import { HeartIcon } from "@heroicons-animated/solid";
 import { A } from "@solidjs/router";
+import { createSignal } from "solid-js";
 import { GithubStarsButton } from "~/components/github-button";
 import { Logo } from "~/components/logo";
 import { SolidJsLogo } from "~/components/solidjs-logo";
+import { SponsorHeartFilled } from "~/components/sponsor-heart-filled";
 import { ThemeToggle } from "~/components/ui/theme-toggle";
 import { LINK } from "~/constants";
-import type { AnimatedIconHandle } from "~/types/icon";
 
 const Header = () => {
-  let heartRef: AnimatedIconHandle | undefined;
+  const [isSponsorIconAnimating, setIsSponsorIconAnimating] =
+    createSignal(false);
 
-  const handleMouseEnter = () => {
-    heartRef?.startAnimation();
+  const handleSponsorEnter = () => {
+    setIsSponsorIconAnimating(true);
   };
 
-  const handleMouseLeave = () => {
-    heartRef?.stopAnimation();
+  const handleSponsorLeave = () => {
+    setIsSponsorIconAnimating(false);
   };
 
   return (
@@ -41,15 +42,16 @@ const Header = () => {
             aria-label="Sponsor Project"
             class="supports-[corner-shape:squircle]:corner-squircle flex size-9 items-center justify-center gap-1 rounded-[14px] bg-white font-sans text-[#3F3F47] text-sm underline-offset-4 focus-within:outline-offset-2 hover:underline focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] sm:size-auto sm:bg-transparent sm:pr-1 dark:bg-white/10 dark:text-[#FAFAFA] sm:dark:bg-transparent"
             href={LINK.SPONSOR}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onBlur={handleSponsorLeave}
+            onFocus={handleSponsorEnter}
+            onMouseEnter={handleSponsorEnter}
+            onMouseLeave={handleSponsorLeave}
             tabIndex={0}
           >
-            <HeartIcon
+            <SponsorHeartFilled
+              animate={isSponsorIconAnimating()}
+              aria-hidden="true"
               class="text-primary"
-              ref={(h: AnimatedIconHandle) => {
-                heartRef = h;
-              }}
               size={16}
             />
             <span class="hidden sm:inline">Sponsor Project</span>

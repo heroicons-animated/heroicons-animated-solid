@@ -1,14 +1,33 @@
-import { createSignal, onMount } from "solid-js";
+import "number-flow";
+import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import { LINK } from "~/constants";
+
+interface NumberFlowElement extends HTMLElement {
+  update: (value?: number) => void;
+}
+
+interface GitHubRepoResponse {
+  stargazers_count?: number;
+}
 
 const GITHUB_API =
   "https://api.github.com/repos/heroicons-animated/heroicons-animated-solid";
 
 const GithubStarsButton = () => {
-  const [displayStars, setDisplayStars] = createSignal<number>(0);
-  const [starsLoaded, setStarsLoaded] = createSignal(false);
+  const [stars, setStars] = createSignal(0);
+  const [isHydrated, setIsHydrated] = createSignal(false);
+  let numberFlowRef: NumberFlowElement | undefined;
+  let intervalRef: ReturnType<typeof setInterval> | undefined;
+
+  createEffect(() => {
+    if (numberFlowRef) {
+      numberFlowRef.update(stars());
+    }
+  });
 
   onMount(async () => {
+    setIsHydrated(true);
     try {
       const response = await fetch(GITHUB_API, {
         headers: {
@@ -17,61 +36,88 @@ const GithubStarsButton = () => {
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        const count = data.stargazers_count ?? 0;
-        // Simple animate-up
-        let current = 0;
-        const duration = 1500;
-        const interval = 20;
-        const steps = duration / interval;
-        const increment = count / steps;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= count) {
-            setDisplayStars(count);
-            setStarsLoaded(true);
-            clearInterval(timer);
-          } else {
-            setDisplayStars(Math.floor(current));
-          }
-        }, interval);
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
       }
+
+      const data = (await response.json()) as GitHubRepoResponse;
+      const targetStars = data.stargazers_count ?? 0;
+
+      if (targetStars === 0) {
+        return;
+      }
+
+      const maxIncrement = Math.max(5, Math.ceil(targetStars / 30));
+      const delay = 10;
+
+      intervalRef = setInterval(() => {
+        const currentStars = stars();
+
+        if (currentStars < targetStars) {
+          const remaining = targetStars - currentStars;
+          const progress = remaining / targetStars;
+          const easeOutFactor = progress * progress;
+          const currentIncrement = Math.max(
+            1,
+            Math.ceil(maxIncrement * easeOutFactor)
+          );
+          setStars(Math.min(currentStars + currentIncrement, targetStars));
+        } else if (intervalRef) {
+          clearInterval(intervalRef);
+          intervalRef = undefined;
+        }
+      }, delay);
     } catch {
-      setStarsLoaded(true);
+      setStars(0);
+    }
+  });
+
+  onCleanup(() => {
+    if (intervalRef) {
+      clearInterval(intervalRef);
     }
   });
 
   return (
     <a
-      aria-label={`Star on GitHub${starsLoaded() ? ` (${displayStars().toLocaleString()} stars)` : ""}`}
+      aria-label={
+        isHydrated() ? `Star on GitHub (${stars()} stars)` : "Star on GitHub"
+      }
       class="group/github-stars supports-[corner-shape:squircle]:corner-squircle flex size-9 items-center justify-center gap-2 rounded-[14px] bg-white focus-within:outline-offset-2 focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] sm:size-auto sm:px-2.5 sm:py-2 dark:bg-white/10"
       href={LINK.GITHUB}
       rel="noopener noreferrer"
       tabIndex={0}
       target="_blank"
     >
-      {/* GitHub logo */}
       <svg
         aria-hidden="true"
         class="size-4"
         fill="currentColor"
-        viewBox="0 0 15 15"
+        viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          clip-rule="evenodd"
-          d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.2535 11.825 3.2535 11.825C2.92712 10.9874 2.44977 10.7644 2.44977 10.7644C1.78283 10.3149 2.49881 10.3238 2.49881 10.3238C3.24167 10.375 3.62983 11.0849 3.62983 11.0849C4.28734 12.2153 5.31354 11.8996 5.71447 11.7138C5.78073 11.2366 5.96433 10.9096 6.16613 10.7083C4.56637 10.505 2.88105 9.88104 2.88105 7.11424C2.88105 6.3219 3.15702 5.67182 3.64318 5.16195C3.56663 4.95894 3.31772 4.2238 3.71559 3.23348C3.71559 3.23348 4.33753 3.01718 5.67916 3.94937C6.27227 3.77171 6.89053 3.68226 7.50244 3.67949C8.11096 3.68226 8.72922 3.77171 9.32572 3.94937C10.6624 3.01718 11.2845 3.23348 11.2845 3.23348C11.6831 4.2238 11.4341 4.95894 11.3577 5.16195C11.8469 5.67182 12.1183 6.3219 12.1183 7.11424C12.1183 9.88808 10.4309 10.5027 8.82684 10.7017C9.07938 10.9358 9.30479 11.3977 9.30479 12.1065C9.30479 13.127 9.29529 13.9407 9.29529 14.0299C9.29529 14.2239 9.42358 14.4496 9.79331 14.3788C12.6745 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
-          fill-rule="evenodd"
-        />
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
       </svg>
-      <span
-        aria-hidden="true"
-        class="hidden min-w-4 text-center font-sans text-black text-sm tabular-nums tracking-[-0.4px] sm:inline dark:text-white"
+      <Show
+        fallback={
+          <span
+            aria-hidden="true"
+            class="hidden font-sans text-black text-sm tabular-nums tracking-[-0.4px] sm:inline-flex dark:text-white"
+          >
+            {stars()}
+          </span>
+        }
+        when={isHydrated()}
       >
-        {displayStars()}
-      </span>
-      {/* Star icon */}
+        <Dynamic
+          class="hidden font-sans text-black text-sm tabular-nums tracking-[-0.4px] [text-shadow:-0.1px_0_0_currentColor,0.1px_0_0_currentColor] sm:inline-flex dark:text-white"
+          component="number-flow"
+          ref={(el: Element) => {
+            numberFlowRef = el as NumberFlowElement;
+            numberFlowRef.update(stars());
+          }}
+        />
+      </Show>
       <svg
         aria-hidden="true"
         class="hidden text-neutral-400 transition-colors duration-100 group-hover/github-stars:text-[#e3b341] sm:block"

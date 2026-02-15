@@ -4,10 +4,10 @@ import { LINK } from "~/constants";
 import { ICON_MANIFEST } from "~/lib/manifest";
 
 const CommentBlock = clientOnly(() =>
-  import("~/components/comment").then((m) => ({ default: m.CommentBlock })),
+  import("~/components/comment").then((m) => ({ default: m.CommentBlock }))
 );
 const IconsList = clientOnly(() =>
-  import("~/components/list").then((m) => ({ default: m.IconsList })),
+  import("~/components/list").then((m) => ({ default: m.IconsList }))
 );
 
 const Home = () => {
