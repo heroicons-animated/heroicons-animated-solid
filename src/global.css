@@ -2,7 +2,7 @@
 @import "tailwindcss";
 @plugin "@toolwind/corner-shape";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *, [data-kb-theme="dark"] *));
 
 @theme inline {
   --color-background: var(--background);
@@ -35,7 +35,8 @@
     "Liberation Mono", "Courier New", monospace;
 }
 
-.dark {
+.dark,
+[data-kb-theme="dark"] {
   --background: #171717;
   --foreground: #fff;
   --secondary-bg: #262626;

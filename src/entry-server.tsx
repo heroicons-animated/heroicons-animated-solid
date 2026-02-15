@@ -1,7 +1,20 @@
-// @refresh reload
+import { COLOR_MODE_STORAGE_KEY, ColorModeScript } from "@kobalte/core";
 import { createHandler, StartServer } from "@solidjs/start/server";
+import { getRequestEvent } from "solid-js/web";
 import { LINK, SITE } from "~/constants";
 import { ICON_MANIFEST } from "~/lib/manifest";
+
+const THEME_COLOR_LIGHT = "#f5f5f5";
+const THEME_COLOR_DARK = "#171717";
+
+function getThemeColorFromCookie(): string {
+  const cookie = getRequestEvent()?.request.headers.get("cookie") ?? "";
+  const match = cookie.match(
+    new RegExp(`(^| )${COLOR_MODE_STORAGE_KEY}=([^;]+)`)
+  );
+  const value = match?.[2];
+  return value === "dark" ? THEME_COLOR_DARK : THEME_COLOR_LIGHT;
+}
 
 const TITLE = `${SITE.NAME} | Free Animated Heroicons for Solid`;
 const DESCRIPTION = SITE.DESCRIPTION.LONG;
@@ -83,7 +96,7 @@ export default createHandler(() => (
           <meta content={SITE.KEYWORDS.join(", ")} name="keywords" />
           <meta content={SITE.AUTHOR.NAME} name="author" />
           <meta content="index, follow" name="robots" />
-          <meta content="#f5f5f5" name="theme-color" />
+          <meta content={getThemeColorFromCookie()} name="theme-color" />
           <meta content={SITE.NAME} name="application-name" />
           <link href={SITE.URL} rel="canonical" />
 
@@ -107,6 +120,12 @@ export default createHandler(() => (
           <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
           <link href="/favicon.png" rel="icon" type="image/png" />
           <link href="/favicon.png" rel="apple-touch-icon" />
+
+          <ColorModeScript
+            initialColorMode="system"
+            storageKey={COLOR_MODE_STORAGE_KEY}
+            storageType="cookie"
+          />
 
           <script
             innerHTML={JSON.stringify(WEBSITE_JSON_LD)}

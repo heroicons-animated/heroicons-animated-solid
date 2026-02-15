@@ -7,19 +7,19 @@ import { Skeleton } from "~/components/ui/skeleton";
 const SponsorButton = clientOnly(() =>
   import("~/components/sponsor-button").then((m) => ({
     default: m.SponsorButton,
-  })),
+  }))
 );
 
 const ThemeToggle = clientOnly(() =>
   import("~/components/ui/theme-toggle").then((m) => ({
     default: m.ThemeToggle,
-  })),
+  }))
 );
 
 const GithubStarsButton = clientOnly(() =>
   import("~/components/github-button").then((m) => ({
     default: m.GithubStarsButton,
-  })),
+  }))
 );
 
 const Header = () => {

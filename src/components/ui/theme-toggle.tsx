@@ -1,10 +1,10 @@
 import { MoonIcon, SunIcon } from "@heroicons-animated/solid";
+import { useColorMode } from "@kobalte/core";
 import { createSignal, onMount, Show } from "solid-js";
-import { useTheme } from "~/providers/theme";
 import type { AnimatedIconHandle } from "~/types/icon";
 
 const ThemeToggle = () => {
-  const { setTheme, resolvedTheme } = useTheme();
+  const { colorMode, toggleColorMode } = useColorMode();
   let sunRef: AnimatedIconHandle | undefined;
   let moonRef: AnimatedIconHandle | undefined;
   const [mounted, setMounted] = createSignal(false);
@@ -15,15 +15,13 @@ const ThemeToggle = () => {
     const handler = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "u") {
         e.preventDefault();
-        const isDark = resolvedTheme() === "dark";
-        setTheme(isDark ? "light" : "dark");
+        toggleColorMode();
       }
     };
     document.addEventListener("keydown", handler);
   });
 
-  const isDark = () => resolvedTheme() === "dark";
-  const nextTheme = () => (isDark() ? "light" : "dark");
+  const isDark = () => colorMode() === "dark";
 
   const handleMouseEnter = () => {
     sunRef?.startAnimation();
@@ -40,7 +38,7 @@ const ThemeToggle = () => {
       aria-label={isDark() ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark()}
       class="supports-[corner-shape:squircle]:corner-squircle flex size-9 cursor-pointer items-center justify-center rounded-[14px] bg-white focus-within:outline-offset-2 focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] dark:bg-white/10"
-      onClick={() => setTheme(nextTheme())}
+      onClick={() => toggleColorMode()}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       tabIndex={0}

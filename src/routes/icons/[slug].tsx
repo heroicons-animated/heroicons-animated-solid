@@ -8,15 +8,15 @@ import { kebabToPascalCase } from "~/lib/kebab-to-pascal";
 import { ICON_MANIFEST } from "~/lib/manifest";
 
 const GoHomeButton = clientOnly(() =>
-  import("~/components/go-home-button").then((m) => ({ default: m.default })),
+  import("~/components/go-home-button").then((m) => ({ default: m.default }))
 );
 const IconCard = clientOnly(() =>
-  import("~/components/icon-card").then((m) => ({ default: m.IconCard })),
+  import("~/components/icon-card").then((m) => ({ default: m.IconCard }))
 );
 const SimilarIcons = clientOnly(() =>
   import("~/components/similar-icons").then((m) => ({
     default: m.SimilarIcons,
-  })),
+  }))
 );
 
 const getIconBySlug = (slug: string) => {

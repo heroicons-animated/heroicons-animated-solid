@@ -11,11 +11,18 @@ const IconsList = clientOnly(() =>
 );
 
 const IconsListFallback = () => (
-  <div class="view-container grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-2 border-neutral-200 pt-2 pb-[60px] xl:border-x dark:border-neutral-800">
-    <For each={Array.from({ length: 12 }, (_, i) => i)}>
-      {() => <Skeleton class="h-[180px] rounded-[20px]" />}
-    </For>
-  </div>
+  <>
+    <div class="sticky top-0 z-50 border-neutral-200 border-y bg-background/80 backdrop-blur-md dark:border-neutral-800 dark:bg-background/80">
+      <div class="view-container flex items-center gap-2 border-neutral-200 py-2 xl:border-x dark:border-neutral-800">
+        <Skeleton class="h-10 flex-1 rounded-[8px]" />
+      </div>
+    </div>
+    <div class="view-container grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-2 border-neutral-200 pt-2 pb-[60px] xl:border-x dark:border-neutral-800">
+      <For each={Array.from({ length: 12 }, (_, i) => i)}>
+        {() => <Skeleton class="h-[180px] rounded-[20px]" />}
+      </For>
+    </div>
+  </>
 );
 
 const Home = () => {

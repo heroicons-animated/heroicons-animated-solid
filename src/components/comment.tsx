@@ -47,11 +47,11 @@ const CommentAnimationsDevLink = () => {
 const CourseButton = clientOnly(() =>
   import("~/components/course-button").then((m) => ({
     default: m.CourseButton,
-  }))
+  })),
 );
 
 const CourseButtonFallback = () => (
-  <Skeleton class="h-8 w-[120px] rounded-[8px] supports-[corner-shape:squircle]:rounded-[12px]" />
+  <Skeleton class="h-7 w-[120px] rounded-[8px] supports-[corner-shape:squircle]:rounded-[12px]" />
 );
 
 const CommentBlock = () => {
