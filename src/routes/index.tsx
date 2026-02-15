@@ -1,11 +1,21 @@
 import { clientOnly } from "@solidjs/start";
+import { For } from "solid-js";
 import { CliBlock } from "~/components/cli-block";
 import { CommentBlock } from "~/components/comment";
+import { Skeleton } from "~/components/ui/skeleton";
 import { LINK } from "~/constants";
 import { ICON_MANIFEST } from "~/lib/manifest";
 
 const IconsList = clientOnly(() =>
   import("~/components/list").then((m) => ({ default: m.IconsList }))
+);
+
+const IconsListFallback = () => (
+  <div class="view-container grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-2 border-neutral-200 pt-2 pb-[60px] xl:border-x dark:border-neutral-800">
+    <For each={Array.from({ length: 12 }, (_, i) => i)}>
+      {() => <Skeleton class="h-[180px] rounded-[20px]" />}
+    </For>
+  </div>
 );
 
 const Home = () => {
@@ -62,7 +72,7 @@ const Home = () => {
         <CommentBlock />
       </section>
       <section id="icons">
-        <IconsList icons={icons} />
+        <IconsList fallback={<IconsListFallback />} icons={icons} />
       </section>
     </>
   );

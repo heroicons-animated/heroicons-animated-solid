@@ -2,23 +2,24 @@ import { A } from "@solidjs/router";
 import { clientOnly } from "@solidjs/start";
 import { Logo } from "~/components/logo";
 import { SolidJsLogo } from "~/components/solidjs-logo";
+import { Skeleton } from "~/components/ui/skeleton";
 
 const SponsorButton = clientOnly(() =>
   import("~/components/sponsor-button").then((m) => ({
     default: m.SponsorButton,
-  }))
+  })),
 );
 
 const ThemeToggle = clientOnly(() =>
   import("~/components/ui/theme-toggle").then((m) => ({
     default: m.ThemeToggle,
-  }))
+  })),
 );
 
 const GithubStarsButton = clientOnly(() =>
   import("~/components/github-button").then((m) => ({
     default: m.GithubStarsButton,
-  }))
+  })),
 );
 
 const Header = () => {
@@ -41,9 +42,13 @@ const Header = () => {
           </span>
         </A>
         <div class="ml-auto flex w-full flex-1 flex-wrap-reverse items-center justify-end gap-2">
-          <SponsorButton />
-          <ThemeToggle />
-          <GithubStarsButton />
+          <SponsorButton
+            fallback={<Skeleton class="h-9 w-24 rounded-[8px]" />}
+          />
+          <ThemeToggle fallback={<Skeleton class="size-9 rounded-[8px]" />} />
+          <GithubStarsButton
+            fallback={<Skeleton class="h-9 w-20 rounded-[8px]" />}
+          />
         </div>
       </div>
     </header>

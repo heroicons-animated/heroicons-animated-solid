@@ -1,5 +1,6 @@
 import { clientOnly } from "@solidjs/start";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Skeleton } from "./ui/skeleton";
 
 const CommentAuthorLink = () => {
   return (
@@ -49,6 +50,10 @@ const CourseButton = clientOnly(() =>
   }))
 );
 
+const CourseButtonFallback = () => (
+  <Skeleton class="h-8 w-[120px] rounded-[8px] supports-[corner-shape:squircle]:rounded-[12px]" />
+);
+
 const CommentBlock = () => {
   return (
     <div class="relative my-[40px] flex w-full max-w-[610px] flex-col items-center justify-center pl-4 after:absolute after:left-0 after:h-full after:w-[4px] after:bg-neutral-400/50 max-[655px]:px-4 max-[655px]:after:left-4">
@@ -73,7 +78,7 @@ const CommentBlock = () => {
             <CommentAuthorLink />, creator of heroicons-animated
           </p>
         </div>
-        <CourseButton />
+        <CourseButton fallback={<CourseButtonFallback />} />
       </div>
     </div>
   );

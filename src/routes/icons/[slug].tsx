@@ -3,19 +3,20 @@ import { clientOnly } from "@solidjs/start";
 import { createMemo, For, Show } from "solid-js";
 import { CliBlock } from "~/components/cli-block";
 import { ArrowLeftIcon } from "~/components/ui/icons";
+import { Skeleton } from "~/components/ui/skeleton";
 import { kebabToPascalCase } from "~/lib/kebab-to-pascal";
 import { ICON_MANIFEST } from "~/lib/manifest";
 
 const GoHomeButton = clientOnly(() =>
-  import("~/components/go-home-button").then((m) => ({ default: m.default }))
+  import("~/components/go-home-button").then((m) => ({ default: m.default })),
 );
 const IconCard = clientOnly(() =>
-  import("~/components/icon-card").then((m) => ({ default: m.IconCard }))
+  import("~/components/icon-card").then((m) => ({ default: m.IconCard })),
 );
 const SimilarIcons = clientOnly(() =>
   import("~/components/similar-icons").then((m) => ({
     default: m.SimilarIcons,
-  }))
+  })),
 );
 
 const getIconBySlug = (slug: string) => {
@@ -48,7 +49,9 @@ export default function IconDetailPage() {
               The page you're looking for might have been moved or doesn't
               exist.
             </p>
-            <GoHomeButton />
+            <GoHomeButton
+              fallback={<Skeleton class="h-9 w-24 rounded-[8px]" />}
+            />
           </div>
         </main>
       }
@@ -66,7 +69,12 @@ export default function IconDetailPage() {
             </A>
 
             <div class="flex w-full flex-col gap-6 min-[880px]:flex-row min-[880px]:items-center">
-              <IconCard icon={iconData()} />
+              <IconCard
+                fallback={
+                  <Skeleton class="h-[186px] w-full rounded-[20px] min-[880px]:w-[200px]" />
+                }
+                icon={iconData()}
+              />
 
               <div class="flex h-full flex-col gap-1">
                 <h1 class="font-sans text-[28px] min-[640px]:text-[36px]">
@@ -101,7 +109,19 @@ export default function IconDetailPage() {
             </div>
           </div>
 
-          <SimilarIcons currentIcon={iconData()} />
+          <SimilarIcons
+            currentIcon={iconData()}
+            fallback={
+              <div class="view-container border-neutral-200 pt-12 pb-[60px] xl:border-x xl:pt-4 dark:border-neutral-800">
+                <Skeleton class="mb-4 h-7 w-40" />
+                <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-2">
+                  <For each={Array.from({ length: 6 }, (_, i) => i)}>
+                    {() => <Skeleton class="h-[180px] rounded-[20px]" />}
+                  </For>
+                </div>
+              </div>
+            }
+          />
         </section>
       )}
     </Show>

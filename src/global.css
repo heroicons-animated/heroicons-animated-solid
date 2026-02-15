@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-skeleton: var(--skeleton);
   --font-sans: var(--app-font-sans);
   --font-mono: var(--app-font-mono);
 
@@ -22,6 +23,7 @@
   --foreground: #000;
   --primary: #8b5cf6;
   --secondary: #3f3f47;
+  --skeleton: #e5e5e5;
 
   --radius: 0.4rem;
 
@@ -38,6 +40,7 @@
   --foreground: #fff;
   --secondary-bg: #262626;
   --secondary: #d4d4d4;
+  --skeleton: #262626;
 }
 
 @keyframes sponsor-heart-pulse {
