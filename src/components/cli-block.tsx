@@ -37,12 +37,12 @@ interface CliBlockProps {
 
 const CliBlock = (props: CliBlockProps) => {
   const [state, setState] = createSignal<IconStatus>("idle");
-  let currentIconName = props.staticIconName || "";
+  let currentIconName = props.staticIconName || props.icons?.[0]?.name || "";
 
   const { packageName, setPackageName } = usePackageNameContext();
 
   const isStatic = !!props.staticIconName;
-  const loopIcons = () =>
+  const filteredIcons = () =>
     (props.icons || []).filter((icon) => icon.name.length <= 20);
 
   const handleCopyToClipboard = async () => {
@@ -94,10 +94,18 @@ const CliBlock = (props: CliBlockProps) => {
                     "isolate whitespace-nowrap px-4 py-3 pr-20 font-mono text-sm tracking-[-0.39px]"
                   )}
                 >
-                  <span class="text-neutral-600 dark:text-neutral-400">
+                  <span class="sr-only">
+                    {getPackageManagerPrefix(pm)} {getShadcnCLI()}{" "}
+                    {getRegistryPathPrefix()}
+                    {props.staticIconName || currentIconName}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="text-neutral-600 dark:text-neutral-400"
+                  >
                     {getPackageManagerPrefix(pm)}
                   </span>{" "}
-                  <span class="text-black dark:text-white">
+                  <span aria-hidden="true" class="text-black dark:text-white">
                     {getShadcnCLI()} add {getRegistryPathPrefix()}
                   </span>
                   {isStatic ? (
@@ -107,13 +115,36 @@ const CliBlock = (props: CliBlockProps) => {
                   ) : (
                     <TextLoop
                       interval={1.5}
-                      items={loopIcons()}
+                      items={filteredIcons()}
                       onIndexChange={(index) => {
-                        currentIconName = loopIcons()[index]?.name || "";
+                        currentIconName = filteredIcons()[index]?.name || "";
                       }}
                       renderItem={(icon) => (
                         <span class="shrink-0 text-primary">{icon.name}</span>
                       )}
+                      transition={{
+                        duration: 0.25,
+                      }}
+                      variants={{
+                        initial: {
+                          y: -12,
+                          rotateX: -90,
+                          opacity: 0,
+                          filter: "blur(2px)",
+                        },
+                        animate: {
+                          y: 0,
+                          rotateX: 0,
+                          opacity: 1,
+                          filter: "blur(0px)",
+                        },
+                        exit: {
+                          y: 12,
+                          rotateX: 90,
+                          opacity: 0,
+                          filter: "blur(2px)",
+                        },
+                      }}
                     />
                   )}
                 </div>

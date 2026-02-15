@@ -1,5 +1,23 @@
-import { createEffect, createSignal, type JSX, onCleanup } from "solid-js";
+import {
+  createEffect,
+  createSignal,
+  type JSX,
+  onCleanup,
+  Show,
+} from "solid-js";
+import {
+  Motion,
+  type Options,
+  Presence,
+  type VariantDefinition,
+} from "solid-motionone";
 import { cn } from "~/lib/utils";
+
+interface TextLoopVariants {
+  initial: VariantDefinition;
+  animate: VariantDefinition;
+  exit: VariantDefinition;
+}
 
 interface TextLoopProps<T> {
   items: T[];
@@ -7,7 +25,19 @@ interface TextLoopProps<T> {
   class?: string;
   interval?: number;
   onIndexChange?: (index: number) => void;
+  transition?: Options["transition"];
+  variants?: TextLoopVariants;
 }
+
+const DEFAULT_TRANSITION: Options["transition"] = {
+  duration: 0.3,
+};
+
+const DEFAULT_VARIANTS: TextLoopVariants = {
+  initial: { y: 20, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { y: -20, opacity: 0 },
+};
 
 export function TextLoop<T>(props: TextLoopProps<T>) {
   const [currentIndex, setCurrentIndex] = createSignal(0);
@@ -35,9 +65,20 @@ export function TextLoop<T>(props: TextLoopProps<T>) {
       aria-hidden="true"
       class={cn("relative inline-block whitespace-nowrap", props.class)}
     >
-      {props.items.length > 0
-        ? props.renderItem(props.items[currentIndex()])
-        : null}
+      <Presence exitBeforeEnter>
+        <Show keyed when={props.items[currentIndex()]}>
+          {(item) => (
+            <Motion.div
+              animate={(props.variants ?? DEFAULT_VARIANTS).animate}
+              exit={(props.variants ?? DEFAULT_VARIANTS).exit}
+              initial={(props.variants ?? DEFAULT_VARIANTS).initial}
+              transition={props.transition ?? DEFAULT_TRANSITION}
+            >
+              {props.renderItem(item)}
+            </Motion.div>
+          )}
+        </Show>
+      </Presence>
     </div>
   );
 }

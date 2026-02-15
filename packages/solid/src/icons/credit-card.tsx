@@ -16,9 +16,19 @@ interface CreditCardIconProps
 }
 
 const LINE_VARIANTS = {
-  visible: { pathLength: 1, opacity: 1 },
-  hidden: { pathLength: 0, opacity: 0 },
+  visible: (index: number) => ({
+    pathLength: 1,
+    opacity: 1,
+    transition: { delay: index * 0.1, duration: 0.3 },
+  }),
+  hidden: (index: number) => ({
+    pathLength: 0,
+    opacity: 0,
+    transition: { delay: index * 0.1, duration: 0.3 },
+  }),
 };
+
+const LINE_ANIMATION_STEP_MS = 400;
 const CreditCardIcon = (rawProps: CreditCardIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
@@ -28,13 +38,20 @@ const CreditCardIcon = (rawProps: CreditCardIconProps) => {
     "size",
     "ref",
   ]);
-  const [variant, setVariant] = createSignal("normal");
+  const [variant, setVariant] = createSignal("visible");
   let isControlled = false;
+
+  const runLineAnimation = () => {
+    setVariant("hidden");
+    setTimeout(() => {
+      setVariant("visible");
+    }, LINE_ANIMATION_STEP_MS);
+  };
 
   if (local.ref) {
     isControlled = true;
     local.ref({
-      startAnimation: () => setVariant("animate"),
+      startAnimation: () => runLineAnimation(),
       stopAnimation: () => setVariant("visible"),
     });
   }
@@ -47,7 +64,7 @@ const CreditCardIcon = (rawProps: CreditCardIconProps) => {
         local.onMouseEnter(e);
       }
     } else {
-      setVariant("animate");
+      runLineAnimation();
     }
   };
 
@@ -87,10 +104,10 @@ const CreditCardIcon = (rawProps: CreditCardIconProps) => {
           { d: "M5.25 16.5h3", index: 1 },
         ].map((line) => (
           <Motion.path
-            animate={resolveValues(LINE_VARIANTS, variant())}
+            animate={resolveValues(LINE_VARIANTS, variant(), line.index)}
             d={line.d}
             initial="visible"
-            transition={resolveTransition(LINE_VARIANTS, variant())}
+            transition={resolveTransition(LINE_VARIANTS, variant(), line.index)}
           />
         ))}
       </svg>

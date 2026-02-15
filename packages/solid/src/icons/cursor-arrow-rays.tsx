@@ -41,6 +41,9 @@ const RAY_VARIANTS = {
     },
   }),
 };
+
+const RAY_SPREAD_DELAY = 1.3;
+
 const CursorArrowRaysIcon = (rawProps: CursorArrowRaysIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
@@ -53,6 +56,14 @@ const CursorArrowRaysIcon = (rawProps: CursorArrowRaysIconProps) => {
   const [cursorVariant, setCursorVariant] = createSignal("normal");
   const [rayVariant, setRayVariant] = createSignal("normal");
   let isControlled = false;
+
+  const resolveRayTransition = (custom: { x: number; y: number }) =>
+    resolveTransition(
+      RAY_VARIANTS,
+      rayVariant(),
+      custom,
+      rayVariant() === "spread" ? { delay: RAY_SPREAD_DELAY } : undefined
+    );
 
   if (local.ref) {
     isControlled = true;
@@ -118,34 +129,34 @@ const CursorArrowRaysIcon = (rawProps: CursorArrowRaysIconProps) => {
           transition={resolveTransition(CURSOR_VARIANTS, cursorVariant())}
         />
         <Motion.path
-          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          animate={resolveValues(RAY_VARIANTS, rayVariant(), { x: 0, y: -2 })}
           d="M12 2.25V4.5"
-          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+          transition={resolveRayTransition({ x: 0, y: -2 })}
         />
         <Motion.path
-          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          animate={resolveValues(RAY_VARIANTS, rayVariant(), { x: 2, y: -2 })}
           d="M17.8336 4.66637L16.2426 6.25736"
-          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+          transition={resolveRayTransition({ x: 2, y: -2 })}
         />
         <Motion.path
-          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          animate={resolveValues(RAY_VARIANTS, rayVariant(), { x: 2, y: 0 })}
           d="M20.25 10.5H18"
-          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+          transition={resolveRayTransition({ x: 2, y: 0 })}
         />
         <Motion.path
-          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          animate={resolveValues(RAY_VARIANTS, rayVariant(), { x: -2, y: 2 })}
           d="M7.75736 14.7426L6.16637 16.3336"
-          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+          transition={resolveRayTransition({ x: -2, y: 2 })}
         />
         <Motion.path
-          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          animate={resolveValues(RAY_VARIANTS, rayVariant(), { x: -2, y: 0 })}
           d="M6 10.5H3.75"
-          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+          transition={resolveRayTransition({ x: -2, y: 0 })}
         />
         <Motion.path
-          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          animate={resolveValues(RAY_VARIANTS, rayVariant(), { x: -2, y: -2 })}
           d="M7.75736 6.25736L6.16637 4.66637"
-          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+          transition={resolveRayTransition({ x: -2, y: -2 })}
         />
       </svg>
     </div>

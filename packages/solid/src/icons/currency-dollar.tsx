@@ -86,7 +86,7 @@ const CurrencyDollarIcon = (rawProps: CurrencyDollarIconProps) => {
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="1.5"
-        style={{ "origin-x": "50%", "origin-y": "50%" }}
+        style={{ "transform-origin": "50% 50%" }}
         transition={resolveTransition(ROTATE_VARIANTS, variant())}
         viewBox="0 0 24 24"
         width={local.size}

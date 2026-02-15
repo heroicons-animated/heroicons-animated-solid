@@ -85,7 +85,7 @@ const TagIcon = (rawProps: TagIconProps) => {
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="1.5"
-        style={{ "origin-x": "25%", "origin-y": "25%" }}
+        style={{ "transform-origin": "25% 25%" }}
         transition={resolveTransition(TAG_VARIANTS, variant())}
         viewBox="0 0 24 24"
         width={local.size}

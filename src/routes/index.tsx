@@ -4,10 +4,10 @@ import { LINK } from "~/constants";
 import { ICON_MANIFEST } from "~/lib/manifest";
 
 const CommentBlock = clientOnly(() =>
-  import("~/components/comment").then((m) => ({ default: m.CommentBlock }))
+  import("~/components/comment").then((m) => ({ default: m.CommentBlock })),
 );
 const IconsList = clientOnly(() =>
-  import("~/components/list").then((m) => ({ default: m.IconsList }))
+  import("~/components/list").then((m) => ({ default: m.IconsList })),
 );
 
 const Home = () => {
@@ -20,7 +20,8 @@ const Home = () => {
         id="hero"
       >
         <h1 class="px-4 text-center font-sans text-[32px] min-[640px]:text-[42px]">
-          Beautifully animated heroicons<span class="text-primary">^</span>
+          Beautifully animated heroicons for Solid
+          <span class="text-primary">^</span>
         </h1>
         <p class="mt-5 max-w-[582px] px-4 text-center font-mono text-secondary text-sm">
           an open-source (
@@ -46,7 +47,7 @@ const Home = () => {
             tabIndex={0}
             target="_blank"
           >
-            Motion One
+            Solid MotionOne
           </a>{" "}
           &{" "}
           <a

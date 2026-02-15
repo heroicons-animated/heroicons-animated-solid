@@ -57,12 +57,11 @@ const ArrowTopRightOnSquareIcon = (
   const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
     e
   ) => {
-    if (isControlled) {
-      if (typeof local.onMouseEnter === "function") {
-        local.onMouseEnter(e);
-      }
-    } else {
-      setVariant("normal");
+    if (!isControlled) {
+      setVariant("animate");
+    }
+    if (typeof local.onMouseEnter === "function") {
+      local.onMouseEnter(e);
     }
   };
 

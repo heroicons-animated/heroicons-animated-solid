@@ -154,16 +154,16 @@ const CalendarDateRangeIcon = (rawProps: CalendarDateRangeIconProps) => {
         />
         {RANGE_LINES.map((line) => (
           <Motion.path
-            animate={resolveValues(LINE_VARIANTS, variant())}
+            animate={resolveValues(LINE_VARIANTS, variant(), line.index)}
             d={line.d}
-            transition={resolveTransition(LINE_VARIANTS, variant())}
+            transition={resolveTransition(LINE_VARIANTS, variant(), line.index)}
           />
         ))}
         {DOTS.map((dot) => (
           <Motion.path
-            animate={resolveValues(DOT_VARIANTS, variant())}
+            animate={resolveValues(DOT_VARIANTS, variant(), dot.index)}
             d={dot.d}
-            transition={resolveTransition(DOT_VARIANTS, variant())}
+            transition={resolveTransition(DOT_VARIANTS, variant(), dot.index)}
           />
         ))}
       </svg>

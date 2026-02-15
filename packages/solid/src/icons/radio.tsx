@@ -107,7 +107,7 @@ const RadioIcon = (rawProps: RadioIconProps) => {
         <Motion.path
           animate={resolveValues(ANTENNA_VARIANTS, variant())}
           d="M3.75 7.5L20.25 3.375"
-          style={{ "origin-x": "3.75px", "origin-y": "7.5px" }}
+          style={{ "transform-origin": "3.75px 7.5px" }}
           transition={resolveTransition(ANTENNA_VARIANTS, variant())}
         />
         <path d="M12 6.75C9.29246 6.75 6.63727 6.97417 4.05199 7.40497C2.99912 7.58042 2.25 8.50663 2.25 9.57402V18.75C2.25 19.9926 3.25736 21 4.5 21H19.5C20.7426 21 21.75 19.9926 21.75 18.75V9.57402C21.75 8.50663 21.0009 7.58042 19.948 7.40497C17.3627 6.97417 14.7075 6.75 12 6.75Z" />

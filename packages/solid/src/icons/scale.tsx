@@ -92,7 +92,7 @@ const ScaleIcon = (rawProps: ScaleIconProps) => {
         <path d="M12 3V20.25M12 20.25C10.528 20.25 9.1179 20.515 7.81483 21M12 20.25C13.472 20.25 14.8821 20.515 16.1852 21" />
         <Motion.g
           animate={resolveValues(BALANCE_VARIANTS, variant())}
-          style={{ "origin-x": "12px", "origin-y": "4.5px" }}
+          style={{ "transform-origin": "12px 4.5px" }}
           transition={resolveTransition(BALANCE_VARIANTS, variant())}
         >
           <path d="M18.75 4.97089C16.5446 4.66051 14.291 4.5 12 4.5C9.70897 4.5 7.45542 4.66051 5.25 4.97089M18.75 4.97089C19.7604 5.1131 20.7608 5.28677 21.75 5.49087M2.25 5.49087C3.23922 5.28677 4.23956 5.1131 5.25 4.97089" />

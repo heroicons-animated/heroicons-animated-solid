@@ -92,7 +92,7 @@ const ExclamationCircleIcon = (rawProps: ExclamationCircleIconProps) => {
         <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         <Motion.g
           animate={resolveValues(EXCLAMATION_VARIANTS, variant())}
-          style={{ "origin-x": "50%", "origin-y": "50%" }}
+          style={{ "transform-origin": "50% 50%" }}
           transition={resolveTransition(EXCLAMATION_VARIANTS, variant())}
         >
           <path d="M12 9v3.75" />

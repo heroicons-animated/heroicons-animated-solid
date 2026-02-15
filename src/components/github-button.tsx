@@ -1,7 +1,8 @@
 import { createSignal, onMount } from "solid-js";
 import { LINK } from "~/constants";
 
-const GITHUB_API = "https://api.github.com/repos/Aniket-508/heroicons-animated";
+const GITHUB_API =
+  "https://api.github.com/repos/heroicons-animated/heroicons-animated-solid";
 
 const GithubStarsButton = () => {
   const [displayStars, setDisplayStars] = createSignal<number>(0);

@@ -98,7 +98,7 @@ const H2Icon = (rawProps: H2IconProps) => {
         <Motion.path
           animate={resolveValues(VARIANTS, variant())}
           d="M21.75 19.5H16.5v-1.609a2.25 2.25 0 0 1 1.244-2.012l2.89-1.445c.651-.326 1.116-.955 1.116-1.683 0-.498-.04-.987-.118-1.463-.135-.825-.835-1.422-1.668-1.489a15.202 15.202 0 0 0-3.464.12"
-          style={{ "origin-y": "12px" }}
+          style={{ "transform-origin": "50% 12px" }}
           transition={resolveTransition(VARIANTS, variant())}
         />
       </svg>

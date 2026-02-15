@@ -15,6 +15,13 @@ interface AdjustmentsHorizontalIconProps
   ref?: (handle: AdjustmentsHorizontalIconHandle) => void;
 }
 
+const DEFAULT_TRANSITION = {
+  type: "spring",
+  stiffness: 100,
+  damping: 12,
+  mass: 0.4,
+};
+
 const AdjustmentsHorizontalIcon = (
   rawProps: AdjustmentsHorizontalIconProps
 ) => {
@@ -86,7 +93,9 @@ const AdjustmentsHorizontalIcon = (
           )}
           transition={resolveTransition(
             { normal: { x1: 10.5 }, animate: { x1: 13.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="10.5"
           x2="20.25"
@@ -100,7 +109,9 @@ const AdjustmentsHorizontalIcon = (
           )}
           transition={resolveTransition(
             { normal: { x2: 7.5 }, animate: { x2: 10.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="3.75"
           x2="7.5"
@@ -118,7 +129,9 @@ const AdjustmentsHorizontalIcon = (
           r="1.5"
           transition={resolveTransition(
             { normal: { cx: 9 }, animate: { cx: 12 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
         />
 
@@ -129,7 +142,9 @@ const AdjustmentsHorizontalIcon = (
           )}
           transition={resolveTransition(
             { normal: { x1: 16.5 }, animate: { x1: 13.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="16.5"
           x2="20.25"
@@ -143,7 +158,9 @@ const AdjustmentsHorizontalIcon = (
           )}
           transition={resolveTransition(
             { normal: { x2: 13.5 }, animate: { x2: 10.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="3.75"
           x2="13.5"
@@ -161,7 +178,9 @@ const AdjustmentsHorizontalIcon = (
           r="1.5"
           transition={resolveTransition(
             { normal: { cx: 15 }, animate: { cx: 12 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
         />
 
@@ -172,7 +191,9 @@ const AdjustmentsHorizontalIcon = (
           )}
           transition={resolveTransition(
             { normal: { x1: 10.5 }, animate: { x1: 13.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="10.5"
           x2="20.25"
@@ -186,7 +207,9 @@ const AdjustmentsHorizontalIcon = (
           )}
           transition={resolveTransition(
             { normal: { x2: 7.5 }, animate: { x2: 10.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="3.75"
           x2="7.5"
@@ -204,7 +227,9 @@ const AdjustmentsHorizontalIcon = (
           r="1.5"
           transition={resolveTransition(
             { normal: { cx: 9 }, animate: { cx: 12 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
         />
       </svg>

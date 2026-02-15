@@ -105,9 +105,9 @@ const EllipsisHorizontalIcon = (rawProps: EllipsisHorizontalIconProps) => {
           },
         ].map((dot) => (
           <Motion.path
-            animate={resolveValues(DOT_VARIANTS, variant())}
+            animate={resolveValues(DOT_VARIANTS, variant(), dot.index)}
             d={dot.d}
-            transition={resolveTransition(DOT_VARIANTS, variant())}
+            transition={resolveTransition(DOT_VARIANTS, variant(), dot.index)}
           />
         ))}
       </svg>

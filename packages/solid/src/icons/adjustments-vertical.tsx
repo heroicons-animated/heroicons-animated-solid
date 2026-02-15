@@ -15,6 +15,13 @@ interface AdjustmentsVerticalIconProps
   ref?: (handle: AdjustmentsVerticalIconHandle) => void;
 }
 
+const DEFAULT_TRANSITION = {
+  type: "spring",
+  stiffness: 100,
+  damping: 12,
+  mass: 0.4,
+};
+
 const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
@@ -84,7 +91,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           )}
           transition={resolveTransition(
             { normal: { y2: 13.5 }, animate: { y2: 10.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="6"
           x2="6"
@@ -98,7 +107,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           )}
           transition={resolveTransition(
             { normal: { y1: 16.5 }, animate: { y1: 13.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="6"
           x2="6"
@@ -116,7 +127,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           r="1.5"
           transition={resolveTransition(
             { normal: { cy: 15 }, animate: { cy: 12 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
         />
 
@@ -127,7 +140,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           )}
           transition={resolveTransition(
             { normal: { y2: 7.5 }, animate: { y2: 10.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="12"
           x2="12"
@@ -141,7 +156,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           )}
           transition={resolveTransition(
             { normal: { y1: 10.5 }, animate: { y1: 13.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="12"
           x2="12"
@@ -159,7 +176,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           r="1.5"
           transition={resolveTransition(
             { normal: { cy: 9 }, animate: { cy: 12 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
         />
 
@@ -170,7 +189,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           )}
           transition={resolveTransition(
             { normal: { y2: 13.5 }, animate: { y2: 10.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="18"
           x2="18"
@@ -184,7 +205,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           )}
           transition={resolveTransition(
             { normal: { y1: 16.5 }, animate: { y1: 13.5 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
           x1="18"
           x2="18"
@@ -202,7 +225,9 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
           r="1.5"
           transition={resolveTransition(
             { normal: { cy: 15 }, animate: { cy: 12 } },
-            variant()
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
           )}
         />
       </svg>

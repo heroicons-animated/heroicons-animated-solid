@@ -88,7 +88,7 @@ const FireIcon = (rawProps: FireIconProps) => {
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="1.5"
-        style={{ "origin-x": "50%", "origin-y": "100%" }}
+        style={{ "transform-origin": "50% 100%" }}
         transition={resolveTransition(FLAME_VARIANTS, variant())}
         viewBox="0 0 24 24"
         width={local.size}

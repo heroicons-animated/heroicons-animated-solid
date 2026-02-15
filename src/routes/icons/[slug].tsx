@@ -1,65 +1,99 @@
+import { ArrowLeftIcon } from "@heroicons-animated/solid";
 import { A, useParams } from "@solidjs/router";
-import { clientOnly } from "@solidjs/start";
 import { createMemo, For, Show } from "solid-js";
 import { CliBlock } from "~/components/cli-block";
+import GoHomeButton from "~/components/go-home-button";
+import { IconCard } from "~/components/icon-card";
+import { SimilarIcons } from "~/components/similar-icons";
+import { kebabToPascalCase } from "~/lib/kebab-to-pascal";
 import { ICON_MANIFEST } from "~/lib/manifest";
 
-const IconCardPreview = clientOnly(
-  () => import("~/components/icon-card-preview")
-);
+const getIconBySlug = (slug: string) => {
+  return ICON_MANIFEST.find((icon) => icon.name === slug);
+};
 
 export default function IconDetailPage() {
   const params = useParams<{ slug: string }>();
 
-  const iconData = createMemo(() =>
-    ICON_MANIFEST.find((i) => i.name === params.slug)
-  );
+  const icon = createMemo(() => {
+    const slug = params.slug;
+    if (!slug) {
+      return undefined;
+    }
+    return getIconBySlug(slug);
+  });
+
+  const pascalName = createMemo(() => {
+    const slug = params.slug ?? "";
+    return kebabToPascalCase(slug);
+  });
 
   return (
-    <main class="view-container min-h-[calc(100vh-var(--header-height))] border-neutral-200 px-4 py-8 xl:border-x dark:border-neutral-800">
-      <Show
-        fallback={
-          <div class="flex flex-col items-center gap-4 pt-20">
-            <h1 class="font-mono text-4xl">Icon not found</h1>
-            <A class="text-primary underline underline-offset-3" href="/">
-              Go back
+    <Show
+      fallback={
+        <main class="view-container flex min-h-[calc(100vh-var(--header-height))] flex-col items-center justify-center border-neutral-200 px-4 py-16 xl:border-x dark:border-neutral-800">
+          <div class="flex flex-col items-center gap-6">
+            <h1 class="font-mono text-8xl">404</h1>
+            <p class="text-center text-secondary">
+              The page you're looking for might have been moved or doesn't
+              exist.
+            </p>
+            <GoHomeButton />
+          </div>
+        </main>
+      }
+      when={icon()}
+    >
+      {(iconData) => (
+        <section class="flex min-h-[calc(100vh-var(--header-height))] flex-col">
+          <div class="view-container flex flex-col items-start border-neutral-200 py-12 xl:border-x xl:pb-4 min-[880px]:pt-[60px] dark:border-neutral-800">
+            <A
+              class="mb-8 flex items-center gap-2 font-sans text-secondary text-sm transition-[color] duration-100 hover:text-primary focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2"
+              href="/"
+            >
+              <ArrowLeftIcon class="[&>svg]:size-4" size={16} />
+              Back to all icons
             </A>
-          </div>
-        }
-        when={iconData()}
-      >
-        {(data) => (
-          <div class="flex flex-col items-center gap-8">
-            {/* Breadcrumb */}
-            <nav class="flex w-full items-center gap-2 font-mono text-secondary text-sm">
-              <A class="transition-colors hover:text-primary" href="/">
-                Home
-              </A>
-              <span>/</span>
-              <span class="text-foreground">{data().name}</span>
-            </nav>
 
-            {/* Icon card (client-only) */}
-            <IconCardPreview name={data().name} slug={params.slug} />
+            <div class="flex w-full flex-col gap-6 min-[880px]:flex-row min-[880px]:items-center">
+              <IconCard icon={iconData()} />
 
-            {/* CLI block */}
-            <CliBlock staticIconName={data().name} />
-
-            {/* Keywords */}
-            <Show when={data().keywords.length > 0}>
-              <div class="flex flex-wrap items-center justify-center gap-2">
-                <For each={data().keywords}>
-                  {(keyword) => (
-                    <span class="rounded-full bg-neutral-200 px-3 py-1 font-mono text-xs dark:bg-neutral-800">
-                      {keyword}
-                    </span>
-                  )}
-                </For>
+              <div class="flex h-full flex-col gap-1">
+                <h1 class="font-sans text-[28px] min-[640px]:text-[36px]">
+                  {pascalName()}
+                </h1>
+                <p class="font-mono text-secondary text-sm">
+                  Animated {iconData().name.replace(/-/g, " ")} icon for Solid
+                </p>
+                <CliBlock
+                  class="mt-7 hidden px-0 min-[880px]:flex"
+                  staticIconName={iconData().name}
+                />
               </div>
-            </Show>
+            </div>
+
+            <CliBlock
+              class="mt-8 flex px-0 min-[880px]:hidden"
+              staticIconName={iconData().name}
+            />
           </div>
-        )}
-      </Show>
-    </main>
+
+          <div class="view-container border-neutral-200 py-4 xl:border dark:border-neutral-800">
+            <h2 class="mb-3 font-sans text-xl">Keywords</h2>
+            <div class="flex flex-wrap gap-2">
+              <For each={iconData().keywords}>
+                {(keyword) => (
+                  <span class="supports-[corner-shape:squircle]:corner-squircle rounded-[12px] bg-neutral-200 px-3 py-1 font-mono text-secondary text-sm supports-[corner-shape:squircle]:rounded-[20px] dark:bg-[#262626]">
+                    {keyword}
+                  </span>
+                )}
+              </For>
+            </div>
+          </div>
+
+          <SimilarIcons currentIcon={iconData()} />
+        </section>
+      )}
+    </Show>
   );
 }

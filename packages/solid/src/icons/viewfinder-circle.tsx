@@ -56,6 +56,9 @@ const CIRCLE_VARIANTS = {
     },
   },
 };
+
+const ANIMATION_RESET_DELAY_MS = 400;
+
 const ViewfinderCircleIcon = (rawProps: ViewfinderCircleIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
@@ -68,10 +71,17 @@ const ViewfinderCircleIcon = (rawProps: ViewfinderCircleIconProps) => {
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
 
+  const runFocusAnimation = () => {
+    setVariant("animate");
+    setTimeout(() => {
+      setVariant("normal");
+    }, ANIMATION_RESET_DELAY_MS);
+  };
+
   if (local.ref) {
     isControlled = true;
     local.ref({
-      startAnimation: () => setVariant("animate"),
+      startAnimation: () => runFocusAnimation(),
       stopAnimation: () => setVariant("normal"),
     });
   }
@@ -84,7 +94,7 @@ const ViewfinderCircleIcon = (rawProps: ViewfinderCircleIconProps) => {
         local.onMouseEnter(e);
       }
     } else {
-      setVariant("animate");
+      runFocusAnimation();
     }
   };
 

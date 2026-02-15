@@ -91,9 +91,9 @@ const CodeBracketSquareIcon = (rawProps: CodeBracketSquareIconProps) => {
       >
         <path d="M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
         <Motion.path
-          animate={resolveValues(CODE_VARIANTS, variant())}
+          animate={resolveValues(CODE_VARIANTS, variant(), -1)}
           d="M9.75 9.75L7.5 12l2.25 2.25"
-          transition={resolveTransition(CODE_VARIANTS, variant())}
+          transition={resolveTransition(CODE_VARIANTS, variant(), -1)}
         />
         <Motion.path
           animate={resolveValues(CODE_VARIANTS, variant(), 1)}

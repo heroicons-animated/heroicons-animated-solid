@@ -98,7 +98,7 @@ const H1Icon = (rawProps: H1IconProps) => {
         <Motion.path
           animate={resolveValues(VARIANTS, variant())}
           d="M17.244 10.868l2.25-1.5v10.126h-2.25m2.25 0h2.25"
-          style={{ "origin-y": "12px" }}
+          style={{ "transform-origin": "50% 12px" }}
           transition={resolveTransition(VARIANTS, variant())}
         />
       </svg>

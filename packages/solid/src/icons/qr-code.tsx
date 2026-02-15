@@ -101,39 +101,39 @@ const QrCodeIcon = (rawProps: QrCodeIconProps) => {
           transition={resolveTransition(DOT_VARIANTS, variant(), 0)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.05)}
           d="M6.75 16.5H7.5V17.25H6.75V16.5Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.05)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.1)}
           d="M16.5 6.75H17.25V7.5H16.5V6.75Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.1)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.15)}
           d="M13.5 13.5H14.25V14.25H13.5V13.5Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.15)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.2)}
           d="M13.5 19.5H14.25V20.25H13.5V19.5Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.2)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.25)}
           d="M19.5 13.5H20.25V14.25H19.5V13.5Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.25)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.3)}
           d="M19.5 19.5H20.25V20.25H19.5V19.5Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.3)}
         />
         <Motion.path
-          animate={resolveValues(DOT_VARIANTS, variant())}
+          animate={resolveValues(DOT_VARIANTS, variant(), 0.35)}
           d="M16.5 16.5H17.25V17.25H16.5V16.5Z"
-          transition={resolveTransition(DOT_VARIANTS, variant())}
+          transition={resolveTransition(DOT_VARIANTS, variant(), 0.35)}
         />
       </svg>
     </div>

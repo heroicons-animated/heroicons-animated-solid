@@ -118,18 +118,18 @@ const ShareIcon = (rawProps: ShareIconProps) => {
           transition={resolveTransition(NODE_VARIANTS, variant(), 0)}
         />
         <Motion.circle
-          animate={resolveValues(NODE_VARIANTS, variant())}
+          animate={resolveValues(NODE_VARIANTS, variant(), 0.15)}
           cx="18.75"
           cy="4.5"
           r="2.25"
-          transition={resolveTransition(NODE_VARIANTS, variant())}
+          transition={resolveTransition(NODE_VARIANTS, variant(), 0.15)}
         />
         <Motion.circle
-          animate={resolveValues(NODE_VARIANTS, variant())}
+          animate={resolveValues(NODE_VARIANTS, variant(), 0.3)}
           cx="18.75"
           cy="19.5"
           r="2.25"
-          transition={resolveTransition(NODE_VARIANTS, variant())}
+          transition={resolveTransition(NODE_VARIANTS, variant(), 0.3)}
         />
       </svg>
     </div>

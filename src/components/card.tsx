@@ -8,8 +8,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import { LINK } from "~/constants";
 import { useTouchDevice } from "~/hooks/use-touch-device";
-import { getCLICommand } from "~/lib/cli";
+import { getCLICommand, getFileExtension } from "~/lib/cli";
 import { cn } from "~/lib/utils";
 import { usePackageNameContext } from "~/providers/package-name";
 import type { AnimatedIconHandle, IconManifestItem } from "~/types/icon";
@@ -88,6 +89,17 @@ const PauseIcon = () => (
     />
   </svg>
 );
+
+const ICON_SOURCE_BASE_URL = `${LINK.GITHUB.replace("https://github.com", "https://raw.githubusercontent.com")}/main/packages/solid/src/icons`;
+
+const getIconContent = async (name: string): Promise<string> => {
+  const response = await fetch(`${ICON_SOURCE_BASE_URL}/${name}.tsx`);
+  if (!response.ok) {
+    throw new Error(`Icon source not found: ${name}`);
+  }
+
+  return response.text();
+};
 
 interface CardProps extends JSX.HTMLAttributes<HTMLDivElement> {
   children: JSX.Element;
@@ -199,8 +211,10 @@ const CopyCLIAction = (props: Pick<IconManifestItem, "name">) => {
   return (
     <Tooltip>
       <TooltipTrigger
+        aria-disabled={state() !== "idle"}
         aria-label="Copy shadcn/cli command"
         class="supports-[corner-shape:squircle]:corner-squircle flex size-10 cursor-pointer items-center justify-center rounded-[14px] bg-neutral-200/20 transition-[background-color] duration-100 focus-within:-outline-offset-1 hover:bg-neutral-200 focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] dark:bg-neutral-800/20 dark:hover:bg-neutral-700"
+        data-busy={state() !== "idle" ? "" : undefined}
         onClick={handleCopy}
         tabIndex={0}
       >
@@ -221,6 +235,7 @@ const CopyCLIAction = (props: Pick<IconManifestItem, "name">) => {
 
 const CopyCodeAction = (props: Pick<IconManifestItem, "name">) => {
   const [state, setState] = createSignal<IconStatus>("idle");
+  const ext = getFileExtension();
 
   const handleCopy = async (e: MouseEvent) => {
     e.stopPropagation();
@@ -231,8 +246,8 @@ const CopyCodeAction = (props: Pick<IconManifestItem, "name">) => {
 
     try {
       setState("loading");
-      // For now, copy the icon name as a placeholder
-      await navigator.clipboard.writeText(props.name);
+      const content = await getIconContent(props.name);
+      await navigator.clipboard.writeText(content);
       setState("done");
       setTimeout(() => setState("idle"), 2000);
     } catch {
@@ -244,8 +259,10 @@ const CopyCodeAction = (props: Pick<IconManifestItem, "name">) => {
   return (
     <Tooltip>
       <TooltipTrigger
+        aria-disabled={state() !== "idle"}
         aria-label="Copy .tsx code"
         class="supports-[corner-shape:squircle]:corner-squircle flex size-10 cursor-pointer items-center justify-center rounded-[14px] bg-neutral-200/20 transition-[background-color] duration-100 focus-within:-outline-offset-1 hover:bg-neutral-200 focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] dark:bg-neutral-800/20 dark:hover:bg-neutral-700"
+        data-busy={state() !== "idle" ? "" : undefined}
         onClick={handleCopy}
         tabIndex={0}
       >
@@ -256,7 +273,7 @@ const CopyCodeAction = (props: Pick<IconManifestItem, "name">) => {
       <TooltipContent>
         Copy{" "}
         <code class="rounded-[4px] bg-neutral-50/20 px-1 py-0.5 font-mono">
-          .tsx
+          .{ext}
         </code>{" "}
         code
       </TooltipContent>
@@ -269,12 +286,14 @@ type ActionsProps = Pick<IconManifestItem, "name"> & {
 };
 
 const Actions = (props: ActionsProps) => {
+  const alwaysVisible = props.alwaysVisible ?? false;
+
   return (
     <TooltipProvider>
       <div
         class={cn(
           "my-6 flex items-center justify-center gap-2 transition-opacity duration-100",
-          props.alwaysVisible
+          alwaysVisible
             ? "opacity-100"
             : "opacity-0 group-hover/card:opacity-100 has-data-busy:opacity-100 has-data-popup-open:opacity-100 has-focus-visible:opacity-100 [@media(hover:none)]:opacity-100"
         )}

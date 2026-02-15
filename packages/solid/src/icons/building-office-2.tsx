@@ -106,9 +106,13 @@ const BuildingOffice2Icon = (rawProps: BuildingOffice2IconProps) => {
         {WINDOWS.map((window) => {
           return (
             <Motion.path
-              animate={resolveValues(WINDOW_VARIANTS, variant())}
+              animate={resolveValues(WINDOW_VARIANTS, variant(), window.index)}
               d={window.path}
-              transition={resolveTransition(WINDOW_VARIANTS, variant())}
+              transition={resolveTransition(
+                WINDOW_VARIANTS,
+                variant(),
+                window.index
+              )}
             />
           );
         })}

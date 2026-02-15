@@ -114,12 +114,12 @@ const TruckIcon = (rawProps: TruckIconProps) => {
           { y: 8, width: 5, x: 0 },
           { y: 11, width: 7, x: -1 },
           { y: 14, width: 4, x: 0 },
-        ].map((line) => (
+        ].map((line, i) => (
           <Motion.line
-            animate={resolveValues(SPEED_LINE_VARIANTS, variant())}
+            animate={resolveValues(SPEED_LINE_VARIANTS, variant(), i)}
             stroke-linecap="round"
             stroke-width="1.5"
-            transition={resolveTransition(SPEED_LINE_VARIANTS, variant())}
+            transition={resolveTransition(SPEED_LINE_VARIANTS, variant(), i)}
             x1={line.x}
             x2={line.x + line.width}
             y1={line.y}

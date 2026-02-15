@@ -102,7 +102,7 @@ const ClipboardIcon = (rawProps: ClipboardIconProps) => {
         <Motion.path
           animate={resolveValues(CLIP_VARIANTS, variant())}
           d="M15.6657 3.88789C15.3991 2.94272 14.5305 2.25 13.5 2.25H10.5C9.46954 2.25 8.60087 2.94272 8.33426 3.88789M15.6657 3.88789C15.7206 4.0825 15.75 4.28782 15.75 4.5V4.5C15.75 4.91421 15.4142 5.25 15 5.25H9C8.58579 5.25 8.25 4.91421 8.25 4.5V4.5C8.25 4.28782 8.27937 4.0825 8.33426 3.88789"
-          style={{ "origin-y": 0 }}
+          style={{ "transform-origin": "50% 0%" }}
           transition={resolveTransition(CLIP_VARIANTS, variant())}
         />
         <Motion.path

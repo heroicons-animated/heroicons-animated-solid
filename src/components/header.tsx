@@ -2,6 +2,7 @@ import { HeartIcon } from "@heroicons-animated/solid";
 import { A } from "@solidjs/router";
 import { GithubStarsButton } from "~/components/github-button";
 import { Logo } from "~/components/logo";
+import { SolidJsLogo } from "~/components/solidjs-logo";
 import { ThemeToggle } from "~/components/ui/theme-toggle";
 import { LINK } from "~/constants";
 import type { AnimatedIconHandle } from "~/types/icon";
@@ -27,7 +28,13 @@ const Header = () => {
           tabIndex={0}
         >
           <Logo class="w-6 text-primary min-[395px]:w-8" />
-          heroicons-animated
+          <span class="relative inline-flex flex-col">
+            <span>heroicons-animated</span>
+            <span class="absolute right-0 -bottom-[14px] flex items-center gap-1 font-mono text-[10px] text-secondary">
+              - for
+              <SolidJsLogo class="h-3.5 w-3.5" />
+            </span>
+          </span>
         </A>
         <div class="ml-auto flex w-full flex-1 flex-wrap-reverse items-center justify-end gap-2">
           <a

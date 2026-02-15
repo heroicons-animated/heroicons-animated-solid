@@ -119,9 +119,13 @@ const BuildingLibraryIcon = (rawProps: BuildingLibraryIconProps) => {
         />
         {PILLARS.map((pillar) => (
           <Motion.path
-            animate={resolveValues(PILLAR_VARIANTS, variant())}
+            animate={resolveValues(PILLAR_VARIANTS, variant(), pillar.index)}
             d={pillar.d}
-            transition={resolveTransition(PILLAR_VARIANTS, variant())}
+            transition={resolveTransition(
+              PILLAR_VARIANTS,
+              variant(),
+              pillar.index
+            )}
           />
         ))}
       </svg>

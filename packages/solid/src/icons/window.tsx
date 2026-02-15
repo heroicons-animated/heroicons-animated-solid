@@ -99,14 +99,14 @@ const WindowIcon = (rawProps: WindowIconProps) => {
           transition={resolveTransition(BUTTON_VARIANTS, variant(), 0)}
         />
         <Motion.path
-          animate={resolveValues(BUTTON_VARIANTS, variant())}
+          animate={resolveValues(BUTTON_VARIANTS, variant(), 0.1)}
           d="M7.5 6H7.5075V6.0075H7.5V6Z"
-          transition={resolveTransition(BUTTON_VARIANTS, variant())}
+          transition={resolveTransition(BUTTON_VARIANTS, variant(), 0.1)}
         />
         <Motion.path
-          animate={resolveValues(BUTTON_VARIANTS, variant())}
+          animate={resolveValues(BUTTON_VARIANTS, variant(), 0.2)}
           d="M9.75 6H9.7575V6.0075H9.75V6Z"
-          transition={resolveTransition(BUTTON_VARIANTS, variant())}
+          transition={resolveTransition(BUTTON_VARIANTS, variant(), 0.2)}
         />
       </svg>
     </div>

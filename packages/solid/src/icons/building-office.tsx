@@ -103,9 +103,17 @@ const BuildingOfficeIcon = (rawProps: BuildingOfficeIconProps) => {
         {FLOOR_LINES.map((floorLine) => {
           return (
             <Motion.path
-              animate={resolveValues(FLOOR_VARIANTS, variant())}
+              animate={resolveValues(
+                FLOOR_VARIANTS,
+                variant(),
+                floorLine.index
+              )}
               d={floorLine.path}
-              transition={resolveTransition(FLOOR_VARIANTS, variant())}
+              transition={resolveTransition(
+                FLOOR_VARIANTS,
+                variant(),
+                floorLine.index
+              )}
             />
           );
         })}

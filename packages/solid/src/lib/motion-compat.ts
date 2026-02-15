@@ -96,8 +96,19 @@ function convertTransitionObj(t: TransitionObj): TransitionObj {
 
 // biome-ignore lint/suspicious/noExplicitAny: Variant payload is dynamic and icon-specific.
 type VariantValue = Record<string, any>;
-type VariantDef = VariantValue | ((custom: number) => VariantValue);
+// biome-ignore lint/suspicious/noExplicitAny: Custom payload can be number or object depending on icon variant usage.
+type VariantDef = VariantValue | ((custom: any) => VariantValue);
 type Variants = Record<string, VariantDef>;
+
+function toTransformOriginPart(value: unknown, fallback: string): string {
+  if (typeof value === "number") {
+    return `${value * 100}%`;
+  }
+  if (typeof value === "string" && value.length > 0) {
+    return value;
+  }
+  return fallback;
+}
 
 /**
  * Resolve the animation values from a variant definition.
@@ -106,7 +117,8 @@ type Variants = Record<string, VariantDef>;
 export function resolveValues(
   variants: Variants,
   variantName: string,
-  custom = 0
+  // biome-ignore lint/suspicious/noExplicitAny: Custom payload shape varies per icon.
+  custom: any = 0
   // biome-ignore lint/suspicious/noExplicitAny: Returned object is forwarded to Motion animate prop.
 ): any {
   const def = variants[variantName];
@@ -114,7 +126,14 @@ export function resolveValues(
     return {};
   }
   const state = typeof def === "function" ? def(custom) : def;
-  const { transition: _t, ...values } = state;
+  const { transition: _t, originX, originY, ...values } = state;
+
+  if (originX !== undefined || originY !== undefined) {
+    const x = toTransformOriginPart(originX, "50%");
+    const y = toTransformOriginPart(originY, "50%");
+    values.transformOrigin = `${x} ${y}`;
+  }
+
   return values;
 }
 
@@ -125,7 +144,8 @@ export function resolveValues(
 export function resolveTransition(
   variants: Variants,
   variantName: string,
-  custom = 0,
+  // biome-ignore lint/suspicious/noExplicitAny: Custom payload shape varies per icon.
+  custom: any = 0,
   extraTransition?: TransitionObj
   // biome-ignore lint/suspicious/noExplicitAny: Returned object is forwarded to Motion transition prop.
 ): any {
