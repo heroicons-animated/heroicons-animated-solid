@@ -47,7 +47,7 @@ const CommentAnimationsDevLink = () => {
 const CourseButton = clientOnly(() =>
   import("~/components/course-button").then((m) => ({
     default: m.CourseButton,
-  })),
+  }))
 );
 
 const CourseButtonFallback = () => (
