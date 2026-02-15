@@ -1,0 +1,77 @@
+{
+  "name": "@heroicons-animated/solid",
+  "version": "1.0.0",
+  "description": "Beautifully animated Heroicons for SolidJS",
+  "author": "Aniket-508",
+  "homepage": "https://www.heroicons-animated.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heroicons-animated/heroicons-animated-solid.git",
+    "directory": "packages/solid"
+  },
+  "bugs": {
+    "url": "https://github.com/heroicons-animated/heroicons-animated-solid/issues"
+  },
+  "keywords": [
+    "heroicons",
+    "solidjs",
+    "solid",
+    "icons",
+    "animated",
+    "motion-one",
+    "solid-motionone"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js",
+      "default": "./dist/icons/*.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/icons/*.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "type-check": "tsc --noEmit",
+    "prepack": "cp ../../LICENSE . 2>/dev/null || true",
+    "postpack": "rm -f LICENSE 2>/dev/null || true"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.0"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.8.0",
+    "solid-motionone": "^1.0.0"
+  },
+  "devDependencies": {
+    "solid-js": "^1.9.5",
+    "solid-motionone": "^1.0.4",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.0.0",
+    "vite-plugin-solid": "^2.11.6"
+  }
+}

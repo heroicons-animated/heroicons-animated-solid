@@ -1,0 +1,56 @@
+{
+  "name": "heroicons-animated-solid",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Beautifully animated Heroicons for SolidJS",
+  "author": "Aniket-508",
+  "license": "MIT",
+  "homepage": "https://heroicons-animated.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heroicons-animated/heroicons-animated-solid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/heroicons-animated/heroicons-animated-solid/issues"
+  },
+  "keywords": [
+    "heroicons",
+    "animated",
+    "icons",
+    "solidjs",
+    "solid",
+    "motion-one"
+  ],
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "pnpm --filter @heroicons-animated/solid build && vinxi build",
+    "start": "vinxi start",
+    "build:lib": "pnpm --filter @heroicons-animated/solid build",
+    "dev:lib": "pnpm --filter @heroicons-animated/solid dev",
+    "convert-icons": "node --import tsx scripts/convert-icons.ts"
+  },
+  "dependencies": {
+    "@heroicons-animated/solid": "workspace:*",
+    "@solidjs/router": "^0.15.3",
+    "@solidjs/start": "^1.1.0",
+    "clsx": "^2.1.1",
+    "fuse.js": "^7.1.0",
+    "solid-js": "^1.9.5",
+    "solid-motionone": "^1.0.4",
+    "tailwind-merge": "^3.4.0",
+    "vinxi": "^0.5.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "tailwindcss": "^4.1.18",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite-plugin-solid": "^2.11.6"
+  },
+  "engines": {
+    "node": ">=20.x",
+    "pnpm": ">=10.x"
+  },
+  "packageManager": "pnpm@10.28.0"
+}
