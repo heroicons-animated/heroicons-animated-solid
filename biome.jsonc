@@ -1,28 +1,34 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite/biome/core", "ultracite/biome/solid"],
+  "linter": {
+    "rules": {
+      "performance": {
+        "noBarrelFile": "off"
+      }
+    }
+  },
   "overrides": [
     {
-      "includes": ["packages/solid/src/icons/**/*.tsx"],
+      "includes": [
+        "packages/solid/src/icons/**/*.tsx",
+        "src/components/card.tsx"
+      ],
       "linter": {
         "rules": {
           "a11y": {
             "noNoninteractiveElementInteractions": "off",
             "noStaticElementInteractions": "off",
             "noSvgWithoutTitle": "off"
-          },
-          "performance": { "useSolidForComponent": "off" }
+          }
         }
       }
     },
     {
-      "includes": ["src/components/card.tsx"],
+      "includes": ["packages/solid/src/icons/**/*.tsx"],
       "linter": {
         "rules": {
-          "a11y": {
-            "noNoninteractiveElementInteractions": "off",
-            "noStaticElementInteractions": "off"
-          }
+          "performance": { "useSolidForComponent": "off" }
         }
       }
     },
@@ -31,22 +37,6 @@
       "linter": {
         "rules": {
           "performance": { "noNamespaceImport": "off" }
-        }
-      }
-    },
-    {
-      "includes": ["packages/solid/src/index.ts"],
-      "linter": {
-        "rules": {
-          "performance": { "noBarrelFile": "off" }
-        }
-      }
-    },
-    {
-      "includes": ["packages/solid/src/icons/index.ts"],
-      "linter": {
-        "rules": {
-          "style": { "noExportedImports": "off" }
         }
       }
     }
