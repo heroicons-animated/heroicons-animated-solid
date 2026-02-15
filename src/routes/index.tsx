@@ -1,8 +1,14 @@
+import { clientOnly } from "@solidjs/start";
 import { CliBlock } from "~/components/cli-block";
-import { CommentBlock } from "~/components/comment";
-import { IconsList } from "~/components/list";
 import { LINK } from "~/constants";
 import { ICON_MANIFEST } from "~/lib/manifest";
+
+const CommentBlock = clientOnly(() =>
+  import("~/components/comment").then((m) => ({ default: m.CommentBlock }))
+);
+const IconsList = clientOnly(() =>
+  import("~/components/list").then((m) => ({ default: m.IconsList }))
+);
 
 const Home = () => {
   const icons = ICON_MANIFEST;

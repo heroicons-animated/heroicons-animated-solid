@@ -1,20 +1,20 @@
 import {
-  type ParentComponent,
   createContext,
   createEffect,
   createSignal,
   onMount,
+  type ParentComponent,
   useContext,
 } from "solid-js";
 import { isServer } from "solid-js/web";
 
 type Theme = "light" | "dark" | "system";
 
-type ThemeContextType = {
+interface ThemeContextType {
   theme: () => Theme;
   resolvedTheme: () => "light" | "dark";
   setTheme: (theme: Theme) => void;
-};
+}
 
 const ThemeContext = createContext<ThemeContextType>();
 
@@ -26,7 +26,9 @@ const ThemeProvider: ParentComponent = (props) => {
 
   const resolveTheme = (t: Theme): "light" | "dark" => {
     if (t === "system") {
-      if (isServer) return "light";
+      if (isServer) {
+        return "light";
+      }
       return window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
@@ -73,7 +75,9 @@ const ThemeProvider: ParentComponent = (props) => {
 
 const useTheme = () => {
   const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
+  if (!ctx) {
+    throw new Error("useTheme must be used within ThemeProvider");
+  }
   return ctx;
 };
 

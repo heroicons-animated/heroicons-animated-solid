@@ -1,10 +1,10 @@
 import { MoonIcon, SunIcon } from "@heroicons-animated/solid";
-import type { AnimatedIconHandle } from "~/types/icon";
-import { Show, createSignal, onMount } from "solid-js";
+import { createSignal, onMount, Show } from "solid-js";
 import { useTheme } from "~/providers/theme";
+import type { AnimatedIconHandle } from "~/types/icon";
 
 const ThemeToggle = () => {
-  const { setTheme, theme: currentTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   let sunRef: AnimatedIconHandle | undefined;
   let moonRef: AnimatedIconHandle | undefined;
   const [mounted, setMounted] = createSignal(false);
@@ -49,7 +49,6 @@ const ThemeToggle = () => {
       <Show when={mounted()}>
         <span class="flex items-center justify-center">
           <Show
-            when={isDark()}
             fallback={
               <SunIcon
                 aria-hidden="true"
@@ -59,6 +58,7 @@ const ThemeToggle = () => {
                 size={16}
               />
             }
+            when={isDark()}
           >
             <MoonIcon
               aria-hidden="true"

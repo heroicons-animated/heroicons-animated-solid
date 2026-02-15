@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface ExclamationTriangleIconHandle {
@@ -9,7 +9,8 @@ export interface ExclamationTriangleIconHandle {
   stopAnimation: () => void;
 }
 
-interface ExclamationTriangleIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ExclamationTriangleIconProps
+  extends JSX.HTMLAttributes<HTMLDivElement> {
   size?: number;
   ref?: (handle: ExclamationTriangleIconHandle) => void;
 }
@@ -29,7 +30,11 @@ const EXCLAMATION_VARIANTS = {
 const ExclamationTriangleIcon = (rawProps: ExclamationTriangleIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -42,17 +47,25 @@ const ExclamationTriangleIcon = (rawProps: ExclamationTriangleIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -66,26 +79,26 @@ const ExclamationTriangleIcon = (rawProps: ExclamationTriangleIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M2.697 16.126c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z" />
-              <Motion.g
-                animate={resolveValues(EXCLAMATION_VARIANTS, variant())}
-                transition={resolveTransition(EXCLAMATION_VARIANTS, variant())}
-                style={{ "origin-x": "50%", "origin-y": "50%" }}
-              >
-                <path d="M12 9v3.75" />
-                <path d="M12 15.75h.007v.008H12v-.008Z" />
-              </Motion.g>
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M2.697 16.126c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z" />
+        <Motion.g
+          animate={resolveValues(EXCLAMATION_VARIANTS, variant())}
+          style={{ "origin-x": "50%", "origin-y": "50%" }}
+          transition={resolveTransition(EXCLAMATION_VARIANTS, variant())}
+        >
+          <path d="M12 9v3.75" />
+          <path d="M12 15.75h.007v.008H12v-.008Z" />
+        </Motion.g>
+      </svg>
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface ViewfinderCircleIconHandle {
@@ -58,7 +58,11 @@ const CIRCLE_VARIANTS = {
 const ViewfinderCircleIcon = (rawProps: ViewfinderCircleIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -71,17 +75,25 @@ const ViewfinderCircleIcon = (rawProps: ViewfinderCircleIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -95,42 +107,42 @@ const ViewfinderCircleIcon = (rawProps: ViewfinderCircleIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Motion.path
-                animate={resolveValues(CORNER_VARIANTS, variant())}
-                transition={resolveTransition(CORNER_VARIANTS, variant())}
-                d="M7.5 3.75H6C4.75736 3.75 3.75 4.75736 3.75 6V7.5"
-              />
-              <Motion.path
-                animate={resolveValues(CORNER_VARIANTS, variant())}
-                transition={resolveTransition(CORNER_VARIANTS, variant())}
-                d="M16.5 3.75H18C19.2426 3.75 20.25 4.75736 20.25 6V7.5"
-              />
-              <Motion.path
-                animate={resolveValues(CORNER_VARIANTS, variant())}
-                transition={resolveTransition(CORNER_VARIANTS, variant())}
-                d="M20.25 16.5V18C20.25 19.2426 19.2426 20.25 18 20.25H16.5"
-              />
-              <Motion.path
-                animate={resolveValues(CORNER_VARIANTS, variant())}
-                transition={resolveTransition(CORNER_VARIANTS, variant())}
-                d="M7.5 20.25H6C4.75736 20.25 3.75 19.2426 3.75 18V16.5"
-              />
-              <Motion.path
-                animate={resolveValues(CIRCLE_VARIANTS, variant())}
-                transition={resolveTransition(CIRCLE_VARIANTS, variant())}
-                d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
-              />
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(CORNER_VARIANTS, variant())}
+          d="M7.5 3.75H6C4.75736 3.75 3.75 4.75736 3.75 6V7.5"
+          transition={resolveTransition(CORNER_VARIANTS, variant())}
+        />
+        <Motion.path
+          animate={resolveValues(CORNER_VARIANTS, variant())}
+          d="M16.5 3.75H18C19.2426 3.75 20.25 4.75736 20.25 6V7.5"
+          transition={resolveTransition(CORNER_VARIANTS, variant())}
+        />
+        <Motion.path
+          animate={resolveValues(CORNER_VARIANTS, variant())}
+          d="M20.25 16.5V18C20.25 19.2426 19.2426 20.25 18 20.25H16.5"
+          transition={resolveTransition(CORNER_VARIANTS, variant())}
+        />
+        <Motion.path
+          animate={resolveValues(CORNER_VARIANTS, variant())}
+          d="M7.5 20.25H6C4.75736 20.25 3.75 19.2426 3.75 18V16.5"
+          transition={resolveTransition(CORNER_VARIANTS, variant())}
+        />
+        <Motion.path
+          animate={resolveValues(CIRCLE_VARIANTS, variant())}
+          d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+          transition={resolveTransition(CIRCLE_VARIANTS, variant())}
+        />
+      </svg>
     </div>
   );
 };

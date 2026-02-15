@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface CursorArrowRaysIconHandle {
@@ -43,7 +43,11 @@ const RAY_VARIANTS = {
 const CursorArrowRaysIcon = (rawProps: CursorArrowRaysIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [cursorVariant, setCursorVariant] = createSignal("normal");
   const [rayVariant, setRayVariant] = createSignal("normal");
@@ -63,18 +67,26 @@ const CursorArrowRaysIcon = (rawProps: CursorArrowRaysIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setCursorVariant("animate");
       setRayVariant("spread");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setCursorVariant("normal");
       setRayVariant("normal");
@@ -89,58 +101,58 @@ const CursorArrowRaysIcon = (rawProps: CursorArrowRaysIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Motion.path
-                animate={resolveValues(CURSOR_VARIANTS, cursorVariant())}
-                transition={resolveTransition(CURSOR_VARIANTS, cursorVariant())}
-                d="M15.0423 21.6718L13.6835 16.6007M13.6835 16.6007L11.1741 18.826L11.7425 9.35623L16.9697 17.2731L13.6835 16.6007Z"
-              />
-              <Motion.path
-                animate={resolveValues(RAY_VARIANTS, rayVariant())}
-                transition={resolveTransition(RAY_VARIANTS, rayVariant())}
-                custom={{ x: 0, y: -2 }}
-                d="M12 2.25V4.5"
-              />
-              <Motion.path
-                animate={resolveValues(RAY_VARIANTS, rayVariant())}
-                transition={resolveTransition(RAY_VARIANTS, rayVariant())}
-                custom={{ x: 2, y: -2 }}
-                d="M17.8336 4.66637L16.2426 6.25736"
-              />
-              <Motion.path
-                animate={resolveValues(RAY_VARIANTS, rayVariant())}
-                transition={resolveTransition(RAY_VARIANTS, rayVariant())}
-                custom={{ x: 2, y: 0 }}
-                d="M20.25 10.5H18"
-              />
-              <Motion.path
-                animate={resolveValues(RAY_VARIANTS, rayVariant())}
-                transition={resolveTransition(RAY_VARIANTS, rayVariant())}
-                custom={{ x: -2, y: 2 }}
-                d="M7.75736 14.7426L6.16637 16.3336"
-              />
-              <Motion.path
-                animate={resolveValues(RAY_VARIANTS, rayVariant())}
-                transition={resolveTransition(RAY_VARIANTS, rayVariant())}
-                custom={{ x: -2, y: 0 }}
-                d="M6 10.5H3.75"
-              />
-              <Motion.path
-                animate={resolveValues(RAY_VARIANTS, rayVariant())}
-                transition={resolveTransition(RAY_VARIANTS, rayVariant())}
-                custom={{ x: -2, y: -2 }}
-                d="M7.75736 6.25736L6.16637 4.66637"
-              />
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(CURSOR_VARIANTS, cursorVariant())}
+          d="M15.0423 21.6718L13.6835 16.6007M13.6835 16.6007L11.1741 18.826L11.7425 9.35623L16.9697 17.2731L13.6835 16.6007Z"
+          transition={resolveTransition(CURSOR_VARIANTS, cursorVariant())}
+        />
+        <Motion.path
+          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          custom={{ x: 0, y: -2 }}
+          d="M12 2.25V4.5"
+          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+        />
+        <Motion.path
+          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          custom={{ x: 2, y: -2 }}
+          d="M17.8336 4.66637L16.2426 6.25736"
+          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+        />
+        <Motion.path
+          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          custom={{ x: 2, y: 0 }}
+          d="M20.25 10.5H18"
+          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+        />
+        <Motion.path
+          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          custom={{ x: -2, y: 2 }}
+          d="M7.75736 14.7426L6.16637 16.3336"
+          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+        />
+        <Motion.path
+          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          custom={{ x: -2, y: 0 }}
+          d="M6 10.5H3.75"
+          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+        />
+        <Motion.path
+          animate={resolveValues(RAY_VARIANTS, rayVariant())}
+          custom={{ x: -2, y: -2 }}
+          d="M7.75736 6.25736L6.16637 4.66637"
+          transition={resolveTransition(RAY_VARIANTS, rayVariant())}
+        />
+      </svg>
     </div>
   );
 };

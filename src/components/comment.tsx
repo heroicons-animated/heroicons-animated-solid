@@ -1,6 +1,6 @@
 import { ArrowTopRightOnSquareIcon } from "@heroicons-animated/solid";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import type { AnimatedIconHandle } from "~/types/icon";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const CommentAuthorLink = () => {
   return (

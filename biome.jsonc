@@ -1,0 +1,54 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/biome/core", "ultracite/biome/solid"],
+  "overrides": [
+    {
+      "includes": ["packages/solid/src/icons/**/*.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noNoninteractiveElementInteractions": "off",
+            "noStaticElementInteractions": "off",
+            "noSvgWithoutTitle": "off"
+          },
+          "performance": { "useSolidForComponent": "off" }
+        }
+      }
+    },
+    {
+      "includes": ["src/components/card.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noNoninteractiveElementInteractions": "off",
+            "noStaticElementInteractions": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/lib/icons.ts"],
+      "linter": {
+        "rules": {
+          "performance": { "noNamespaceImport": "off" }
+        }
+      }
+    },
+    {
+      "includes": ["packages/solid/src/index.ts"],
+      "linter": {
+        "rules": {
+          "performance": { "noBarrelFile": "off" }
+        }
+      }
+    },
+    {
+      "includes": ["packages/solid/src/icons/index.ts"],
+      "linter": {
+        "rules": {
+          "style": { "noExportedImports": "off" }
+        }
+      }
+    }
+  ]
+}

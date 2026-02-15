@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface LockOpenIconHandle {
@@ -42,7 +42,11 @@ const SHACKLE_VARIANTS = {
 const LockOpenIcon = (rawProps: LockOpenIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -55,17 +59,25 @@ const LockOpenIcon = (rawProps: LockOpenIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -80,24 +92,24 @@ const LockOpenIcon = (rawProps: LockOpenIconProps) => {
     >
       <Motion.svg
         animate={resolveValues(SVG_VARIANTS, variant())}
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
         transition={resolveTransition(SVG_VARIANTS, variant())}
-                fill="none"
-                height={local.size}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width={local.size}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <Motion.path
-                  animate={resolveValues(SHACKLE_VARIANTS, variant())}
-                  transition={resolveTransition(SHACKLE_VARIANTS, variant())}
-                  d="M13.5 10.5V6.75C13.5 4.26472 15.5147 2.25 18 2.25C20.4853 2.25 22.5 4.26472 22.5 6.75V10.5"
-                />
-                <path d="M3.75 21.75H14.25C15.4926 21.75 16.5 20.7426 16.5 19.5V12.75C16.5 11.5074 15.4926 10.5 14.25 10.5H3.75C2.50736 10.5 1.5 11.5074 1.5 12.75V19.5C1.5 20.7426 2.50736 21.75 3.75 21.75Z" />
-              </Motion.svg>
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(SHACKLE_VARIANTS, variant())}
+          d="M13.5 10.5V6.75C13.5 4.26472 15.5147 2.25 18 2.25C20.4853 2.25 22.5 4.26472 22.5 6.75V10.5"
+          transition={resolveTransition(SHACKLE_VARIANTS, variant())}
+        />
+        <path d="M3.75 21.75H14.25C15.4926 21.75 16.5 20.7426 16.5 19.5V12.75C16.5 11.5074 15.4926 10.5 14.25 10.5H3.75C2.50736 10.5 1.5 11.5074 1.5 12.75V19.5C1.5 20.7426 2.50736 21.75 3.75 21.75Z" />
+      </Motion.svg>
     </div>
   );
 };

@@ -37,7 +37,6 @@ const Input = (props: InputProps) => {
         </span>
       )}
       <input
-        ref={local.ref}
         class={cn(
           "flex h-9 w-full min-w-0 px-3 py-1 text-sm outline-none ring-1",
           "bg-neutral-100 text-neutral-800 ring-neutral-200 selection:bg-primary selection:text-white placeholder:text-neutral-400/70 dark:bg-neutral-900 dark:text-neutral-100 dark:ring-neutral-800",
@@ -50,6 +49,7 @@ const Input = (props: InputProps) => {
         )}
         data-slot="input"
         disabled={local.disabled}
+        ref={local.ref}
         type={local.type}
         {...others}
       />

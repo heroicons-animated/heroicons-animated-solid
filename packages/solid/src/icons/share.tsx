@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface ShareIconHandle {
@@ -45,7 +45,11 @@ const LINE_VARIANTS = {
 const ShareIcon = (rawProps: ShareIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -58,17 +62,25 @@ const ShareIcon = (rawProps: ShareIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -82,45 +94,45 @@ const ShareIcon = (rawProps: ShareIconProps) => {
       {...others}
     >
       <svg
-                fill="none"
-                height={local.size}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width={local.size}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <Motion.path
-                  animate={resolveValues(LINE_VARIANTS, variant())}
-                  transition={resolveTransition(LINE_VARIANTS, variant())}
-                  d="M7.21721 10.9071C7.39737 11.2307 7.5 11.6034 7.5 12C7.5 12.3966 7.39737 12.7693 7.21721 13.0929M7.21721 10.9071L16.7828 5.5929M7.21721 13.0929L16.7828 18.4071"
-                />
-                <Motion.circle
-                  animate={resolveValues(NODE_VARIANTS, variant(), 0)}
-                  transition={resolveTransition(NODE_VARIANTS, variant(), 0)}
-                  cx="5.25"
-                  cy="12"
-                  r="2.25"
-                />
-                <Motion.circle
-                  animate={resolveValues(NODE_VARIANTS, variant())}
-                  transition={resolveTransition(NODE_VARIANTS, variant())}
-                  custom={0.15}
-                  cx="18.75"
-                  cy="4.5"
-                  r="2.25"
-                />
-                <Motion.circle
-                  animate={resolveValues(NODE_VARIANTS, variant())}
-                  transition={resolveTransition(NODE_VARIANTS, variant())}
-                  custom={0.3}
-                  cx="18.75"
-                  cy="19.5"
-                  r="2.25"
-                />
-              </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(LINE_VARIANTS, variant())}
+          d="M7.21721 10.9071C7.39737 11.2307 7.5 11.6034 7.5 12C7.5 12.3966 7.39737 12.7693 7.21721 13.0929M7.21721 10.9071L16.7828 5.5929M7.21721 13.0929L16.7828 18.4071"
+          transition={resolveTransition(LINE_VARIANTS, variant())}
+        />
+        <Motion.circle
+          animate={resolveValues(NODE_VARIANTS, variant(), 0)}
+          cx="5.25"
+          cy="12"
+          r="2.25"
+          transition={resolveTransition(NODE_VARIANTS, variant(), 0)}
+        />
+        <Motion.circle
+          animate={resolveValues(NODE_VARIANTS, variant())}
+          custom={0.15}
+          cx="18.75"
+          cy="4.5"
+          r="2.25"
+          transition={resolveTransition(NODE_VARIANTS, variant())}
+        />
+        <Motion.circle
+          animate={resolveValues(NODE_VARIANTS, variant())}
+          custom={0.3}
+          cx="18.75"
+          cy="19.5"
+          r="2.25"
+          transition={resolveTransition(NODE_VARIANTS, variant())}
+        />
+      </svg>
     </div>
   );
 };

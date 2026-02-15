@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface PowerIconHandle {
@@ -39,7 +39,11 @@ const LINE_VARIANTS = {
 const PowerIcon = (rawProps: PowerIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -52,17 +56,25 @@ const PowerIcon = (rawProps: PowerIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -76,28 +88,28 @@ const PowerIcon = (rawProps: PowerIconProps) => {
       {...others}
     >
       <svg
-                fill="none"
-                height={local.size}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width={local.size}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <Motion.path
-                  animate={resolveValues(CIRCLE_VARIANTS, variant())}
-                  transition={resolveTransition(CIRCLE_VARIANTS, variant())}
-                  d="M5.636 5.636a9 9 0 1 0 12.728 0"
-                  style={{ "transform-origin": "center center" }}
-                />
-                <Motion.path
-                  animate={resolveValues(LINE_VARIANTS, variant())}
-                  transition={resolveTransition(LINE_VARIANTS, variant())}
-                  d="M12 3v9"
-                />
-              </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(CIRCLE_VARIANTS, variant())}
+          d="M5.636 5.636a9 9 0 1 0 12.728 0"
+          style={{ "transform-origin": "center center" }}
+          transition={resolveTransition(CIRCLE_VARIANTS, variant())}
+        />
+        <Motion.path
+          animate={resolveValues(LINE_VARIANTS, variant())}
+          d="M12 3v9"
+          transition={resolveTransition(LINE_VARIANTS, variant())}
+        />
+      </svg>
     </div>
   );
 };

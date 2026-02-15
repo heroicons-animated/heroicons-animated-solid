@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface ChevronDoubleRightIconHandle {
@@ -9,7 +9,8 @@ export interface ChevronDoubleRightIconHandle {
   stopAnimation: () => void;
 }
 
-interface ChevronDoubleRightIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+interface ChevronDoubleRightIconProps
+  extends JSX.HTMLAttributes<HTMLDivElement> {
   size?: number;
   ref?: (handle: ChevronDoubleRightIconHandle) => void;
 }
@@ -27,7 +28,11 @@ const VARIANTS = {
 const ChevronDoubleRightIcon = (rawProps: ChevronDoubleRightIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -40,17 +45,25 @@ const ChevronDoubleRightIcon = (rawProps: ChevronDoubleRightIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -64,22 +77,22 @@ const ChevronDoubleRightIcon = (rawProps: ChevronDoubleRightIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Motion.path
-                animate={resolveValues(VARIANTS, variant())}
-                transition={resolveTransition(VARIANTS, variant())}
-                d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-              />
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(VARIANTS, variant())}
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+          transition={resolveTransition(VARIANTS, variant())}
+        />
+      </svg>
     </div>
   );
 };

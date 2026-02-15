@@ -1,25 +1,23 @@
-import { type JSX, children as resolveChildren, createEffect, createSignal, onCleanup } from "solid-js";
+import { createEffect, createSignal, type JSX, onCleanup } from "solid-js";
 import { cn } from "~/lib/utils";
 
-type TextLoopProps = {
-  children: JSX.Element;
+interface TextLoopProps<T> {
+  items: T[];
+  renderItem: (item: T) => JSX.Element;
   class?: string;
   interval?: number;
   onIndexChange?: (index: number) => void;
-};
+}
 
-export function TextLoop(props: TextLoopProps) {
+export function TextLoop<T>(props: TextLoopProps<T>) {
   const [currentIndex, setCurrentIndex] = createSignal(0);
-  const resolved = resolveChildren(() => props.children);
-
-  const items = () => {
-    const c = resolved();
-    return Array.isArray(c) ? c : [c];
-  };
 
   createEffect(() => {
     const intervalMs = (props.interval ?? 2) * 1000;
-    const len = items().length;
+    const len = props.items.length;
+    if (len === 0) {
+      return;
+    }
 
     const timer = setInterval(() => {
       setCurrentIndex((current) => {
@@ -37,7 +35,9 @@ export function TextLoop(props: TextLoopProps) {
       aria-hidden="true"
       class={cn("relative inline-block whitespace-nowrap", props.class)}
     >
-      {items()[currentIndex()]}
+      {props.items.length > 0
+        ? props.renderItem(props.items[currentIndex()])
+        : null}
     </div>
   );
 }

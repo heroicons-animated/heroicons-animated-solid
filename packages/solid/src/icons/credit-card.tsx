@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface CreditCardIconHandle {
@@ -21,7 +21,11 @@ const LINE_VARIANTS = {
 const CreditCardIcon = (rawProps: CreditCardIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -34,17 +38,25 @@ const CreditCardIcon = (rawProps: CreditCardIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("visible");
     }
@@ -58,31 +70,31 @@ const CreditCardIcon = (rawProps: CreditCardIconProps) => {
       {...others}
     >
       <svg
-                fill="none"
-                height={local.size}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width={local.size}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M2.25 8.25h19.5M2.25 9h19.5M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-                {[
-                  { d: "M5.25 14.25h6", index: 0 },
-                  { d: "M5.25 16.5h3", index: 1 },
-                ].map((line) => (
-                  <Motion.path
-                    animate={resolveValues(LINE_VARIANTS, variant())}
-                    transition={resolveTransition(LINE_VARIANTS, variant())}
-                    custom={line.index}
-                    d={line.d}
-                    initial="visible"
-                    key={line.index}
-                  />
-                ))}
-              </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M2.25 8.25h19.5M2.25 9h19.5M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+        {[
+          { d: "M5.25 14.25h6", index: 0 },
+          { d: "M5.25 16.5h3", index: 1 },
+        ].map((line) => (
+          <Motion.path
+            animate={resolveValues(LINE_VARIANTS, variant())}
+            custom={line.index}
+            d={line.d}
+            initial="visible"
+            key={line.index}
+            transition={resolveTransition(LINE_VARIANTS, variant())}
+          />
+        ))}
+      </svg>
     </div>
   );
 };

@@ -1,18 +1,19 @@
-import { type JSX, Show, createEffect, createSignal } from "solid-js";
+import { createEffect, createSignal, type JSX } from "solid-js";
 
 const DEFAULT_LOADING_DELAY = 150;
 
 type IconStatus = "idle" | "loading" | "done" | "error";
 
-type IconStateProps = {
+interface IconStateProps {
   children: JSX.Element;
   status?: IconStatus;
   loadingDelay?: number;
-};
+}
 
 /** Inline SVG icons for status states */
 const SpinnerIcon = () => (
   <svg
+    aria-hidden="true"
     class="animate-spin"
     fill="none"
     height="16"
@@ -30,6 +31,7 @@ const SpinnerIcon = () => (
 
 const CheckIcon = () => (
   <svg
+    aria-hidden="true"
     class="text-green-600"
     fill="none"
     height="16"
@@ -47,6 +49,7 @@ const CheckIcon = () => (
 
 const XIcon = () => (
   <svg
+    aria-hidden="true"
     class="text-red-500"
     fill="none"
     height="16"

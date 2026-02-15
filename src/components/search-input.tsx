@@ -1,17 +1,18 @@
-import { onMount, onCleanup } from "solid-js";
+import { onCleanup, onMount } from "solid-js";
 import { Input } from "./ui/input";
 import { Kbd } from "./ui/kbd";
 
-type SearchInputProps = {
+interface SearchInputProps {
   searchValue: string;
   setSearchValue: (value: string) => void;
   resultCount?: number;
   totalCount?: number;
-};
+}
 
 /** Inline magnifying glass SVG */
 const MagnifyingGlassIcon = () => (
   <svg
+    aria-hidden="true"
     class="size-5 text-neutral-400"
     fill="none"
     stroke="currentColor"
@@ -29,6 +30,9 @@ const MagnifyingGlassIcon = () => (
 
 const SearchInput = (props: SearchInputProps) => {
   let inputRef: HTMLInputElement | undefined;
+  const setInputRef = (el: HTMLInputElement) => {
+    inputRef = el;
+  };
 
   onMount(() => {
     const handler = (e: KeyboardEvent) => {
@@ -64,7 +68,7 @@ const SearchInput = (props: SearchInputProps) => {
           leadingIcon={<MagnifyingGlassIcon />}
           onInput={(e) => props.setSearchValue(e.currentTarget.value)}
           placeholder="Search icons..."
-          ref={inputRef}
+          ref={setInputRef}
           role="search"
           spellcheck={false}
           trailingIcon={

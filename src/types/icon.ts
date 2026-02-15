@@ -10,7 +10,8 @@ export interface AnimatedIconHandle {
   stopAnimation: () => void;
 }
 
-export interface AnimatedIconProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface AnimatedIconProps
+  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, "ref"> {
   size?: number;
   ref?: (handle: AnimatedIconHandle) => void;
 }

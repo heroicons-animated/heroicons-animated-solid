@@ -33,8 +33,11 @@ function AvatarImage(props: AvatarImageProps) {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <img
+      alt=""
       class={cn("size-full object-cover", local.class)}
       data-slot="avatar-image"
+      height={40}
+      width={40}
       {...others}
     />
   );

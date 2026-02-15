@@ -1,43 +1,51 @@
-import Fuse from "fuse.js";
 import { A, useSearchParams } from "@solidjs/router";
-import { createMemo, For, Show } from "solid-js";
+import Fuse from "fuse.js";
+import { type Component, createMemo, For, Show } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import { Card, CardActions, CardTitle } from "~/components/card";
 import { ICON_MAP } from "~/lib/icons";
-import type { AnimatedIconHandle, IconManifestItem } from "~/types/icon";
+import type {
+  AnimatedIconHandle,
+  AnimatedIconProps,
+  IconManifestItem,
+} from "~/types/icon";
 import { SearchInput } from "./search-input";
 
-type Props = {
+interface Props {
   icons: IconManifestItem[];
-};
+}
 
 const IconItem = (props: {
   icon: IconManifestItem;
-  Icon: any;
+  Icon?: Component<AnimatedIconProps>;
 }) => {
   let animationRef: AnimatedIconHandle | undefined;
 
   return (
     <Show when={props.Icon}>
-      <A
-        class="rounded-[20px] focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2"
-        href={`/icons/${props.icon.name}`}
-      >
-        <Card
-          animationRef={animationRef}
-          class="transition-shadow [contain-intrinsic-size:auto_180px] [content-visibility:auto] hover:shadow-sm"
-          onMouseEnter={() => animationRef?.startAnimation()}
-          onMouseLeave={() => animationRef?.stopAnimation()}
+      {(Icon) => (
+        <A
+          class="rounded-[20px] focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2"
+          href={`/icons/${props.icon.name}`}
         >
-          <props.Icon
-            class="flex items-center justify-center [&>svg]:size-10 [&>svg]:text-neutral-800 dark:[&>svg]:text-neutral-100"
-            ref={(h: AnimatedIconHandle) => {
-              animationRef = h;
-            }}
-          />
-          <CardTitle>{props.icon.name}</CardTitle>
-          <CardActions {...props.icon} />
-        </Card>
-      </A>
+          <Card
+            animationRef={animationRef}
+            class="transition-shadow [contain-intrinsic-size:auto_180px] [content-visibility:auto] hover:shadow-sm"
+            onMouseEnter={() => animationRef?.startAnimation()}
+            onMouseLeave={() => animationRef?.stopAnimation()}
+          >
+            <Dynamic<typeof Icon extends () => infer C ? C : never>
+              class="flex items-center justify-center [&>svg]:size-10 [&>svg]:text-neutral-800 dark:[&>svg]:text-neutral-100"
+              component={Icon()}
+              ref={(h: AnimatedIconHandle) => {
+                animationRef = h;
+              }}
+            />
+            <CardTitle>{props.icon.name}</CardTitle>
+            <CardActions {...props.icon} />
+          </Card>
+        </A>
+      )}
     </Show>
   );
 };
@@ -69,7 +77,9 @@ const IconsList = (props: Props) => {
 
   const filteredIcons = createMemo(() => {
     const q = searchValue().trim();
-    if (!q) return props.icons;
+    if (!q) {
+      return props.icons;
+    }
     return fuse()
       .search(q)
       .map((result) => result.item);
@@ -90,12 +100,7 @@ const IconsList = (props: Props) => {
           </div>
         </Show>
         <For each={filteredIcons()}>
-          {(icon) => (
-            <IconItem
-              Icon={ICON_MAP.get(icon.name) ?? undefined}
-              icon={icon}
-            />
-          )}
+          {(icon) => <IconItem Icon={ICON_MAP.get(icon.name)} icon={icon} />}
         </For>
       </div>
     </>

@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface BuildingOfficeIconHandle {
@@ -39,7 +39,11 @@ const FLOOR_LINES = [
 const BuildingOfficeIcon = (rawProps: BuildingOfficeIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -52,17 +56,25 @@ const BuildingOfficeIcon = (rawProps: BuildingOfficeIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -76,29 +88,29 @@ const BuildingOfficeIcon = (rawProps: BuildingOfficeIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-              {FLOOR_LINES.map((floorLine, index) => {
-                return (
-                  <Motion.path
-                    animate={resolveValues(FLOOR_VARIANTS, variant())}
-                    transition={resolveTransition(FLOOR_VARIANTS, variant())}
-                    custom={floorLine.index}
-                    d={floorLine.path}
-                    key={`${floorLine.y}-${index}`}
-                  />
-                );
-              })}
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+        {FLOOR_LINES.map((floorLine, index) => {
+          return (
+            <Motion.path
+              animate={resolveValues(FLOOR_VARIANTS, variant())}
+              custom={floorLine.index}
+              d={floorLine.path}
+              key={`${floorLine.y}-${index}`}
+              transition={resolveTransition(FLOOR_VARIANTS, variant())}
+            />
+          );
+        })}
+      </svg>
     </div>
   );
 };

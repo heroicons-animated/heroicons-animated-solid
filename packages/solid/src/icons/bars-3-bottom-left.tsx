@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface Bars3BottomLeftIconHandle {
@@ -54,7 +54,11 @@ const BOTTOM_BAR_VARIANTS = {
 const Bars3BottomLeftIcon = (rawProps: Bars3BottomLeftIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -67,17 +71,25 @@ const Bars3BottomLeftIcon = (rawProps: Bars3BottomLeftIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -91,32 +103,32 @@ const Bars3BottomLeftIcon = (rawProps: Bars3BottomLeftIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Motion.path
-                d="M3.75 6.75h16.5"
-                animate={resolveValues(CREATE_SLIDE_VARIANTS(0), variant())}
-                transition={resolveTransition(CREATE_SLIDE_VARIANTS(0), variant())}
-              />
-              <Motion.path
-                d="M3.75 12h16.5"
-                animate={resolveValues(CREATE_SLIDE_VARIANTS(0.05), variant())}
-                transition={resolveTransition(CREATE_SLIDE_VARIANTS(0.05), variant())}
-              />
-              <Motion.path
-                animate={resolveValues(BOTTOM_BAR_VARIANTS, variant())}
-                transition={resolveTransition(BOTTOM_BAR_VARIANTS, variant())}
-                d="M3.75 17.25H12"
-              />
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Motion.path
+          animate={resolveValues(CREATE_SLIDE_VARIANTS(0), variant())}
+          d="M3.75 6.75h16.5"
+          transition={resolveTransition(CREATE_SLIDE_VARIANTS(0), variant())}
+        />
+        <Motion.path
+          animate={resolveValues(CREATE_SLIDE_VARIANTS(0.05), variant())}
+          d="M3.75 12h16.5"
+          transition={resolveTransition(CREATE_SLIDE_VARIANTS(0.05), variant())}
+        />
+        <Motion.path
+          animate={resolveValues(BOTTOM_BAR_VARIANTS, variant())}
+          d="M3.75 17.25H12"
+          transition={resolveTransition(BOTTOM_BAR_VARIANTS, variant())}
+        />
+      </svg>
     </div>
   );
 };

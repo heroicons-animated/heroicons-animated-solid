@@ -5,7 +5,9 @@ const useTouchDevice = (): (() => boolean) => {
   const [isTouchDevice, setIsTouchDevice] = createSignal(false);
 
   onMount(() => {
-    if (isServer) return;
+    if (isServer) {
+      return;
+    }
 
     const hasTouchScreen =
       "ontouchstart" in window ||

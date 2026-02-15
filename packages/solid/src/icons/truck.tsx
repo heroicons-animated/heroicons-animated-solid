@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface TruckIconHandle {
@@ -49,7 +49,11 @@ const SPEED_LINE_VARIANTS = {
 const TruckIcon = (rawProps: TruckIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -62,17 +66,25 @@ const TruckIcon = (rawProps: TruckIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -86,42 +98,42 @@ const TruckIcon = (rawProps: TruckIconProps) => {
       {...others}
     >
       <svg
-                className="overflow-visible"
-                fill="none"
-                height={local.size}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width={local.size}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {[
-                  { y: 8, width: 5, x: 0 },
-                  { y: 11, width: 7, x: -1 },
-                  { y: 14, width: 4, x: 0 },
-                ].map((line, i) => (
-                  <Motion.line
-                    animate={resolveValues(SPEED_LINE_VARIANTS, variant())}
-                    transition={resolveTransition(SPEED_LINE_VARIANTS, variant())}
-                    custom={i}
-                    key={`speed-${i}`}
-                    stroke-linecap="round"
-                    stroke-width="1.5"
-                    x1={line.x}
-                    x2={line.x + line.width}
-                    y1={line.y}
-                    y2={line.y}
-                  />
-                ))}
+        class="overflow-visible"
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {[
+          { y: 8, width: 5, x: 0 },
+          { y: 11, width: 7, x: -1 },
+          { y: 14, width: 4, x: 0 },
+        ].map((line, i) => (
+          <Motion.line
+            animate={resolveValues(SPEED_LINE_VARIANTS, variant())}
+            custom={i}
+            key={`speed-${i}`}
+            stroke-linecap="round"
+            stroke-width="1.5"
+            transition={resolveTransition(SPEED_LINE_VARIANTS, variant())}
+            x1={line.x}
+            x2={line.x + line.width}
+            y1={line.y}
+            y2={line.y}
+          />
+        ))}
 
-                <Motion.path
-                  animate={resolveValues(TRUCK_VARIANTS, variant())}
-                  transition={resolveTransition(TRUCK_VARIANTS, variant())}
-                  d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-                />
-              </svg>
+        <Motion.path
+          animate={resolveValues(TRUCK_VARIANTS, variant())}
+          d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+          transition={resolveTransition(TRUCK_VARIANTS, variant())}
+        />
+      </svg>
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import { Motion } from "solid-motionone";
 import type { JSX } from "solid-js";
 import { createSignal, mergeProps, splitProps } from "solid-js";
-import { resolveValues, resolveTransition } from "@/lib/motion-compat";
+import { Motion } from "solid-motionone";
+import { resolveTransition, resolveValues } from "@/lib/motion-compat";
 import { cn } from "@/lib/utils";
 
 export interface BuildingLibraryIconHandle {
@@ -51,7 +51,11 @@ const PILLAR_VARIANTS = {
 const BuildingLibraryIcon = (rawProps: BuildingLibraryIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
-    "onMouseEnter", "onMouseLeave", "class", "size", "ref",
+    "onMouseEnter",
+    "onMouseLeave",
+    "class",
+    "size",
+    "ref",
   ]);
   const [variant, setVariant] = createSignal("normal");
   let isControlled = false;
@@ -64,17 +68,25 @@ const BuildingLibraryIcon = (rawProps: BuildingLibraryIconProps) => {
     });
   }
 
-  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseEnter === "function") local.onMouseEnter(e);
+      if (typeof local.onMouseEnter === "function") {
+        local.onMouseEnter(e);
+      }
     } else {
       setVariant("animate");
     }
   };
 
-  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (e) => {
+  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (
+    e
+  ) => {
     if (isControlled) {
-      if (typeof local.onMouseLeave === "function") local.onMouseLeave(e);
+      if (typeof local.onMouseLeave === "function") {
+        local.onMouseLeave(e);
+      }
     } else {
       setVariant("normal");
     }
@@ -88,32 +100,32 @@ const BuildingLibraryIcon = (rawProps: BuildingLibraryIconProps) => {
       {...others}
     >
       <svg
-              fill="none"
-              height={local.size}
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              width={local.size}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18" />
-              <Motion.path
-                animate={resolveValues(DOT_VARIANTS, variant())}
-                transition={resolveTransition(DOT_VARIANTS, variant())}
-                d="M12 6.75h.008v.008H12V6.75Z"
-              />
-              {PILLARS.map((pillar) => (
-                <Motion.path
-                  animate={resolveValues(PILLAR_VARIANTS, variant())}
-                  transition={resolveTransition(PILLAR_VARIANTS, variant())}
-                  custom={pillar.index}
-                  d={pillar.d}
-                  key={pillar.index}
-                />
-              ))}
-            </svg>
+        fill="none"
+        height={local.size}
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        width={local.size}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18" />
+        <Motion.path
+          animate={resolveValues(DOT_VARIANTS, variant())}
+          d="M12 6.75h.008v.008H12V6.75Z"
+          transition={resolveTransition(DOT_VARIANTS, variant())}
+        />
+        {PILLARS.map((pillar) => (
+          <Motion.path
+            animate={resolveValues(PILLAR_VARIANTS, variant())}
+            custom={pillar.index}
+            d={pillar.d}
+            key={pillar.index}
+            transition={resolveTransition(PILLAR_VARIANTS, variant())}
+          />
+        ))}
+      </svg>
     </div>
   );
 };

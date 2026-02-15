@@ -1,17 +1,17 @@
 import {
-  type ParentComponent,
   createContext,
   createSignal,
+  type ParentComponent,
   useContext,
 } from "solid-js";
 import { PACKAGE_MANAGER } from "~/constants";
 
 type PackageManager = (typeof PACKAGE_MANAGER)[keyof typeof PACKAGE_MANAGER];
 
-type PackageNameContextType = {
+interface PackageNameContextType {
   packageName: () => PackageManager;
   setPackageName: (packageName: PackageManager) => void;
-};
+}
 
 const PackageNameContext = createContext<PackageNameContextType>();
 

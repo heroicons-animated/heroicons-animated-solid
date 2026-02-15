@@ -1,6 +1,5 @@
-import { createEffect, createSignal, onCleanup, splitProps } from "solid-js";
 import type { JSX } from "solid-js";
-import { Show } from "solid-js";
+import { createSignal, onCleanup, Show, splitProps } from "solid-js";
 import type { IconStatus } from "~/components/ui/icon-state";
 import { IconState } from "~/components/ui/icon-state";
 import {
@@ -10,7 +9,7 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { useTouchDevice } from "~/hooks/use-touch-device";
-import { getCLICommand, getFileExtension } from "~/lib/cli";
+import { getCLICommand } from "~/lib/cli";
 import { cn } from "~/lib/utils";
 import { usePackageNameContext } from "~/providers/package-name";
 import type { AnimatedIconHandle, IconManifestItem } from "~/types/icon";
@@ -18,6 +17,7 @@ import type { AnimatedIconHandle, IconManifestItem } from "~/types/icon";
 /** Inline clipboard icon */
 const ClipboardDocumentIcon = () => (
   <svg
+    aria-hidden="true"
     class="size-4 text-neutral-800 dark:text-neutral-100"
     fill="none"
     stroke="currentColor"
@@ -36,6 +36,7 @@ const ClipboardDocumentIcon = () => (
 /** Inline command line icon */
 const CommandLineIcon = () => (
   <svg
+    aria-hidden="true"
     class="size-4 text-neutral-800 dark:text-neutral-100"
     fill="none"
     stroke="currentColor"
@@ -53,14 +54,38 @@ const CommandLineIcon = () => (
 
 /** Inline play / pause icons */
 const PlayIcon = () => (
-  <svg class="size-4 text-neutral-800 dark:text-neutral-100" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" stroke-linecap="round" stroke-linejoin="round" />
+  <svg
+    aria-hidden="true"
+    class="size-4 text-neutral-800 dark:text-neutral-100"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
   </svg>
 );
 
 const PauseIcon = () => (
-  <svg class="size-4 text-neutral-800 dark:text-neutral-100" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15.75 5.25v13.5m-7.5-13.5v13.5" stroke-linecap="round" stroke-linejoin="round" />
+  <svg
+    aria-hidden="true"
+    class="size-4 text-neutral-800 dark:text-neutral-100"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15.75 5.25v13.5m-7.5-13.5v13.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
   </svg>
 );
 
@@ -83,7 +108,9 @@ const Card = (props: CardProps) => {
   let timeoutRef: ReturnType<typeof setTimeout> | null = null;
 
   onCleanup(() => {
-    if (timeoutRef) clearTimeout(timeoutRef);
+    if (timeoutRef) {
+      clearTimeout(timeoutRef);
+    }
   });
 
   const handlePlayClick = (e: MouseEvent) => {
@@ -114,8 +141,8 @@ const Card = (props: CardProps) => {
         local.class
       )}
       {...others}
-      onMouseEnter={isTouchDevice() ? undefined : local.onMouseEnter as any}
-      onMouseLeave={isTouchDevice() ? undefined : local.onMouseLeave as any}
+      onMouseEnter={isTouchDevice() ? undefined : local.onMouseEnter}
+      onMouseLeave={isTouchDevice() ? undefined : local.onMouseLeave}
     >
       <Show when={isTouchDevice()}>
         <button
@@ -125,7 +152,7 @@ const Card = (props: CardProps) => {
           onClick={handlePlayClick}
           type="button"
         >
-          <Show when={isAnimating()} fallback={<PlayIcon />}>
+          <Show fallback={<PlayIcon />} when={isAnimating()}>
             <PauseIcon />
           </Show>
         </button>
@@ -153,7 +180,9 @@ const CopyCLIAction = (props: Pick<IconManifestItem, "name">) => {
   const handleCopy = async (e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (state() !== "idle") return;
+    if (state() !== "idle") {
+      return;
+    }
 
     try {
       await navigator.clipboard.writeText(
@@ -196,7 +225,9 @@ const CopyCodeAction = (props: Pick<IconManifestItem, "name">) => {
   const handleCopy = async (e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (state() !== "idle") return;
+    if (state() !== "idle") {
+      return;
+    }
 
     try {
       setState("loading");

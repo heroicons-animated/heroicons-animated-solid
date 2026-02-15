@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import { resolve } from "node:path";
-import solid from "vite-plugin-solid";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import solid from "vite-plugin-solid";
 
 const srcDir = resolve(import.meta.dirname, "src");
 const iconsDir = resolve(srcDir, "icons");

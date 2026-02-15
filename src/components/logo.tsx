@@ -1,9 +1,9 @@
 import { cn } from "~/lib/utils";
 
-type LogoProps = {
+interface LogoProps {
   class?: string;
   type?: "default";
-};
+}
 
 export const Logo = (props: LogoProps) => {
   return (
