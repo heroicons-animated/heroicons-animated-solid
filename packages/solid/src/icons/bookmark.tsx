@@ -16,10 +16,12 @@ interface BookmarkIconProps
 }
 
 const BOOKMARK_VARIANTS = {
-  normal: { scaleY: 1, scaleX: 1 },
+  normal: { scaleY: 1, scaleX: 1, originX: 0.5, originY: 0.5 },
   animate: {
     scaleY: [1, 1.3, 0.9, 1.05, 1],
     scaleX: [1, 0.9, 1.1, 0.95, 1],
+    originX: 0.5,
+    originY: 0.5,
     transition: {
       duration: 0.6,
       ease: "easeOut",

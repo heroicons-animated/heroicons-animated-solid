@@ -16,10 +16,12 @@ interface ArrowUturnUpIconProps
 }
 
 const STRETCH_VARIANTS = {
-  normal: { scaleY: 1, y: 0, opacity: 1 },
+  normal: { scaleY: 1, y: 0, opacity: 1, originX: 0.5, originY: 0.5 },
   animate: {
     scaleY: [1, 1.15, 1],
     y: [0, -1.5, 0],
+    originX: 0.5,
+    originY: 0.5,
     transition: {
       duration: 0.45,
       ease: "easeInOut",

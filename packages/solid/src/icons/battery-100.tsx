@@ -17,14 +17,18 @@ interface Battery100IconProps
 
 const CLIP_VARIANTS = {
   normal: {
-    width: 0,
+    scaleX: 0,
+    originX: 0,
+    originY: 0.5,
     transition: {
       duration: 0.5,
       ease: "easeOut",
     },
   },
   animate: {
-    width: 13.5,
+    scaleX: 1,
+    originX: 0,
+    originY: 0.5,
     transition: {
       duration: 0.5,
       ease: "easeOut",
@@ -100,6 +104,7 @@ const Battery100Icon = (rawProps: Battery100IconProps) => {
               animate={resolveValues(CLIP_VARIANTS, variant())}
               height="4.5"
               transition={resolveTransition(CLIP_VARIANTS, variant())}
+              width="13.5"
               x="4.5"
               y="10.5"
             />

@@ -105,7 +105,10 @@ const Bars3Icon = (rawProps: Bars3IconProps) => {
           <Motion.path
             animate={resolveValues(CREATE_BAR_VARIANTS(bar.delay), variant())}
             d={bar.d}
-            style={{ "transform-origin": "center" }}
+            style={{
+              "transform-box": "fill-box",
+              "transform-origin": "center",
+            }}
             transition={resolveTransition(
               CREATE_BAR_VARIANTS(bar.delay),
               variant()

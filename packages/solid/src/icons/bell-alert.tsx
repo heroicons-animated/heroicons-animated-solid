@@ -16,8 +16,12 @@ interface BellAlertIconProps
 }
 
 const SVG_VARIANTS = {
-  normal: { rotate: 0 },
-  animate: { rotate: [0, -10, 10, -10, 0] },
+  normal: { rotate: 0, originX: 0.5, originY: 0.5 },
+  animate: {
+    rotate: [0, -10, 10, -10, 0],
+    originX: 0.5,
+    originY: 0.5,
+  },
 };
 const BellAlertIcon = (rawProps: BellAlertIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);

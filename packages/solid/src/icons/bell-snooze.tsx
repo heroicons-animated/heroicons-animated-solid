@@ -16,10 +16,12 @@ interface BellSnoozeIconProps
 }
 
 const BELL_VARIANTS = {
-  normal: { rotate: 0, scale: 1 },
+  normal: { rotate: 0, scale: 1, originX: 0.5, originY: 0.5 },
   animate: {
     rotate: [0, -8, -8, 0],
     scale: [1, 0.97, 0.97, 1],
+    originX: 0.5,
+    originY: 0.5,
     transition: {
       duration: 0.8,
       ease: "easeInOut",

@@ -22,6 +22,46 @@ const DEFAULT_TRANSITION = {
   mass: 0.4,
 };
 
+const LEFT_TOP_LINE_VARIANTS = {
+  normal: { d: "M6 3.75V13.5" },
+  animate: { d: "M6 3.75V10.5" },
+};
+
+const LEFT_BOTTOM_LINE_VARIANTS = {
+  normal: { d: "M6 16.5V20.25" },
+  animate: { d: "M6 13.5V20.25" },
+};
+
+const MIDDLE_TOP_LINE_VARIANTS = {
+  normal: { d: "M12 3.75V7.5" },
+  animate: { d: "M12 3.75V10.5" },
+};
+
+const MIDDLE_BOTTOM_LINE_VARIANTS = {
+  normal: { d: "M12 10.5V20.25" },
+  animate: { d: "M12 13.5V20.25" },
+};
+
+const RIGHT_TOP_LINE_VARIANTS = {
+  normal: { d: "M18 3.75V13.5" },
+  animate: { d: "M18 3.75V10.5" },
+};
+
+const RIGHT_BOTTOM_LINE_VARIANTS = {
+  normal: { d: "M18 16.5V20.25" },
+  animate: { d: "M18 13.5V20.25" },
+};
+
+const UP_KNOB_VARIANTS = {
+  normal: { y: 0 },
+  animate: { y: -3 },
+};
+
+const DOWN_KNOB_VARIANTS = {
+  normal: { y: 0 },
+  animate: { y: 3 },
+};
+
 const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
   const props = mergeProps({ size: 28 }, rawProps);
   const [local, others] = splitProps(props, [
@@ -84,152 +124,101 @@ const AdjustmentsVerticalIcon = (rawProps: AdjustmentsVerticalIconProps) => {
         width={local.size}
         xmlns="http://www.w3.org/2000/svg"
       >
-        <Motion.line
-          animate={resolveValues(
-            { normal: { y2: 13.5 }, animate: { y2: 10.5 } },
-            variant()
-          )}
+        <Motion.path
+          animate={resolveValues(LEFT_TOP_LINE_VARIANTS, variant())}
+          d="M6 3.75V13.5"
           transition={resolveTransition(
-            { normal: { y2: 13.5 }, animate: { y2: 10.5 } },
-            variant(),
-            undefined,
-            DEFAULT_TRANSITION
-          )}
-          x1="6"
-          x2="6"
-          y1="3.75"
-          y2="13.5"
-        />
-        <Motion.line
-          animate={resolveValues(
-            { normal: { y1: 16.5 }, animate: { y1: 13.5 } },
-            variant()
-          )}
-          transition={resolveTransition(
-            { normal: { y1: 16.5 }, animate: { y1: 13.5 } },
-            variant(),
-            undefined,
-            DEFAULT_TRANSITION
-          )}
-          x1="6"
-          x2="6"
-          y1="16.5"
-          y2="20.25"
-        />
-        <Motion.circle
-          animate={resolveValues(
-            { normal: { cy: 15 }, animate: { cy: 12 } },
-            variant()
-          )}
-          cx="6"
-          cy="15"
-          fill="none"
-          r="1.5"
-          transition={resolveTransition(
-            { normal: { cy: 15 }, animate: { cy: 12 } },
+            LEFT_TOP_LINE_VARIANTS,
             variant(),
             undefined,
             DEFAULT_TRANSITION
           )}
         />
+        <Motion.path
+          animate={resolveValues(LEFT_BOTTOM_LINE_VARIANTS, variant())}
+          d="M6 16.5V20.25"
+          transition={resolveTransition(
+            LEFT_BOTTOM_LINE_VARIANTS,
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
+          )}
+        />
+        <Motion.g
+          animate={resolveValues(UP_KNOB_VARIANTS, variant())}
+          transition={resolveTransition(
+            UP_KNOB_VARIANTS,
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
+          )}
+        >
+          <circle cx="6" cy="15" fill="none" r="1.5" />
+        </Motion.g>
 
-        <Motion.line
-          animate={resolveValues(
-            { normal: { y2: 7.5 }, animate: { y2: 10.5 } },
-            variant()
-          )}
+        <Motion.path
+          animate={resolveValues(MIDDLE_TOP_LINE_VARIANTS, variant())}
+          d="M12 3.75V7.5"
           transition={resolveTransition(
-            { normal: { y2: 7.5 }, animate: { y2: 10.5 } },
-            variant(),
-            undefined,
-            DEFAULT_TRANSITION
-          )}
-          x1="12"
-          x2="12"
-          y1="3.75"
-          y2="7.5"
-        />
-        <Motion.line
-          animate={resolveValues(
-            { normal: { y1: 10.5 }, animate: { y1: 13.5 } },
-            variant()
-          )}
-          transition={resolveTransition(
-            { normal: { y1: 10.5 }, animate: { y1: 13.5 } },
-            variant(),
-            undefined,
-            DEFAULT_TRANSITION
-          )}
-          x1="12"
-          x2="12"
-          y1="10.5"
-          y2="20.25"
-        />
-        <Motion.circle
-          animate={resolveValues(
-            { normal: { cy: 9 }, animate: { cy: 12 } },
-            variant()
-          )}
-          cx="12"
-          cy="9"
-          fill="none"
-          r="1.5"
-          transition={resolveTransition(
-            { normal: { cy: 9 }, animate: { cy: 12 } },
+            MIDDLE_TOP_LINE_VARIANTS,
             variant(),
             undefined,
             DEFAULT_TRANSITION
           )}
         />
+        <Motion.path
+          animate={resolveValues(MIDDLE_BOTTOM_LINE_VARIANTS, variant())}
+          d="M12 10.5V20.25"
+          transition={resolveTransition(
+            MIDDLE_BOTTOM_LINE_VARIANTS,
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
+          )}
+        />
+        <Motion.g
+          animate={resolveValues(DOWN_KNOB_VARIANTS, variant())}
+          transition={resolveTransition(
+            DOWN_KNOB_VARIANTS,
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
+          )}
+        >
+          <circle cx="12" cy="9" fill="none" r="1.5" />
+        </Motion.g>
 
-        <Motion.line
-          animate={resolveValues(
-            { normal: { y2: 13.5 }, animate: { y2: 10.5 } },
-            variant()
-          )}
+        <Motion.path
+          animate={resolveValues(RIGHT_TOP_LINE_VARIANTS, variant())}
+          d="M18 3.75V13.5"
           transition={resolveTransition(
-            { normal: { y2: 13.5 }, animate: { y2: 10.5 } },
-            variant(),
-            undefined,
-            DEFAULT_TRANSITION
-          )}
-          x1="18"
-          x2="18"
-          y1="3.75"
-          y2="13.5"
-        />
-        <Motion.line
-          animate={resolveValues(
-            { normal: { y1: 16.5 }, animate: { y1: 13.5 } },
-            variant()
-          )}
-          transition={resolveTransition(
-            { normal: { y1: 16.5 }, animate: { y1: 13.5 } },
-            variant(),
-            undefined,
-            DEFAULT_TRANSITION
-          )}
-          x1="18"
-          x2="18"
-          y1="16.5"
-          y2="20.25"
-        />
-        <Motion.circle
-          animate={resolveValues(
-            { normal: { cy: 15 }, animate: { cy: 12 } },
-            variant()
-          )}
-          cx="18"
-          cy="15"
-          fill="none"
-          r="1.5"
-          transition={resolveTransition(
-            { normal: { cy: 15 }, animate: { cy: 12 } },
+            RIGHT_TOP_LINE_VARIANTS,
             variant(),
             undefined,
             DEFAULT_TRANSITION
           )}
         />
+        <Motion.path
+          animate={resolveValues(RIGHT_BOTTOM_LINE_VARIANTS, variant())}
+          d="M18 16.5V20.25"
+          transition={resolveTransition(
+            RIGHT_BOTTOM_LINE_VARIANTS,
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
+          )}
+        />
+        <Motion.g
+          animate={resolveValues(UP_KNOB_VARIANTS, variant())}
+          transition={resolveTransition(
+            UP_KNOB_VARIANTS,
+            variant(),
+            undefined,
+            DEFAULT_TRANSITION
+          )}
+        >
+          <circle cx="18" cy="15" fill="none" r="1.5" />
+        </Motion.g>
       </svg>
     </div>
   );
