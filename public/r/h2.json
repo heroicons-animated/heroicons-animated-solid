@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "h2",
+  "title": "h2",
+  "description": "Animated h2 icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "h2.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface H2IconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface H2IconProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: H2IconHandle) => void;\n}\n\nconst VARIANTS = {\n  normal: {\n    scale: 1,\n    transition: {\n      type: \"spring\",\n      stiffness: 500,\n      damping: 25,\n    },\n  },\n  animate: {\n    scale: 0.9,\n    transition: {\n      type: \"spring\",\n      stiffness: 400,\n      damping: 15,\n    },\n  },\n};\nconst H2Icon = (rawProps: H2IconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <svg\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path d=\"M2.243 4.492v7.5m0 0v7.502m0-7.501h10.5m0-7.5v7.5m0 0v7.501\" />\n        <Motion.path\n          animate={resolveValues(VARIANTS, variant())}\n          d=\"M21.75 19.5H16.5v-1.609a2.25 2.25 0 0 1 1.244-2.012l2.89-1.445c.651-.326 1.116-.955 1.116-1.683 0-.498-.04-.987-.118-1.463-.135-.825-.835-1.422-1.668-1.489a15.202 15.202 0 0 0-3.464.12\"\n          style={{ \"transform-origin\": \"50% 12px\" }}\n          transition={resolveTransition(VARIANTS, variant())}\n        />\n      </svg>\n    </div>\n  );\n};\n\nexport { H2Icon };\n"
+    }
+  ]
+}

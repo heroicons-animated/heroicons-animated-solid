@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "arrow-long-up",
+  "title": "arrow-long-up",
+  "description": "Animated arrow-long-up icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "arrow-long-up.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ArrowLongUpIconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface ArrowLongUpIconProps\n  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: ArrowLongUpIconHandle) => void;\n}\n\nconst ARROW_HEAD_VARIANTS = {\n  normal: { translateY: 0 },\n  animate: {\n    translateY: [0, 3, 0],\n    transition: {\n      duration: 0.4,\n    },\n  },\n};\n\nconst LINE_VARIANTS = {\n  normal: { d: \"M12 3v18\" },\n  animate: {\n    d: [\"M12 3v18\", \"M12 6v15\", \"M12 3v18\"],\n    transition: {\n      duration: 0.4,\n    },\n  },\n};\nconst ArrowLongUpIcon = (rawProps: ArrowLongUpIconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <svg\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <Motion.path\n          animate={resolveValues(ARROW_HEAD_VARIANTS, variant())}\n          d=\"M8.25 6.75 12 3m0 0 3.75 3.75\"\n          transition={resolveTransition(ARROW_HEAD_VARIANTS, variant())}\n        />\n        <Motion.path\n          animate={resolveValues(LINE_VARIANTS, variant())}\n          d=\"M12 3v18\"\n          transition={resolveTransition(LINE_VARIANTS, variant())}\n        />\n      </svg>\n    </div>\n  );\n};\n\nexport { ArrowLongUpIcon };\n"
+    }
+  ]
+}

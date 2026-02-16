@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "device-tablet",
+  "title": "device-tablet",
+  "description": "Animated device-tablet icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "device-tablet.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DeviceTabletIconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface DeviceTabletIconProps\n  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: DeviceTabletIconHandle) => void;\n}\n\nconst DEVICE_VARIANTS = {\n  normal: {\n    rotate: 0,\n  },\n  animate: {\n    rotate: [0, -3, 3, -3, 3, -2, 2, 0],\n    transition: {\n      duration: 0.5,\n      ease: \"easeInOut\",\n    },\n  },\n};\nconst DeviceTabletIcon = (rawProps: DeviceTabletIconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <Motion.svg\n        animate={resolveValues(DEVICE_VARIANTS, variant())}\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        transition={resolveTransition(DEVICE_VARIANTS, variant())}\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path d=\"M10.5 19.5H13.5M6.75 21.75H17.25C18.4926 21.75 19.5 20.7426 19.5 19.5V4.5C19.5 3.25736 18.4926 2.25 17.25 2.25H6.75C5.50736 2.25 4.5 3.25736 4.5 4.5V19.5C4.5 20.7426 5.50736 21.75 6.75 21.75Z\" />\n      </Motion.svg>\n    </div>\n  );\n};\n\nexport { DeviceTabletIcon };\n"
+    }
+  ]
+}

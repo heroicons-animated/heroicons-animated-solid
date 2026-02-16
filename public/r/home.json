@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "home",
+  "title": "home",
+  "description": "Animated home icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "home.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface HomeIconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface HomeIconProps\n  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: HomeIconHandle) => void;\n}\n\nconst SVG_VARIANTS = {\n  normal: {\n    scale: 1,\n    y: 0,\n  },\n  animate: {\n    scale: [1, 1.1, 1],\n    y: [0, -1, 0],\n    transition: {\n      duration: 0.4,\n      ease: \"easeOut\",\n    },\n  },\n};\nconst HomeIcon = (rawProps: HomeIconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <Motion.svg\n        animate={resolveValues(SVG_VARIANTS, variant())}\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        transition={resolveTransition(SVG_VARIANTS, variant())}\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path d=\"M2.25 12L11.2045 3.04549C11.6438 2.60615 12.3562 2.60615 12.7955 3.04549L21.75 12M4.5 9.75V19.875C4.5 20.4963 5.00368 21 5.625 21H9.75V16.125C9.75 15.5037 10.2537 15 10.875 15H13.125C13.7463 15 14.25 15.5037 14.25 16.125V21H18.375C18.9963 21 19.5 20.4963 19.5 19.875V9.75M8.25 21H16.5\" />\n      </Motion.svg>\n    </div>\n  );\n};\n\nexport { HomeIcon };\n"
+    }
+  ]
+}

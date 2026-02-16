@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "magnifying-glass-minus",
+  "title": "magnifying-glass-minus",
+  "description": "Animated magnifying-glass-minus icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "magnifying-glass-minus.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface MagnifyingGlassMinusIconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface MagnifyingGlassMinusIconProps\n  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: MagnifyingGlassMinusIconHandle) => void;\n}\n\nconst SYMBOL_VARIANT = {\n  normal: { pathLength: 1, opacity: 1, pathOffset: 0 },\n  animate: {\n    pathLength: [0, 1],\n    opacity: [0, 1],\n    pathOffset: [1, 0],\n    transition: { duration: 0.4, ease: \"easeInOut\" },\n  },\n};\nconst MagnifyingGlassMinusIcon = (rawProps: MagnifyingGlassMinusIconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <svg\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path d=\"M21 21L15.8033 15.8033M15.8033 15.8033C17.1605 14.4461 18 12.5711 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18C12.5711 18 14.4461 17.1605 15.8033 15.8033Z\" />\n        <Motion.path\n          animate={resolveValues(SYMBOL_VARIANT, variant())}\n          d=\"M13.5 10.5H7.5\"\n          transition={resolveTransition(SYMBOL_VARIANT, variant())}\n        />\n      </svg>\n    </div>\n  );\n};\n\nexport { MagnifyingGlassMinusIcon };\n"
+    }
+  ]
+}

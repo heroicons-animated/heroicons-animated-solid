@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "bars-arrow-up",
+  "title": "bars-arrow-up",
+  "description": "Animated bars-arrow-up icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "bars-arrow-up.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface BarsArrowUpIconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface BarsArrowUpIconProps\n  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: BarsArrowUpIconHandle) => void;\n}\n\nconst ARROW_VARIANTS = {\n  normal: { translateY: 0 },\n  animate: {\n    translateY: [0, -2, 0],\n    transition: {\n      duration: 0.5,\n      times: [0, 0.4, 1],\n    },\n  },\n};\nconst BarsArrowUpIcon = (rawProps: BarsArrowUpIconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <svg\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path d=\"M3 4.5h14.25M3 9h9.75M3 13.5h5.25\" />\n        <Motion.path\n          animate={resolveValues(ARROW_VARIANTS, variant())}\n          d=\"M13.5 12.75L17.25 9L21 12.75M17.25 9v12\"\n          transition={resolveTransition(ARROW_VARIANTS, variant())}\n        />\n      </svg>\n    </div>\n  );\n};\n\nexport { BarsArrowUpIcon };\n"
+    }
+  ]
+}

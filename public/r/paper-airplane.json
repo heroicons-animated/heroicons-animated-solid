@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-solid.com/schema.json",
+  "name": "paper-airplane",
+  "title": "paper-airplane",
+  "description": "Animated paper-airplane icon for SolidJS",
+  "type": "registry:ui",
+  "registryDependencies": ["motion-compat"],
+  "dependencies": ["solid-motionone"],
+  "files": [
+    {
+      "path": "paper-airplane.tsx",
+      "type": "registry:ui",
+      "content": "import type { JSX } from \"solid-js\";\nimport { createSignal, mergeProps, splitProps } from \"solid-js\";\nimport { Motion } from \"solid-motionone\";\nimport { resolveTransition, resolveValues } from \"@/lib/motion-compat\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PaperAirplaneIconHandle {\n  startAnimation: () => void;\n  stopAnimation: () => void;\n}\n\ninterface PaperAirplaneIconProps\n  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, \"ref\"> {\n  size?: number;\n  ref?: (handle: PaperAirplaneIconHandle) => void;\n}\n\nconst AIRPLANE_VARIANTS = {\n  normal: {\n    scale: 1,\n    x: 0,\n  },\n  animate: {\n    scale: [1, 0.8, 1, 1, 1],\n    x: [0, \"-10%\", \"125%\", \"-150%\", 0],\n    transition: {\n      default: { ease: \"easeInOut\", duration: 1.2 },\n      x: {\n        ease: \"easeInOut\",\n        duration: 1.2,\n        times: [0, 0.25, 0.5, 0.5, 1],\n      },\n    },\n  },\n};\nconst PaperAirplaneIcon = (rawProps: PaperAirplaneIconProps) => {\n  const props = mergeProps({ size: 28 }, rawProps);\n  const [local, others] = splitProps(props, [\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"class\",\n    \"size\",\n    \"ref\",\n  ]);\n  const [variant, setVariant] = createSignal(\"normal\");\n  let isControlled = false;\n\n  if (local.ref) {\n    isControlled = true;\n    local.ref({\n      startAnimation: () => setVariant(\"animate\"),\n      stopAnimation: () => setVariant(\"normal\"),\n    });\n  }\n\n  const handleMouseEnter: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseEnter === \"function\") {\n        local.onMouseEnter(e);\n      }\n    } else {\n      setVariant(\"animate\");\n    }\n  };\n\n  const handleMouseLeave: JSX.EventHandler<HTMLDivElement, MouseEvent> = (\n    e\n  ) => {\n    if (isControlled) {\n      if (typeof local.onMouseLeave === \"function\") {\n        local.onMouseLeave(e);\n      }\n    } else {\n      setVariant(\"normal\");\n    }\n  };\n\n  return (\n    <div\n      class={cn(local.class)}\n      onMouseEnter={handleMouseEnter}\n      onMouseLeave={handleMouseLeave}\n      {...others}\n    >\n      <svg\n        fill=\"none\"\n        height={local.size}\n        stroke=\"currentColor\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        stroke-width=\"1.5\"\n        viewBox=\"0 0 24 24\"\n        width={local.size}\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <Motion.g\n          animate={resolveValues(AIRPLANE_VARIANTS, variant())}\n          transition={resolveTransition(AIRPLANE_VARIANTS, variant())}\n        >\n          <path d=\"M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5\" />\n        </Motion.g>\n      </svg>\n    </div>\n  );\n};\n\nexport { PaperAirplaneIcon };\n"
+    }
+  ]
+}

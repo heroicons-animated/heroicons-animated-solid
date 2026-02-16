@@ -27,6 +27,7 @@
     "build": "pnpm --filter @heroicons-animated/solid build && vinxi build",
     "start": "vinxi start",
     "build:lib": "pnpm --filter @heroicons-animated/solid build",
+    "build-registry": "node --import tsx scripts/registry-build.ts",
     "dev:lib": "pnpm --filter @heroicons-animated/solid dev",
     "convert-icons": "node --import tsx scripts/convert-icons.ts",
     "check": "ultracite check",
