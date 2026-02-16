@@ -4,9 +4,9 @@ import type { PackageManager } from "~/types/package-manager";
 
 export const getFileExtension = (): string => "tsx";
 
-export const getShadcnCLI = (): string => "shadcn@latest";
+export const getShadcnCLI = (): string => "shadcn-solid";
 
-export const getRegistryPathPrefix = (): string => `@${SITE.NAME}/`;
+export const getRegistryPathPrefix = (): string => `${SITE.URL}/r/`;
 
 export const getCLICommand = (
   packageManager: PackageManager,

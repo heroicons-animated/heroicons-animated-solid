@@ -71,7 +71,7 @@ const CliBlock = (props: CliBlockProps) => {
               <div class="relative w-full overflow-hidden">
                 <div
                   class={cn(
-                    "overflow-x-auto rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] bg-white dark:bg-white/10",
+                    "relative overflow-x-auto rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] bg-white dark:bg-white/10",
                     "supports-[corner-shape:squircle]:corner-tr-squircle supports-[corner-shape:squircle]:corner-br-squircle supports-[corner-shape:squircle]:corner-bl-squircle supports-[corner-shape:squircle]:rounded-tr-[14px] supports-[corner-shape:squircle]:rounded-br-[14px] supports-[corner-shape:squircle]:rounded-bl-[14px]",
                     "isolate whitespace-nowrap px-4 py-3 pr-20 font-mono text-sm tracking-[-0.39px]"
                   )}
@@ -130,6 +130,10 @@ const CliBlock = (props: CliBlockProps) => {
                     />
                   )}
                 </div>
+                <div
+                  aria-hidden="true"
+                  class="supports-[corner-shape:squircle]:corner-r-squircle pointer-events-none absolute top-0 right-0 z-10 block h-full w-[88px] rounded-r-[10px] bg-[linear-gradient(to_left,white_0%,white_45%,transparent)] supports-[corner-shape:squircle]:rounded-r-[14px] dark:bg-[linear-gradient(to_left,rgb(47_47_47/1)_0%,rgb(47_47_47/1)_45%,transparent)]"
+                />
                 <button
                   aria-disabled={state() !== "idle"}
                   aria-label="Copy to clipboard"

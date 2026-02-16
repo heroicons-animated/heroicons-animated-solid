@@ -143,7 +143,7 @@ const CopyCLIAction = (props: Pick<IconManifestItem, "name">) => {
     <Tooltip>
       <TooltipTrigger
         aria-disabled={state() !== "idle"}
-        aria-label="Copy shadcn/cli command"
+        aria-label="Copy shadcn-solid command"
         class="supports-[corner-shape:squircle]:corner-squircle flex size-10 cursor-pointer items-center justify-center rounded-[14px] bg-neutral-200/20 transition-[background-color] duration-100 focus-within:-outline-offset-1 hover:bg-neutral-200 focus-visible:outline-1 focus-visible:outline-primary supports-[corner-shape:squircle]:rounded-[20px] dark:bg-neutral-800/20 dark:hover:bg-neutral-700"
         data-busy={state() !== "idle" ? "" : undefined}
         onClick={handleCopy}
@@ -156,7 +156,7 @@ const CopyCLIAction = (props: Pick<IconManifestItem, "name">) => {
       <TooltipContent>
         Copy{" "}
         <code class="rounded-[4px] bg-neutral-50/20 px-1 py-0.5 font-mono">
-          shadcn/cli
+          shadcn-solid
         </code>{" "}
         command
       </TooltipContent>
